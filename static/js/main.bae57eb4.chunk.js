@@ -1,0 +1,2 @@
+(this.webpackJsonpcomunicados_et32=this.webpackJsonpcomunicados_et32||[]).push([[0],{9:function(t,e,c){"use strict";c.r(e);var n=c(0),o=c.n(n),s=c(3),i=c.n(s),r=c(1);function d(){return Object(r.jsx)("div",{})}i.a.render(Object(r.jsx)(o.a.StrictMode,{children:Object(r.jsx)(d,{})}),document.getElementById("root"))}},[[9,1,2]]]);
+//# sourceMappingURL=main.bae57eb4.chunk.js.map
