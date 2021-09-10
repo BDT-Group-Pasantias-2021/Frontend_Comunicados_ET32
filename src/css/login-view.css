@@ -23,7 +23,7 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  background-image: url(../assets/images/perrito_panzon.jpg);
+  background-image: url(../assets/images/things-background.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -37,7 +37,7 @@
   height: 600px;
   border-radius: 10px;
   margin-right: 200px;
-  background-color: #f5f9fc;
+  background-color: #ffffff;
   z-index: 11;
 }
 .login-view .background-container .form-section .form-content {
@@ -46,6 +46,10 @@
   height: fit-content;
 }
 .login-view .background-container .form-section .form-content .form-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   color: #323232;
   margin-bottom: 20px;
 }
@@ -63,14 +67,17 @@
   align-items: center;
   width: 100%;
   height: 45px;
-  background-color: #fff;
+  background-color: #f7f7f7;
   border-radius: 5px;
-  box-shadow: 0px 0px 10px -5px #2d2d2d33;
   color: #000;
   text-decoration: none;
   font-weight: 400;
   font-size: 14px;
   cursor: pointer;
+  transition: all 150ms ease-in-out;
+}
+.login-view .background-container .form-section .form-content .apis-container .api-btn:hover {
+  background-color: #f0f0f0;
 }
 .login-view .background-container .form-section .form-content .apis-container .api-btn img {
   width: 20px;
@@ -102,26 +109,31 @@
 .login-view .background-container .form-section .form-content .login-form-divisor::after {
   margin-left: 10px;
 }
-.login-view .background-container .form-section .login {
+.login-view .background-container .form-section .form-content .login-form .form-input-container {
+  font-size: 13px;
+  color: #ff4242;
+}
+.login-view .background-container .form-section .form-content .login-form .form-input-container .login-form-input {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: none;
-  border-bottom: 1px solid grey;
-  border-top: none;
-  border-right: none;
-  border-left: none;
-  height: 30px;
-  padding: 10px;
-  margin: 2px;
   width: 100%;
+  height: 45px;
+  background-color: #f7f7f7;
+  font-size: 14px;
+  padding: 10px;
+  margin: 15px 0px 5px 0px;
   outline: none;
-  transition: 0.9;
+  border: none;
+  border-radius: 5px;
 }
-.login-view .background-container .form-section .login:focus {
-  border-bottom: 1px solid #44abff;
-  transition: 0.9;
+.login-view .background-container .form-section .form-content .login-form .form-input-container .login-form-input::placeholder {
+  color: #727272;
+}
+.login-view .background-container .form-section .form-content .login-form .form-input-container .login-form-input:focus {
+  background-color: #f0f0f0;
+  border: 1px solid #44abff;
 }
 .login-view .background-container .form-section .container-btn {
   display: flex;
@@ -139,10 +151,10 @@
   height: 45px;
   transition: all 0.5s;
   cursor: pointer;
-  margin-top: 40px;
+  margin-top: 10px;
 }
 .login-view .background-container .form-section .enter-btn .enter-span {
-  color: black;
+  color: white;
   cursor: pointer;
   display: inline-block;
   position: relative;
@@ -158,11 +170,50 @@
 .login-view .background-container .form-section .enter-btn:hover > .enter-span {
   padding-right: 25px;
   transition: 0.5;
-  color: white;
 }
 .login-view .background-container .form-section .enter-btn:hover > .enter-span:after {
   opacity: 1;
   right: 0;
+}
+.login-view .background-container .form-section .form-forgot-keep-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+}
+.login-view .background-container .form-section .form-forgot-keep-container .form-forgot-password {
+  margin: 10px 0px;
+  color: #727272;
+  text-decoration: none;
+  font-size: 13px;
+}
+.login-view .background-container .form-section .form-forgot-keep-container .form-keep-login {
+  margin: 10px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.login-view .background-container .form-section .form-forgot-keep-container .form-keep-login .form-keep-login-label {
+  margin-left: 7.5px;
+  line-height: none;
+  font-size: 13px;
+  color: #727272;
+}
+.login-view .background-container .form-section .form-register-text {
+  font-size: 15px;
+  color: #727272;
+}
+.login-view .background-container .form-section .form-register-text span {
+  color: #44abff;
+  text-decoration: none;
+  transition: all 150ms ease-in-out;
+  cursor: pointer;
+  font-weight: 600;
+}
+.login-view .background-container .form-section .form-register-text span:hover {
+  color: #0b87ed;
 }
 
 /*# sourceMappingURL=login-view.css.map */
