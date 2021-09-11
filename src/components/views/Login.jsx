@@ -10,7 +10,7 @@ export default function Login() {
 	return (
 		<main className="login-view">
 			<div className="background-login-layout"></div>
-			<div className="background-container">
+			<div className="background-container row">
 				<Form />
 			</div>
 		</main>
