@@ -38,14 +38,15 @@
 			z-index: 11;
 
 			.form-content {
-				padding: 40px;
+				@include displayFlex(column, space-around, null);
 				width: 100%;
-				height: fit-content;
+				height: 100%;
+				padding: 40px;
 
 				.form-title {
 					@include displayFlex(column, center, flex-start);
 					color: $text-color-white;
-					margin-bottom: 20px;
+					margin-bottom: 5px;
 				}
 
 				.apis-container {
@@ -87,8 +88,8 @@
 					font-weight: 300;
 					line-height: 23px;
 					width: 100%;
-					height: 1px;
-					margin: 30px auto;
+					//height: 1px;
+					margin: 5px auto;
 
 					&::before,
 					&::after {
@@ -111,12 +112,23 @@
 					margin: 0;
 
 					.form-double-container {
-						@include displayFlex(row, space-between, center);
+						@include displayFlex(column, space-between, baseline);
 						width: 100%;
 						padding: 0;
 
-						.form-double-input {
-							width: calc(50% - 10px);
+						.form-double-inputs-container {
+							@include displayFlex(row, space-between, center);
+							width: 100%;
+
+							.form-double-input {
+								width: calc(50% - 10px);
+							}
+						}
+
+						.form-double-error {
+							//padding-left: 15px;
+							font-size: 13px;
+							color: $red;
 						}
 					}
 
@@ -230,18 +242,11 @@
 			}
 
 			.form-forgot-keep-container {
-				@include displayFlex(row, space-between, center);
+				@include displayFlex(column, space-between, baseline);
 				margin-top: 5px;
 
-				.form-forgot-password {
-					margin: 10px 0px;
-					color: #727272;
-					text-decoration: none;
-					font-size: 13px;
-				}
-
 				.form-keep-login {
-					margin: 10px 0px;
+					margin: 5px 0px;
 					@include displayFlex(row, flex-start, center);
 
 					.form-keep-login-label {
@@ -251,10 +256,17 @@
 						color: #727272;
 					}
 				}
+
+				.form-forgot-password {
+					color: #727272;
+					text-decoration: none;
+					font-size: 13px;
+				}
 			}
 
 			.form-register-text {
 				font-size: 15px;
+				white-space: nowrap;
 				color: #727272;
 
 				span {
@@ -270,6 +282,13 @@
 				}
 			}
 		}
+	}
+}
+
+@media screen and (max-width: 420px) {
+	.form-register-text {
+		margin-top: 20px;
+		white-space: normal !important;
 	}
 }
 

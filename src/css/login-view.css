@@ -41,9 +41,12 @@
   z-index: 11;
 }
 .login-view .background-container .form-section .form-content {
-  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   width: 100%;
-  height: fit-content;
+  height: 100%;
+  padding: 40px;
 }
 .login-view .background-container .form-section .form-content .form-title {
   display: flex;
@@ -51,7 +54,7 @@
   justify-content: center;
   align-items: flex-start;
   color: #323232;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 .login-view .background-container .form-section .form-content .apis-container {
   display: flex;
@@ -94,8 +97,7 @@
   font-weight: 300;
   line-height: 23px;
   width: 100%;
-  height: 1px;
-  margin: 30px auto;
+  margin: 5px auto;
 }
 .login-view .background-container .form-section .form-content .login-form-divisor::before, .login-view .background-container .form-section .form-content .login-form-divisor::after {
   content: "";
@@ -114,14 +116,25 @@
 }
 .login-view .background-container .form-section .form-content .login-form .form-double-container {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  padding: 0;
+}
+.login-view .background-container .form-section .form-content .login-form .form-double-container .form-double-inputs-container {
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 0;
 }
-.login-view .background-container .form-section .form-content .login-form .form-double-container .form-double-input {
+.login-view .background-container .form-section .form-content .login-form .form-double-container .form-double-inputs-container .form-double-input {
   width: calc(50% - 10px);
+}
+.login-view .background-container .form-section .form-content .login-form .form-double-container .form-double-error {
+  font-size: 13px;
+  color: #ff4242;
 }
 .login-view .background-container .form-section .form-content .login-form .form-input-container {
   padding: 0;
@@ -223,19 +236,13 @@
 }
 .login-view .background-container .form-section .form-forgot-keep-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   margin-top: 5px;
 }
-.login-view .background-container .form-section .form-forgot-keep-container .form-forgot-password {
-  margin: 10px 0px;
-  color: #727272;
-  text-decoration: none;
-  font-size: 13px;
-}
 .login-view .background-container .form-section .form-forgot-keep-container .form-keep-login {
-  margin: 10px 0px;
+  margin: 5px 0px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -247,8 +254,14 @@
   font-size: 13px;
   color: #727272;
 }
+.login-view .background-container .form-section .form-forgot-keep-container .form-forgot-password {
+  color: #727272;
+  text-decoration: none;
+  font-size: 13px;
+}
 .login-view .background-container .form-section .form-register-text {
   font-size: 15px;
+  white-space: nowrap;
   color: #727272;
 }
 .login-view .background-container .form-section .form-register-text span {
@@ -262,6 +275,12 @@
   color: #0b87ed;
 }
 
+@media screen and (max-width: 420px) {
+  .form-register-text {
+    margin-top: 20px;
+    white-space: normal !important;
+  }
+}
 @media screen and (max-width: 768px) {
   .background-container {
     justify-content: center !important;

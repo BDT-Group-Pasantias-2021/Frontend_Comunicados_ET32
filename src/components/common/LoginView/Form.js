@@ -1,27 +1,64 @@
-import React, { useState } from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
-import { Icon } from 'rsuite';
-import 'rsuite/dist/styles/rsuite-default.css';
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from 'react';
+import Axios from 'axios';
+import GoogleLogin from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
 
 // Components
 import GoogleIcon from '../../../assets/svgs/logo-google.svg';
 import FacebookIcon from '../../../assets/svgs/logo-facebook.svg';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Icon } from 'rsuite';
 
+// Styles
+import 'rsuite/dist/styles/rsuite-default.css';
 // Forms
 const LoginForm = ({ changeForm, showPassword, seePassword }) => {
+	const responseGoogle = (response) => {
+		console.log(response.profileObj);
+	};
+
+	const responseFacebook = (response) => {
+		console.log(response);
+	};
+
+	useEffect(() => {
+		/* const googleLoginContainer = document.getElementById('google-login-container');
+		const facebookLoginContainer = document.getElementById('facebook-login-container');
+
+		facebookLoginContainer.firstChild.style.width = '100%';
+		facebookLoginContainer.firstChild.firstChild.innerHTML = `<img src=${FacebookIcon} alt="facebook-icon" />
+		Continuar con Facebook`;
+		googleLoginContainer.firstChild.innerHTML = `<img src=${GoogleIcon} alt="google-icon" />Continuar con Google`;
+
+		setInterval(() => {
+			googleLoginContainer.firstChild.removeAttribute('style');
+		}); */
+	});
+
 	return (
 		<div className="form-content">
 			<h2 className="form-title">Iniciar Sesión</h2>
 
 			<div className="apis-container">
-				<a className="api-btn" href=".">
-					<img src={GoogleIcon} alt="google-icon" />
-					Continuar con Google
-				</a>
-				<a className="api-btn" href=".">
-					<img src={FacebookIcon} alt="facebook-icon" />
-					Continuar con Facebook
-				</a>
+				<span className="api-btn" id="google-login-container">
+					<GoogleLogin
+						clientId="1053805853505-te1vo1l4tsfeg9ck2ip21175rph9c6hc.apps.googleusercontent.com"
+						onSuccess={responseGoogle}
+						onFailure={responseGoogle}
+						cookiePolicy={'single_host_origin'}
+						className="api-btn"
+					/>
+				</span>
+				<span className="api-btn" id="facebook-login-container">
+					<FacebookLogin
+						appId="548174133074419"
+						autoLoad={false}
+						fields="name,email,picture"
+						callback={responseFacebook}
+						cssClass="api-btn"
+					/>
+				</span>
 			</div>
 
 			<div className="login-form-divisor">
@@ -32,14 +69,10 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 				initialValues={{ email: '', contraseña: '' }}
 				validate={(values) => {
 					const errors = {};
+					//? Validación de correo electrónico.
 					if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
 						errors.email = 'Correo electrónico inválido';
 					}
-
-					if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/i.test(values.contraseña)) {
-						errors.contraseña = 'Contraseña inválida';
-					}
-
 					return errors;
 				}}
 				onSubmit={(values, { setSubmitting }) => {
@@ -47,12 +80,22 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 						alert(JSON.stringify(values, null, 2));
 						setSubmitting(false);
 					}, 400);
+					/* if (insertData) {
+						Axios.post("http://localhost:3001/Rasn/admin/animales/nuevo-animal", values).then((res) => {
+							console.log(res.data);
+						}).then(alert("Registrado ingresado"));	
+					} else {
+						Axios.post("http://localhost:3001/Rasn/admin/animales/actualizar-animal", values).then((res) => {
+							console.log(res.data);
+						}).then(alert("Registro actualizado"));
+					} */
 				}}
 			>
 				<Form className="login-form">
 					<div className="form-input-container">
 						<Field
 							className="login-form-input"
+							style={{ marginTop: '0px' }}
 							type="email"
 							name="email"
 							placeholder="Correo Electronico"
@@ -91,15 +134,15 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 							Olvidaste tu contraseña?
 						</a>
 					</div>
-					<div className="login-form-divisor" style={{ marginBottom: '0px' }}>
-						<div className="divisor-text">
-							<p className="form-register-text">
-								Aún no tenés una cuenta? <span onClick={changeForm}>Registrate</span>
-							</p>
-						</div>
-					</div>
 				</Form>
 			</Formik>
+			<div className="login-form-divisor" style={{ marginBottom: '0px', marginTop: '0px' }}>
+				<div className="divisor-text">
+					<p className="form-register-text">
+						Aún no tenés una cuenta? <span onClick={changeForm}>Registrate</span>
+					</p>
+				</div>
+			</div>
 		</div>
 	);
 };
@@ -121,20 +164,41 @@ const RegisterForm = ({ changeForm, showPassword, seePassword }) => {
 				validate={(values) => {
 					const errors = {};
 
+					//? Validación de correo electrónico.
 					if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
 						errors.email = 'Correo electrónico inválido';
 					}
 
-					if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/i.test(values.contraseña)) {
-						errors.contraseña = 'Contraseña inválida';
+					//? Validaciones de longitud (entre 8 y 24) y coincidencias de contraseñas. Debe incluir
+					//? al menos una mayuscula, una minuscula, un número y un caracter especial.
+					if (
+						!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_\\`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@[\]^_\\`{|}~]{8,24}/.test(
+							values.contraseña
+						)
+					) {
+						errors.contraseña =
+							'La contraseña debe tener al menos 8 caracteres, una mayuscula, una minuscula, un numero y un caracter especial.';
 					}
-
+					//? Validaciones de contraseñas coincidentes.
 					if (values.contraseña !== values.confirmar_contraseña) {
 						errors.confirmar_contraseña = 'Las contraseñas no coinciden';
 					}
 
-					if (/[a-zA-Z]/.test(values.identificador)) {
-						errors.identificador = 'Identificador inválido';
+					//? Validaciones de longitud y caracteres del identificador correspondiente al documento seleccionado.
+					if (values.tipo_documento === 'dni' && values.identificador.length !== 8) {
+						errors.identificador = 'El numero de DNI debe tener 8 digitos.';
+					} else if (
+						values.tipo_documento === 'libreta_civica' &&
+						(values.identificador.length < 4 || values.identificador.length > 8)
+					) {
+						errors.identificador = 'El numero de Libreta Civica debe tener entre 4 y 8 digitos';
+					} else if (values.tipo_documento === 'pasaporte' && values.identificador.length !== 9) {
+						errors.identificador = 'El numero de Pasaporte debe tener 9 digitos.';
+					}
+					if (values.tipo_documento === 'dni' || values.tipo_documento === 'libreta_civica') {
+						if (/[a-zA-Z]/.test(values.identificador)) {
+							errors.identificador = 'Identificador inválido';
+						}
 					}
 
 					return errors;
@@ -148,27 +212,29 @@ const RegisterForm = ({ changeForm, showPassword, seePassword }) => {
 			>
 				<Form className="login-form row">
 					<div className="form-double-container">
-						<div className="form-input-container form-double-input">
-							<Field
-								style={{ marginTop: '0px' }}
-								className="login-form-input"
-								type="text"
-								name="nombre"
-								placeholder="Nombre"
-								required
-							/>
-							<ErrorMessage className="input-error" name="nombre" component="div" />
-						</div>
-						<div className="form-input-container form-double-input">
-							<Field
-								style={{ marginTop: '0px' }}
-								className="login-form-input"
-								type="text"
-								name="apellido"
-								placeholder="Apellido"
-								required
-							/>
-							<ErrorMessage className="input-error" name="apellido" component="div" />
+						<div className="form-double-inputs-container">
+							<div className="form-input-container form-double-input">
+								<Field
+									style={{ marginTop: '0px' }}
+									className="login-form-input"
+									type="text"
+									name="nombre"
+									placeholder="Nombre"
+									required
+								/>
+								<ErrorMessage className="input-error" name="nombre" component="div" />
+							</div>
+							<div className="form-input-container form-double-input">
+								<Field
+									style={{ marginTop: '0px' }}
+									className="login-form-input"
+									type="text"
+									name="apellido"
+									placeholder="Apellido"
+									required
+								/>
+								<ErrorMessage className="input-error" name="apellido" component="div" />
+							</div>
 						</div>
 					</div>
 					<div className="form-input-container">
@@ -182,30 +248,34 @@ const RegisterForm = ({ changeForm, showPassword, seePassword }) => {
 						<ErrorMessage className="input-error" name="email" component="div" />
 					</div>
 					<div className="form-double-container">
-						<div className="form-input-container form-double-input">
-							<Field
-								className="login-form-input"
-								as="select"
-								name="tipo_documento"
-								placeholder="Tipo de documento"
-								required
-							>
-								<option value="" defaultValue disabled hidden>
-									Tipo de documento
-								</option>
-								<option value="dni">DNI</option>
-								<option value="libreta_civica">Libreta Cívica</option>
-								<option value="pasaporte">Pasaporte</option>
-							</Field>
+						<div className="form-double-inputs-container">
+							<div className="form-input-container form-double-input">
+								<Field
+									className="login-form-input"
+									as="select"
+									name="tipo_documento"
+									placeholder="Tipo de documento"
+									required
+								>
+									<option value="" defaultValue disabled hidden>
+										Tipo de documento
+									</option>
+									<option value="dni">DNI</option>
+									<option value="libreta_civica">Libreta Cívica</option>
+									<option value="pasaporte">Pasaporte</option>
+								</Field>
+							</div>
+							<div className="form-input-container form-double-input">
+								<Field
+									className="login-form-input"
+									type="text"
+									name="identificador"
+									placeholder="Identificador"
+									required
+								/>
+							</div>
 						</div>
-						<div className="form-input-container form-double-input">
-							<Field
-								className="login-form-input"
-								type="number"
-								name="identificador"
-								placeholder="Identificador"
-								required
-							/>
+						<div className="form-double-error">
 							<ErrorMessage className="input-error" name="identificador" component="div" />
 						</div>
 					</div>
@@ -239,15 +309,15 @@ const RegisterForm = ({ changeForm, showPassword, seePassword }) => {
 					<button type="submit" className="enter-btn">
 						<span className="enter-span">Registrarse</span>
 					</button>
-					<div className="login-form-divisor" style={{ marginBottom: '0px' }}>
-						<div className="divisor-text">
-							<p className="form-register-text">
-								Ya tenés una cuenta? <span onClick={changeForm}>Iniciá Sesión</span>
-							</p>
-						</div>
-					</div>
 				</Form>
 			</Formik>
+			<div className="login-form-divisor" style={{ marginBottom: '0px' }}>
+				<div className="divisor-text">
+					<p className="form-register-text">
+						Ya tenés una cuenta? <span onClick={changeForm}>Iniciá Sesión</span>
+					</p>
+				</div>
+			</div>
 		</div>
 	);
 };
