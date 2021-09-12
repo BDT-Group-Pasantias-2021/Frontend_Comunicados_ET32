@@ -23,7 +23,7 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 	};
 
 	useEffect(() => {
-		/* const googleLoginContainer = document.getElementById('google-login-container');
+		const googleLoginContainer = document.getElementById('google-login-container');
 		const facebookLoginContainer = document.getElementById('facebook-login-container');
 
 		facebookLoginContainer.firstChild.style.width = '100%';
@@ -33,7 +33,7 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 
 		setInterval(() => {
 			googleLoginContainer.firstChild.removeAttribute('style');
-		}); */
+		});
 	});
 
 	return (
