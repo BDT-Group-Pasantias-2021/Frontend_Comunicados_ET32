@@ -274,7 +274,7 @@ const RegisterForm = ({ changeForm, showPassword, seePassword }) => {
 const ChangePassword = ({ changeForm }) => {
 	return (
 		<div className="form-content">
-			<h2 className="form-title">Cambiar Contraseña</h2>
+			<h2 className="form-title">Recuperar Contraseña</h2>
 			<Formik
 				initialValues={{
 					documento: '',
@@ -288,23 +288,6 @@ const ChangePassword = ({ changeForm }) => {
 						errors.email = 'Correo electrónico inválido';
 					}
 
-					//? Validaciones de longitud y caracteres del documento correspondiente al documento seleccionado.
-					if (values.tipo_documento === 'dni' && values.documento.length !== 8) {
-						errors.documento = 'El numero de DNI debe tener 8 digitos.';
-					} else if (
-						values.tipo_documento === 'libreta_civica' &&
-						(values.documento.length < 4 || values.documento.length > 8)
-					) {
-						errors.documento = 'El numero de Libreta Civica debe tener entre 4 y 8 digitos';
-					} else if (values.tipo_documento === 'pasaporte' && values.documento.length !== 9) {
-						errors.documento = 'El numero de Pasaporte debe tener 9 digitos.';
-					}
-					if (values.tipo_documento === 'dni' || values.tipo_documento === 'libreta_civica') {
-						if (/[a-zA-Z]/.test(values.documento)) {
-							errors.documento = 'documento inválido';
-						}
-					}
-
 					return errors;
 				}}
 				onSubmit={(values, { setSubmitting }) => {
@@ -315,62 +298,39 @@ const ChangePassword = ({ changeForm }) => {
 				}}
 			>
 				<Form className="login-form row">
-					<div className="login-form-inputs-container">
-						<div className="form-double-container">
-							<div className="form-double-inputs-container">
-								<div className="form-input-container form-double-input">
-									<Field
-										className="login-form-input"
-										as="select"
-										name="tipo_documento"
-										placeholder="Tipo de documento"
-										required
-									>
-										<option value="" defaultValue disabled hidden>
-											Tipo de documento
-										</option>
-										<option value="dni">DNI</option>
-										<option value="libreta_civica">Libreta Cívica</option>
-										<option value="pasaporte">Pasaporte</option>
-									</Field>
-								</div>
-								<div className="form-input-container form-double-input">
-									<Field
-										className="login-form-input"
-										type="text"
-										name="documento"
-										placeholder="documento"
-										required
-									/>
-								</div>
-							</div>
-							<div className="form-double-error">
-								<ErrorMessage className="input-error" name="documento" component="div" />
-							</div>
-						</div>
-						<div className="form-input-container">
-							<Field
-								className="login-form-input"
-								type="email"
-								name="email"
-								placeholder="Correo Electronico"
-								required
-							/>
-							<ErrorMessage className="input-error" name="email" component="div" />
-						</div>
+					<div className="form-input-container">
+						<Field
+							className="login-form-input"
+							type="text"
+							name="documento"
+							placeholder="Documento"
+							required
+						/>
 					</div>
+					<div className="form-input-container">
+						<Field
+							className="login-form-input"
+							type="email"
+							name="email"
+							placeholder="Correo Electronico"
+							required
+						/>
+						<ErrorMessage className="input-error" name="email" component="div" />
+					</div>
+
 					<button type="submit" className="enter-btn">
 						<span className="enter-span">Continuar</span>
 					</button>
+					<div className="login-form-divisor" style={{ marginBottom: '0px' }}>
+						<div className="divisor-text">
+							<p className="form-register-text">
+								¿Pudiste recordar la contraseña?{' '}
+								<span onClick={() => changeForm('Login')}>Iniciá Sesión</span>
+							</p>
+						</div>
+					</div>
 				</Form>
 			</Formik>
-			<div className="login-form-divisor" style={{ marginBottom: '0px' }}>
-				<div className="divisor-text">
-					<p className="form-register-text">
-						¿Pudiste recordar la contraseña? <span onClick={() => changeForm('Login')}>Iniciá Sesión</span>
-					</p>
-				</div>
-			</div>
 		</div>
 	);
 };
