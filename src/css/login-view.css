@@ -1,305 +1,251 @@
-@charset "UTF-8";
 .login-view {
   width: 100%;
-  height: 100%;
-}
-.login-view .primary-section, .login-view .background-container .form-section, .login-view .background-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-.login-view .background-login-layout {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.316);
-  z-index: 10;
-}
-.login-view .background-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  background-image: url(../assets/images/pencil-background-blue.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.login-view .background-container .form-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  height: 600px;
-  border-radius: 10px;
-  margin-right: 150px;
-  background-color: #ffffff;
-  z-index: 11;
-}
-.login-view .background-container .form-section .form-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  width: 100%;
-  height: 100%;
-  padding: 40px;
-}
-.login-view .background-container .form-section .form-content .form-title {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  color: #323232;
-  margin-bottom: 5px;
-}
-.login-view .background-container .form-section .form-content .apis-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 105px;
-}
-.login-view .background-container .form-section .form-content .apis-container .api-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 45px;
-  background-color: #f7f7f7;
-  border-radius: 5px;
-  color: #000;
-  text-decoration: none;
-  font-weight: 400;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 150ms ease-in-out;
-}
-.login-view .background-container .form-section .form-content .apis-container .api-btn:hover {
-  background-color: #f0f0f0;
-}
-.login-view .background-container .form-section .form-content .apis-container .api-btn img {
-  width: 20px;
-  height: auto;
-  margin: 0px 7.5px 2px 0px;
-}
-.login-view .background-container .form-section .form-content .login-form-divisor {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: #c9c9c9;
-  font-size: 17px;
-  font-weight: 300;
-  line-height: 23px;
-  width: 100%;
-  margin: 5px auto;
-}
-.login-view .background-container .form-section .form-content .login-form-divisor::before, .login-view .background-container .form-section .form-content .login-form-divisor::after {
-  content: "";
-  -webkit-box-flex: 1;
-  flex: 1;
-  border-bottom: 1px solid #eaeaea;
-}
-.login-view .background-container .form-section .form-content .login-form-divisor::before {
-  margin-right: 10px;
-}
-.login-view .background-container .form-section .form-content .login-form-divisor::after {
-  margin-left: 10px;
-}
-.login-view .background-container .form-section .form-content .login-form {
-  margin: 0;
-}
-.login-view .background-container .form-section .form-content .login-form .form-double-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: baseline;
-  width: 100%;
-  padding: 0;
-}
-.login-view .background-container .form-section .form-content .login-form .form-double-container .form-double-inputs-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-.login-view .background-container .form-section .form-content .login-form .form-double-container .form-double-inputs-container .form-double-input {
-  width: calc(50% - 10px);
-}
-.login-view .background-container .form-section .form-content .login-form .form-double-container .form-double-error {
-  font-size: 13px;
-  color: #ff4242;
-}
-.login-view .background-container .form-section .form-content .login-form .form-input-container {
-  padding: 0;
-}
-.login-view .background-container .form-section .form-content .login-form .form-input-container .input-error {
-  font-size: 13px;
-  color: #ff4242;
-}
-.login-view .background-container .form-section .form-content .login-form .form-input-container .form-password-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row !important;
-}
-.login-view .background-container .form-section .form-content .login-form .form-input-container .form-password-input {
-  width: 100%;
-  height: 45px;
-  background-color: #f7f7f7;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-}
-.login-view .background-container .form-section .form-content .login-form .form-input-container .form-password-input::placeholder {
-  color: #727272;
-}
-.login-view .background-container .form-section .form-content .login-form .form-input-container .form-password-input:focus .form-password-container {
-  background-color: #f0f0f0;
-  border: 1px solid #44abff;
-}
-.login-view .background-container .form-section .form-content .login-form .form-input-container .form-eye-icon {
-  font-size: 17px;
-  cursor: pointer;
-  transition: all 100ms ease-in-out;
-}
-.login-view .background-container .form-section .form-content .login-form .form-input-container .form-eye-icon:hover {
-  color: #44abff;
-}
-.login-view .background-container .form-section .form-content .login-form .form-input-container .login-form-input {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 45px;
-  background-color: #f7f7f7;
-  font-size: 14px;
-  padding: 13px;
-  margin: 15px 0px 5px 0px;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-}
-.login-view .background-container .form-section .form-content .login-form .form-input-container .login-form-input::placeholder {
-  color: #727272;
-}
-.login-view .background-container .form-section .form-content .login-form .form-input-container .login-form-input:focus {
-  background-color: #f0f0f0;
-  border: 1px solid #44abff;
-}
-.login-view .background-container .form-section .container-btn {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.login-view .background-container .form-section .enter-btn {
-  border-radius: 5px;
-  background-color: #44abff;
-  border: none;
-  text-align: center;
-  font-size: 17px;
-  width: 100%;
-  height: 45px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin-top: 10px;
-}
-.login-view .background-container .form-section .enter-btn .enter-span {
-  color: white;
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-.login-view .background-container .form-section .enter-btn .enter-span::after {
-  content: "»";
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-}
-.login-view .background-container .form-section .enter-btn:hover > .enter-span {
-  padding-right: 25px;
-  transition: 0.5;
-}
-.login-view .background-container .form-section .enter-btn:hover > .enter-span:after {
-  opacity: 1;
-  right: 0;
-}
-.login-view .background-container .form-section .form-forgot-keep-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-top: 5px;
-}
-.login-view .background-container .form-section .form-forgot-keep-container .form-keep-login {
-  margin: 5px 0px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-}
-.login-view .background-container .form-section .form-forgot-keep-container .form-keep-login .form-keep-login-label {
-  margin-left: 7.5px;
-  line-height: none;
-  font-size: 13px;
-  color: #727272;
-}
-.login-view .background-container .form-section .form-forgot-keep-container .form-forgot-password {
-  color: #727272;
-  text-decoration: none;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 150ms ease-in;
-}
-.login-view .background-container .form-section .form-forgot-keep-container .form-forgot-password:hover {
-  color: #0b87ed;
-  text-decoration: underline;
-}
-.login-view .background-container .form-section .form-register-text {
-  font-size: 15px;
-  white-space: nowrap;
-  color: #727272;
-}
-.login-view .background-container .form-section .form-register-text span {
-  color: #44abff;
-  text-decoration: none;
-  transition: all 150ms ease-in-out;
-  cursor: pointer;
-  font-weight: 600;
-}
-.login-view .background-container .form-section .form-register-text span:hover {
-  color: #0b87ed;
-}
+  height: 100%; }
+  .login-view .primary-section, .login-view .background-container, .login-view .background-container .form-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; }
+  .login-view .background-login-layout {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.316);
+    z-index: 10; }
+  .login-view .background-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-image: url(../assets/images/pencil-background-blue.jpg);
+    background-repeat: no-repeat;
+    background-size: cover; }
+    .login-view .background-container .form-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      height: 600px;
+      border-radius: 10px;
+      margin-right: 150px;
+      background-color: #ffffff;
+      z-index: 11; }
+      .login-view .background-container .form-section .form-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        width: 100%;
+        height: 100%;
+        padding: 40px; }
+        .login-view .background-container .form-section .form-content .form-title {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          color: #323232; }
+        .login-view .background-container .form-section .form-content .apis-container {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          height: 105px; }
+          .login-view .background-container .form-section .form-content .apis-container .api-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 45px;
+            background-color: #f7f7f7;
+            border-radius: 5px;
+            color: #000;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 150ms ease-in-out; }
+            .login-view .background-container .form-section .form-content .apis-container .api-btn:hover {
+              background-color: #f0f0f0; }
+            .login-view .background-container .form-section .form-content .apis-container .api-btn img {
+              width: 20px;
+              height: auto;
+              margin: 0px 7.5px 2px 0px; }
+        .login-view .background-container .form-section .form-content .login-form-divisor {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          color: #c9c9c9;
+          font-size: 17px;
+          font-weight: 300;
+          line-height: 23px;
+          width: 100%;
+          margin: 5px auto; }
+          .login-view .background-container .form-section .form-content .login-form-divisor::before, .login-view .background-container .form-section .form-content .login-form-divisor::after {
+            content: '';
+            -webkit-box-flex: 1;
+            flex: 1;
+            border-bottom: 1px solid #eaeaea; }
+          .login-view .background-container .form-section .form-content .login-form-divisor::before {
+            margin-right: 10px; }
+          .login-view .background-container .form-section .form-content .login-form-divisor::after {
+            margin-left: 10px; }
+        .login-view .background-container .form-section .form-content .login-form {
+          margin: 0; }
+          .login-view .background-container .form-section .form-content .login-form .form-double-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: baseline;
+            width: 100%;
+            padding: 0; }
+            .login-view .background-container .form-section .form-content .login-form .form-double-container .form-double-inputs-container {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              align-items: center;
+              width: 100%; }
+              .login-view .background-container .form-section .form-content .login-form .form-double-container .form-double-inputs-container .form-double-input {
+                width: calc(50% - 10px); }
+            .login-view .background-container .form-section .form-content .login-form .form-double-container .form-double-error {
+              font-size: 13px;
+              color: #ff4242; }
+          .login-view .background-container .form-section .form-content .login-form .form-input-container {
+            padding: 0; }
+            .login-view .background-container .form-section .form-content .login-form .form-input-container .input-error {
+              font-size: 13px;
+              color: #ff4242; }
+            .login-view .background-container .form-section .form-content .login-form .form-input-container .form-password-container {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              flex-direction: row !important; }
+            .login-view .background-container .form-section .form-content .login-form .form-input-container .form-password-input {
+              width: 100%;
+              height: 45px;
+              background-color: #f7f7f7;
+              outline: none;
+              border: none;
+              border-radius: 5px; }
+              .login-view .background-container .form-section .form-content .login-form .form-input-container .form-password-input::placeholder {
+                color: #727272; }
+              .login-view .background-container .form-section .form-content .login-form .form-input-container .form-password-input:focus .form-password-container {
+                background-color: #f0f0f0;
+                border: 1px solid #44abff; }
+            .login-view .background-container .form-section .form-content .login-form .form-input-container .form-eye-icon {
+              font-size: 17px;
+              cursor: pointer;
+              transition: all 100ms ease-in-out; }
+              .login-view .background-container .form-section .form-content .login-form .form-input-container .form-eye-icon:hover {
+                color: #44abff; }
+            .login-view .background-container .form-section .form-content .login-form .form-input-container .login-form-input {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              width: 100%;
+              height: 45px;
+              background-color: #f7f7f7;
+              font-size: 14px;
+              padding: 13px;
+              margin: 15px 0px 5px 0px;
+              outline: none;
+              border: none;
+              border-radius: 5px; }
+              .login-view .background-container .form-section .form-content .login-form .form-input-container .login-form-input::placeholder {
+                color: #727272; }
+              .login-view .background-container .form-section .form-content .login-form .form-input-container .login-form-input:focus {
+                background-color: #f0f0f0;
+                border: 1px solid #44abff; }
+      .login-view .background-container .form-section .container-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; }
+      .login-view .background-container .form-section .enter-btn {
+        border-radius: 5px;
+        background-color: #44abff;
+        border: none;
+        text-align: center;
+        font-size: 17px;
+        width: 100%;
+        height: 45px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin-top: 10px; }
+        .login-view .background-container .form-section .enter-btn .enter-span {
+          color: white;
+          cursor: pointer;
+          display: inline-block;
+          position: relative;
+          transition: 0.5s; }
+          .login-view .background-container .form-section .enter-btn .enter-span::after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px; }
+        .login-view .background-container .form-section .enter-btn:hover > .enter-span {
+          padding-right: 25px;
+          transition: 0.5; }
+        .login-view .background-container .form-section .enter-btn:hover > .enter-span:after {
+          opacity: 1;
+          right: 0; }
+      .login-view .background-container .form-section .form-forgot-keep-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-top: 5px; }
+        .login-view .background-container .form-section .form-forgot-keep-container .form-keep-login {
+          margin: 5px 0px;
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center; }
+          .login-view .background-container .form-section .form-forgot-keep-container .form-keep-login .form-keep-login-label {
+            margin-left: 7.5px;
+            line-height: none;
+            font-size: 13px;
+            color: #727272; }
+        .login-view .background-container .form-section .form-forgot-keep-container .form-forgot-password {
+          color: #727272;
+          text-decoration: none;
+          font-size: 13px;
+          cursor: pointer;
+          transition: all 150ms ease-in; }
+          .login-view .background-container .form-section .form-forgot-keep-container .form-forgot-password:hover {
+            color: #0b87ed;
+            text-decoration: underline; }
+      .login-view .background-container .form-section .form-register-text {
+        font-size: 15px;
+        white-space: nowrap;
+        color: #727272; }
+        .login-view .background-container .form-section .form-register-text span {
+          color: #44abff;
+          text-decoration: none;
+          transition: all 150ms ease-in-out;
+          cursor: pointer;
+          font-weight: 600; }
+          .login-view .background-container .form-section .form-register-text span:hover {
+            color: #0b87ed; }
 
 @media screen and (max-width: 420px) {
   .form-register-text {
     margin-top: 20px;
-    white-space: normal !important;
-  }
-}
+    white-space: normal !important; } }
 @media screen and (max-width: 768px) {
   .background-container {
-    justify-content: center !important;
-  }
-  .background-container .form-section {
-    margin: 0px !important;
-    height: 550px !important;
-  }
-}
+    justify-content: center !important; }
+    .background-container .form-section {
+      margin: 0px !important;
+      height: 550px !important; } }
 @media screen and (min-width: 1440px) {
   .form-section {
-    width: 500px;
-  }
-}
+    width: 500px; } }
 
 /*# sourceMappingURL=login-view.css.map */

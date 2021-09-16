@@ -47,7 +47,6 @@
 				.form-title {
 					@include displayFlex(column, center, flex-start);
 					color: $text-color-white;
-					margin-bottom: 5px;
 				}
 
 				.apis-container {
@@ -276,7 +275,7 @@
 				font-size: 15px;
 				white-space: nowrap;
 				color: #727272;
-
+				
 				span {
 					color: $blue;
 					text-decoration: none;
