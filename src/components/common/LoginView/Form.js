@@ -26,9 +26,6 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 					return errors;
 				}}
 				onSubmit={(values, { setSubmitting }) => {
-					/* setTimeout(() => {
-						alert(JSON.stringify(values, null, 2));
-					}, 400); */
 					setSubmitting(false);
 					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/validateSession', values).then(
 						(res) => {
@@ -159,104 +156,114 @@ const RegisterForm = ({ changeForm, showPassword, seePassword }) => {
 					}, 400);
 				}}
 			>
-				<Form className="login-form row">
-					<div className="form-double-container">
-						<div className="form-double-inputs-container">
-							<div className="form-input-container form-double-input">
-								<Field
-									style={{ marginTop: '0px' }}
-									className="login-form-input"
-									type="text"
-									name="nombre"
-									placeholder="Nombre"
-									required
-								/>
-								<ErrorMessage className="input-error" name="nombre" component="div" />
-							</div>
-							<div className="form-input-container form-double-input">
-								<Field
-									style={{ marginTop: '0px' }}
-									className="login-form-input"
-									type="text"
-									name="apellido"
-									placeholder="Apellido"
-									required
-								/>
-								<ErrorMessage className="input-error" name="apellido" component="div" />
-							</div>
-						</div>
-					</div>
-					<div className="form-input-container">
-						<Field
-							className="login-form-input"
-							type="email"
-							name="email"
-							placeholder="Correo Electronico"
-							required
-						/>
-						<ErrorMessage className="input-error" name="email" component="div" />
-					</div>
-					<div className="form-double-container">
-						<div className="form-double-inputs-container">
-							<div className="form-input-container form-double-input">
-								<Field
-									className="login-form-input"
-									as="select"
-									name="tipo_documento"
-									placeholder="Tipo de documento"
-									required
-								>
-									<option value="" defaultValue disabled hidden>
-										Tipo de documento
-									</option>
-									<option value="dni">DNI</option>
-									<option value="libreta_civica">Libreta Cívica</option>
-									<option value="pasaporte">Pasaporte</option>
-								</Field>
-							</div>
-							<div className="form-input-container form-double-input">
-								<Field
-									className="login-form-input"
-									type="text"
-									name="documento"
-									placeholder="Documento"
-									required
-								/>
+				<Form
+					className="login-form row"
+					style={{
+						height: '900px',
+						display: 'flex',
+						flexDirection: 'column',
+						justifyContent: 'space-between',
+					}}
+				>
+					<div style={{ marginTop: '20px', padding: '0' }}>
+						<div className="form-double-container">
+							<div className="form-double-inputs-container">
+								<div className="form-input-container form-double-input">
+									<Field
+										style={{ marginTop: '0px' }}
+										className="login-form-input"
+										type="text"
+										name="nombre"
+										placeholder="Nombre"
+										required
+									/>
+									<ErrorMessage className="input-error" name="nombre" component="div" />
+								</div>
+								<div className="form-input-container form-double-input">
+									<Field
+										style={{ marginTop: '0px' }}
+										className="login-form-input"
+										type="text"
+										name="apellido"
+										placeholder="Apellido"
+										required
+									/>
+									<ErrorMessage className="input-error" name="apellido" component="div" />
+								</div>
 							</div>
 						</div>
-						<div className="form-double-error">
-							<ErrorMessage className="input-error" name="documento" component="div" />
-						</div>
-					</div>
-					<div className="form-input-container">
-						<div className="form-password-container login-form-input">
+						<div className="form-input-container">
 							<Field
-								className="form-password-input"
-								type={seePassword ? 'text' : 'password'}
-								name="password"
-								placeholder="Contraseña"
+								className="login-form-input"
+								type="email"
+								name="email"
+								placeholder="Correo Electronico"
 								required
 							/>
-							<Icon
-								className="form-eye-icon"
-								icon={seePassword ? 'eye-slash' : 'eye'}
-								onClick={showPassword}
-							/>
+							<ErrorMessage className="input-error" name="email" component="div" />
 						</div>
-						<ErrorMessage className="input-error" name="password" component="div" />
+						<div className="form-double-container">
+							<div className="form-double-inputs-container">
+								<div className="form-input-container form-double-input">
+									<Field
+										className="login-form-input"
+										as="select"
+										name="tipo_documento"
+										placeholder="Tipo de documento"
+										required
+									>
+										<option value="" defaultValue disabled hidden>
+											Tipo de documento
+										</option>
+										<option value="dni">DNI</option>
+										<option value="libreta_civica">Libreta Cívica</option>
+										<option value="pasaporte">Pasaporte</option>
+									</Field>
+								</div>
+								<div className="form-input-container form-double-input">
+									<Field
+										className="login-form-input"
+										type="text"
+										name="documento"
+										placeholder="Documento"
+										required
+									/>
+								</div>
+							</div>
+							<div className="form-double-error">
+								<ErrorMessage className="input-error" name="documento" component="div" />
+							</div>
+						</div>
+						<div className="form-input-container">
+							<div className="form-password-container login-form-input">
+								<Field
+									className="form-password-input"
+									type={seePassword ? 'text' : 'password'}
+									name="password"
+									placeholder="Contraseña"
+									required
+								/>
+								<Icon
+									className="form-eye-icon"
+									icon={seePassword ? 'eye-slash' : 'eye'}
+									onClick={showPassword}
+								/>
+							</div>
+							<ErrorMessage className="input-error" name="password" component="div" />
+						</div>
+						<div className="form-input-container">
+							<Field
+								className="login-form-input"
+								type={seePassword ? 'text' : 'password'}
+								name="confirmar_contraseña"
+								placeholder="Confirmar contraseña"
+								required
+							/>
+							<ErrorMessage className="input-error" name="confirmar_contraseña" component="div" />
+						</div>
 					</div>
-					<div className="form-input-container">
-						<Field
-							className="login-form-input"
-							type={seePassword ? 'text' : 'password'}
-							name="confirmar_contraseña"
-							placeholder="Confirmar contraseña"
-							required
-						/>
-						<ErrorMessage className="input-error" name="confirmar_contraseña" component="div" />
-					</div>
-					<button type="submit" className="enter-btn">
-						<span className="enter-span">Registrarse</span>
+					<button type="submit" className="enter-btn" style={{ marginBottom: '20px' }}>
+						<span className="enter-span">Continuar</span>
 					</button>
 				</Form>
 			</Formik>
@@ -297,40 +304,48 @@ const ChangePassword = ({ changeForm }) => {
 					}, 400);
 				}}
 			>
-				<Form className="login-form row">
-					<div className="form-input-container">
-						<Field
-							className="login-form-input"
-							type="text"
-							name="documento"
-							placeholder="Documento"
-							required
-						/>
-					</div>
-					<div className="form-input-container">
-						<Field
-							className="login-form-input"
-							type="email"
-							name="email"
-							placeholder="Correo Electronico"
-							required
-						/>
-						<ErrorMessage className="input-error" name="email" component="div" />
-					</div>
-
-					<button type="submit" className="enter-btn">
-						<span className="enter-span">Continuar</span>
-					</button>
-					<div className="login-form-divisor" style={{ marginBottom: '0px' }}>
-						<div className="divisor-text">
-							<p className="form-register-text">
-								¿Pudiste recordar la contraseña?{' '}
-								<span onClick={() => changeForm('Login')}>Iniciá Sesión</span>
-							</p>
+				<Form
+					className="login-form row"
+					style={{
+						height: '900px',
+						display: 'flex',
+						flexDirection: 'column',
+						justifyContent: 'space-between',
+					}}
+				>
+					<div className="forgot-password-inputs-container" style={{ marginTop: '20px', padding: '0' }}>
+						<div className="form-input-container">
+							<Field
+								className="login-form-input"
+								type="text"
+								name="documento"
+								placeholder="Documento"
+								required
+							/>
+						</div>
+						<div className="form-input-container">
+							<Field
+								className="login-form-input"
+								type="email"
+								name="email"
+								placeholder="Correo Electronico"
+								required
+							/>
+							<ErrorMessage className="input-error" name="email" component="div" />
 						</div>
 					</div>
+					<button type="submit" className="enter-btn" style={{ marginBottom: '20px' }}>
+						<span className="enter-span">Continuar</span>
+					</button>
 				</Form>
 			</Formik>
+			<div className="login-form-divisor" style={{ marginBottom: '0px' }}>
+				<div className="divisor-text">
+					<p className="form-register-text">
+						¿Pudiste recordar la contraseña? <span onClick={() => changeForm('Login')}>Iniciá Sesión</span>
+					</p>
+				</div>
+			</div>
 		</div>
 	);
 };
