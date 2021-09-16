@@ -43,18 +43,18 @@
 .login-view .background-container .form-section .form-content {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   width: 100%;
   height: 100%;
   padding: 40px;
 }
 .login-view .background-container .form-section .form-content .form-title {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
   color: #323232;
-  margin-bottom: 5px;
+  text-align: center;
+}
+.login-view .background-container .form-section .form-content .form-logo {
+  width: 120px;
+  align-self: center;
 }
 .login-view .background-container .form-section .form-content .apis-container {
   display: flex;
@@ -239,7 +239,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: baseline;
-  margin-top: 5px;
+  margin: 5px 0px 20px 0px;
 }
 .login-view .background-container .form-section .form-forgot-keep-container .form-keep-login {
   margin: 5px 0px;

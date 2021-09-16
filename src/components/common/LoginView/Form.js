@@ -1,70 +1,20 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Axios from 'axios';
-import GoogleLogin from 'react-google-login';
-import FacebookLogin from 'react-facebook-login';
 
 // Components
-import GoogleIcon from '../../../assets/svgs/logo-google.svg';
-import FacebookIcon from '../../../assets/svgs/logo-facebook.svg';
+import Logo from '../../../assets/images/logo-escolar.png';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { Icon } from 'rsuite';
 
 // Styles
 import 'rsuite/dist/styles/rsuite-default.css';
+
 // Forms
 const LoginForm = ({ changeForm, showPassword, seePassword }) => {
-	const responseGoogle = (response) => {
-		console.log(response.profileObj);
-	};
-
-	const responseFacebook = (response) => {
-		console.log(response);
-	};
-
-	useEffect(() => {
-		const googleLoginContainer = document.getElementById('google-login-container');
-		const facebookLoginContainer = document.getElementById('facebook-login-container');
-
-		facebookLoginContainer.firstChild.style.width = '100%';
-		facebookLoginContainer.firstChild.firstChild.innerHTML = `<img src=${FacebookIcon} alt="facebook-icon" />
-		Continuar con Facebook`;
-		googleLoginContainer.firstChild.innerHTML = `<img src=${GoogleIcon} alt="google-icon" />Continuar con Google`;
-
-		setInterval(() => {
-			googleLoginContainer.firstChild.removeAttribute('style');
-		});
-	});
-
 	return (
 		<div className="form-content">
 			<h2 className="form-title">Iniciar Sesión</h2>
-
-			<div className="apis-container">
-				<span className="api-btn" id="google-login-container">
-					<GoogleLogin
-						clientId="1053805853505-te1vo1l4tsfeg9ck2ip21175rph9c6hc.apps.googleusercontent.com"
-						onSuccess={responseGoogle}
-						onFailure={responseGoogle}
-						cookiePolicy={'single_host_origin'}
-						className="api-btn"
-					/>
-				</span>
-				<span className="api-btn" id="facebook-login-container">
-					<FacebookLogin
-						appId="548174133074419"
-						autoLoad={false}
-						fields="name,email,picture"
-						callback={responseFacebook}
-						cssClass="api-btn"
-					/>
-				</span>
-			</div>
-
-			<div className="login-form-divisor">
-				<div className="divisor-text">O</div>
-			</div>
-
+			<img src={Logo} alt="schoolar-logo" className="form-logo" />
 			<Formik
 				initialValues={{ email: '', password: '' }}
 				validate={(values) => {
@@ -76,73 +26,72 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 					return errors;
 				}}
 				onSubmit={(values, { setSubmitting }) => {
-					setTimeout(() => {
+					/* setTimeout(() => {
 						alert(JSON.stringify(values, null, 2));
-						setSubmitting(false);
-					}, 400);
-					/* if (insertData) {
-						Axios.post("http://localhost:3001/Rasn/admin/animales/nuevo-animal", values).then((res) => {
+					}, 400); */
+					setSubmitting(false);
+					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/validateSession', values).then(
+						(res) => {
 							console.log(res.data);
-						}).then(alert("Registrado ingresado"));	
-					} else {
-						Axios.post("http://localhost:3001/Rasn/admin/animales/actualizar-animal", values).then((res) => {
-							console.log(res.data);
-						}).then(alert("Registro actualizado"));
-					} */
+						}
+					);
 				}}
 			>
 				<Form className="login-form">
-					<div className="form-input-container">
-						<Field
-							className="login-form-input"
-							style={{ marginTop: '0px' }}
-							type="email"
-							name="email"
-							placeholder="Correo Electronico"
-							required
-						/>
-						<ErrorMessage className="input-error" name="email" component="div" />
-					</div>
-					<div className="form-input-container">
-						<div className="form-password-container login-form-input">
+					<div>
+						<div className="form-input-container">
 							<Field
-								className="form-password-input"
-								type={seePassword ? 'text' : 'password'}
-								name="password"
-								placeholder="Contraseña"
+								className="login-form-input"
+								style={{ marginTop: '0px' }}
+								type="email"
+								name="email"
+								placeholder="Correo Electronico"
 								required
 							/>
-							<Icon
-								className="form-eye-icon"
-								icon={seePassword ? 'eye-slash' : 'eye'}
-								onClick={showPassword}
-							/>
+							<ErrorMessage className="input-error" name="email" component="div" />
 						</div>
-						<ErrorMessage className="input-error" name="password" component="div" />
-					</div>
-					<button type="submit" className="enter-btn">
-						<span className="enter-span">Ingresar</span>
-					</button>
-					<div className="form-forgot-keep-container">
-						<div className="form-keep-login">
-							<input type="checkbox" name="keep-login"></input>
-							<label className="form-keep-login-label" htmlFor="keep-login">
-								Mantener sesión iniciada
-							</label>
+						<div className="form-input-container">
+							<div className="form-password-container login-form-input">
+								<Field
+									className="form-password-input"
+									type={seePassword ? 'text' : 'password'}
+									name="password"
+									placeholder="Contraseña"
+									required
+								/>
+								<Icon
+									className="form-eye-icon"
+									icon={seePassword ? 'eye-slash' : 'eye'}
+									onClick={showPassword}
+								/>
+							</div>
+							<ErrorMessage className="input-error" name="password" component="div" />
 						</div>
-						<span className="form-forgot-password" onClick={() => changeForm('changePassword')}>
-							¿Olvidaste tu contraseña?
-						</span>
+						<button type="submit" className="enter-btn">
+							<span className="enter-span">Ingresar</span>
+						</button>
+						<div className="form-forgot-keep-container">
+							<div className="form-keep-login">
+								<input type="checkbox" name="keep-login"></input>
+								<label className="form-keep-login-label" htmlFor="keep-login">
+									Mantener sesión iniciada
+								</label>
+							</div>
+							<span className="form-forgot-password" onClick={() => changeForm('changePassword')}>
+								¿Olvidaste tu contraseña?
+							</span>
+						</div>
+						<div className="login-form-divisor" style={{ marginBottom: '0px', marginTop: '0px' }}>
+							<div className="divisor-text">
+								<p className="form-register-text">
+									¿Aún no tenés una cuenta?{' '}
+									<span onClick={() => changeForm('Register')}>Registrate</span>
+								</p>
+							</div>
+						</div>
 					</div>
 				</Form>
 			</Formik>
-			<div className="login-form-divisor" style={{ marginBottom: '0px', marginTop: '0px' }}>
-				<div className="divisor-text">
-					<p className="form-register-text">
-						¿Aún no tenés una cuenta? <span onClick={() => changeForm('Register')}>Registrate</span>
-					</p>
-				</div>
-			</div>
 		</div>
 	);
 };
@@ -325,17 +274,11 @@ const RegisterForm = ({ changeForm, showPassword, seePassword }) => {
 const ChangePassword = ({ changeForm }) => {
 	return (
 		<div className="form-content">
-			{/* <div className="form-super-container"> */}
 			<h2 className="form-title">Cambiar Contraseña</h2>
 			<Formik
 				initialValues={{
-					nombre: '',
-					apellido: '',
-					tipo_documento: '',
 					documento: '',
 					email: '',
-					password: '',
-					confirmar_contraseña: '',
 				}}
 				validate={(values) => {
 					const errors = {};
@@ -372,49 +315,50 @@ const ChangePassword = ({ changeForm }) => {
 				}}
 			>
 				<Form className="login-form row">
-					<div className="form-double-container">
-						<div className="form-double-inputs-container">
-							<div className="form-input-container form-double-input">
-								<Field
-									className="login-form-input"
-									as="select"
-									name="tipo_documento"
-									placeholder="Tipo de documento"
-									required
-								>
-									<option value="" defaultValue disabled hidden>
-										Tipo de documento
-									</option>
-									<option value="dni">DNI</option>
-									<option value="libreta_civica">Libreta Cívica</option>
-									<option value="pasaporte">Pasaporte</option>
-								</Field>
+					<div className="login-form-inputs-container">
+						<div className="form-double-container">
+							<div className="form-double-inputs-container">
+								<div className="form-input-container form-double-input">
+									<Field
+										className="login-form-input"
+										as="select"
+										name="tipo_documento"
+										placeholder="Tipo de documento"
+										required
+									>
+										<option value="" defaultValue disabled hidden>
+											Tipo de documento
+										</option>
+										<option value="dni">DNI</option>
+										<option value="libreta_civica">Libreta Cívica</option>
+										<option value="pasaporte">Pasaporte</option>
+									</Field>
+								</div>
+								<div className="form-input-container form-double-input">
+									<Field
+										className="login-form-input"
+										type="text"
+										name="documento"
+										placeholder="documento"
+										required
+									/>
+								</div>
 							</div>
-							<div className="form-input-container form-double-input">
-								<Field
-									className="login-form-input"
-									type="text"
-									name="documento"
-									placeholder="documento"
-									required
-								/>
+							<div className="form-double-error">
+								<ErrorMessage className="input-error" name="documento" component="div" />
 							</div>
 						</div>
-						<div className="form-double-error">
-							<ErrorMessage className="input-error" name="documento" component="div" />
+						<div className="form-input-container">
+							<Field
+								className="login-form-input"
+								type="email"
+								name="email"
+								placeholder="Correo Electronico"
+								required
+							/>
+							<ErrorMessage className="input-error" name="email" component="div" />
 						</div>
 					</div>
-					<div className="form-input-container">
-						<Field
-							className="login-form-input"
-							type="email"
-							name="email"
-							placeholder="Correo Electronico"
-							required
-						/>
-						<ErrorMessage className="input-error" name="email" component="div" />
-					</div>
-
 					<button type="submit" className="enter-btn">
 						<span className="enter-span">Continuar</span>
 					</button>
@@ -434,7 +378,7 @@ const ChangePassword = ({ changeForm }) => {
 export default function Formulario() {
 	const [formulario, setFormulario] = useState('Login');
 	const [seePassword, setSeePassword] = useState(false);
-	console.log(formulario);
+
 	function changeForm(typeForm) {
 		setFormulario(typeForm);
 	}
