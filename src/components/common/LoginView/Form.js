@@ -434,7 +434,7 @@ const ChangePassword = ({ changeForm }) => {
 export default function Formulario() {
 	const [formulario, setFormulario] = useState('Login');
 	const [seePassword, setSeePassword] = useState(false);
-
+	console.log(formulario);
 	function changeForm(typeForm) {
 		setFormulario(typeForm);
 	}
