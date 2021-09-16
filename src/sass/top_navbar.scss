@@ -1,0 +1,46 @@
+@import 'colors.scss';
+@import 'fonts.scss';
+@import 'mixins.scss';
+
+#top-navbar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0px;
+	background: #33b6ff;
+
+	position: absolute;
+	width: 1440px;
+	height: 50px;
+	right: 0px;
+	bottom: 974px;
+
+	.left-nav {
+	}
+
+	.right-nav {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		padding: 0px;
+
+		.icons-container {
+			position: static;
+			width: 174.45px;
+			height: 50px;
+			left: 1265.55px;
+			top: 0px;
+		}
+
+		.profile-settings-container {
+			flex: none;
+			order: 1;
+			flex-grow: 0;
+			margin: 0px 0px;
+
+			.profile-image {
+			}
+		}
+	}
+}

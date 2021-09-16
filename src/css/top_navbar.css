@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap");
+#top-navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  background: #33b6ff;
+  position: absolute;
+  width: 1440px;
+  height: 50px;
+  right: 0px;
+  bottom: 974px;
+}
+#top-navbar .right-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+}
+#top-navbar .right-nav .icons-container {
+  position: static;
+  width: 174.45px;
+  height: 50px;
+  left: 1265.55px;
+  top: 0px;
+}
+#top-navbar .right-nav .profile-settings-container {
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 0px 0px;
+}
+
+/*# sourceMappingURL=top_navbar.css.map */
