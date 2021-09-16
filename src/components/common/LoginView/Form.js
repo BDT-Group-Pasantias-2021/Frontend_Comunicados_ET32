@@ -130,16 +130,16 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 								Mantener sesión iniciada
 							</label>
 						</div>
-						<a href="." className="form-forgot-password">
-							Olvidaste tu contraseña?
-						</a>
+						<span  className="form-forgot-password" onClick={() => changeForm("changePassword")}>
+							¿Olvidaste tu contraseña?
+						</span>
 					</div>
 				</Form>
 			</Formik>
 			<div className="login-form-divisor" style={{ marginBottom: '0px', marginTop: '0px' }}>
 				<div className="divisor-text">
 					<p className="form-register-text">
-						Aún no tenés una cuenta? <span onClick={changeForm}>Registrate</span>
+						¿Aún no tenés una cuenta? <span onClick={() => changeForm("Register")}>Registrate</span>
 					</p>
 				</div>
 			</div>
@@ -314,7 +314,136 @@ const RegisterForm = ({ changeForm, showPassword, seePassword }) => {
 			<div className="login-form-divisor" style={{ marginBottom: '0px' }}>
 				<div className="divisor-text">
 					<p className="form-register-text">
-						Ya tenés una cuenta? <span onClick={changeForm}>Iniciá Sesión</span>
+						¿Ya tenés una cuenta? <span onClick={() => changeForm("Login")}>Iniciá Sesión</span>
+					</p>
+				</div>
+			</div>
+		</div>
+	);
+};
+
+
+/* FORMULARIO AL OLVIDAR CONTRASEÑA */
+
+
+const ChangePassword = ({ changeForm, showPassword, seePassword }) => {
+	return (
+		<div className="form-content">
+			{/* <div className="form-super-container"> */}
+				<h2 className="form-title">Cambiar Contraseña</h2>
+				<Formik
+					initialValues={{
+						nombre: '',
+						apellido: '',
+						tipo_documento: '',
+						identificador: '',
+						email: '',
+						contraseña: '',
+						confirmar_contraseña: '',
+					}}
+					validate={(values) => {
+						const errors = {};
+
+						//? Validación de correo electrónico.
+						if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+							errors.email = 'Correo electrónico inválido';
+						}
+
+						//? Validaciones de longitud (entre 8 y 24) y coincidencias de contraseñas. Debe incluir
+						//? al menos una mayuscula, una minuscula, un número y un caracter especial.
+						/* if (
+							!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_\\`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@[\]^_\\`{|}~]{8,24}/.test(
+								values.contraseña
+							)
+						) {
+							errors.contraseña =
+								'La contraseña debe tener al menos 8 caracteres, una mayuscula, una minuscula, un numero y un caracter especial.';
+						}
+						//? Validaciones de contraseñas coincidentes.
+						if (values.contraseña !== values.confirmar_contraseña) {
+							errors.confirmar_contraseña = 'Las contraseñas no coinciden';
+						} */
+
+						//? Validaciones de longitud y caracteres del identificador correspondiente al documento seleccionado.
+						if (values.tipo_documento === 'dni' && values.identificador.length !== 8) {
+							errors.identificador = 'El numero de DNI debe tener 8 digitos.';
+						} else if (
+							values.tipo_documento === 'libreta_civica' &&
+							(values.identificador.length < 4 || values.identificador.length > 8)
+						) {
+							errors.identificador = 'El numero de Libreta Civica debe tener entre 4 y 8 digitos';
+						} else if (values.tipo_documento === 'pasaporte' && values.identificador.length !== 9) {
+							errors.identificador = 'El numero de Pasaporte debe tener 9 digitos.';
+						}
+						if (values.tipo_documento === 'dni' || values.tipo_documento === 'libreta_civica') {
+							if (/[a-zA-Z]/.test(values.identificador)) {
+								errors.identificador = 'Identificador inválido';
+							}
+						}
+
+						return errors;
+					}}
+					onSubmit={(values, { setSubmitting }) => {
+						setTimeout(() => {
+							alert(JSON.stringify(values, null, 2));
+							setSubmitting(false);
+						}, 400);
+					}}
+				>
+					<Form className="login-form row">
+					<div className="form-double-container">
+							<div className="form-double-inputs-container">
+								<div className="form-input-container form-double-input">
+									<Field
+										className="login-form-input"
+										as="select"
+										name="tipo_documento"
+										placeholder="Tipo de documento"
+										required
+									>
+										<option value="" defaultValue disabled hidden>
+											Tipo de documento
+										</option>
+										<option value="dni">DNI</option>
+										<option value="libreta_civica">Libreta Cívica</option>
+										<option value="pasaporte">Pasaporte</option>
+									</Field>
+								</div>
+								<div className="form-input-container form-double-input">
+									<Field
+										className="login-form-input"
+										type="text"
+										name="identificador"
+										placeholder="Identificador"
+										required
+									/>
+								</div>
+							</div>
+							<div className="form-double-error">
+								<ErrorMessage className="input-error" name="identificador" component="div" />
+							</div>
+						</div>
+						<div className="form-input-container">
+							<Field
+								className="login-form-input"
+								type="email"
+								name="email"
+								placeholder="Correo Electronico"
+								required
+							/>
+							<ErrorMessage className="input-error" name="email" component="div" />
+						</div>
+						
+						<button type="submit" className="enter-btn">
+							<span className="enter-span">Continuar</span>
+						</button>
+					</Form>
+				</Formik>
+			{/* </div> */}
+			<div className="login-form-divisor" style={{ marginBottom: '0px' }}>
+				<div className="divisor-text">
+					<p className="form-register-text">
+						¿Pudiste recordar la contraseña? <span onClick={() => changeForm("Login")}>Iniciá Sesión</span>
 					</p>
 				</div>
 			</div>
@@ -323,11 +452,11 @@ const RegisterForm = ({ changeForm, showPassword, seePassword }) => {
 };
 
 export default function Formulario() {
-	const [formulario, setFormulario] = useState(true);
+	const [formulario, setFormulario] = useState("Login");
 	const [seePassword, setSeePassword] = useState(false);
 
-	function changeForm() {
-		setFormulario(!formulario);
+	function changeForm(typeForm) {
+		setFormulario(typeForm);
 	}
 
 	function showPassword() {
@@ -336,11 +465,14 @@ export default function Formulario() {
 
 	return (
 		<div className="form-section col-10 col-sm-8 col-md-5 col-lg-4">
-			{formulario ? (
+			{formulario === "Login" ?(
 				<LoginForm changeForm={changeForm} showPassword={showPassword} seePassword={seePassword} />
-			) : (
+			) : ( formulario === "Register" ?
 				<RegisterForm changeForm={changeForm} showPassword={showPassword} seePassword={seePassword} />
-			)}
+				: 
+				<ChangePassword changeForm={changeForm} showPassword={showPassword} seePassword={seePassword} />
+				)
+		}
 		</div>
 	);
 }

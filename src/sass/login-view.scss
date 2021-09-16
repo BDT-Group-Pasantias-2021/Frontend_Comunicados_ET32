@@ -23,7 +23,7 @@
 		width: 100%;
 		height: 100%;
 		margin: 0;
-		background-image: url(../assets/images/pencil-background.jpg);
+		background-image: url(../assets/images/pencil-background-blue.jpg);
 		background-repeat: no-repeat;
 		background-size: cover;
 
@@ -38,10 +38,11 @@
 			z-index: 11;
 
 			.form-content {
-				@include displayFlex(column, space-around, null);
+				@include displayFlex(column, space-evenly, null);
 				width: 100%;
 				height: 100%;
 				padding: 40px;
+
 
 				.form-title {
 					@include displayFlex(column, center, flex-start);
@@ -114,6 +115,7 @@
 					.form-double-container {
 						@include displayFlex(column, space-between, baseline);
 						width: 100%;
+
 						padding: 0;
 
 						.form-double-inputs-container {
@@ -261,6 +263,12 @@
 					color: #727272;
 					text-decoration: none;
 					font-size: 13px;
+					cursor: pointer;
+					transition: all 150ms ease-in;
+					&:hover{
+						color: $blue--hover;
+						text-decoration: underline;
+					}
 				}
 			}
 
