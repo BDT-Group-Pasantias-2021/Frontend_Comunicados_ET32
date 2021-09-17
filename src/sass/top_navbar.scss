@@ -63,7 +63,9 @@ $containers-border-radius: 5px;
 
 			background: rgba(255, 255, 255, 0.275);
 			border-radius: $containers-border-radius;
+			transition: all 100ms ease-in;
 			&:focus-within {
+
 				background: rgb(255, 255, 255);
 			}
 			.searchbar-input {
@@ -75,6 +77,7 @@ $containers-border-radius: 5px;
 				background: transparent;
 				border-top-left-radius: $containers-border-radius;
 				border-bottom-left-radius: $containers-border-radius;
+
 				
 		}
 
@@ -88,6 +91,8 @@ $containers-border-radius: 5px;
 					width: 18px;
 					height: 18px;
 					fill: #fff;
+					transition: all 100ms ease-in;
+					
 				}
 			}
 		}

@@ -4,12 +4,3 @@
 	justify-content: $justify;
 	align-items: $align;
 }
-
-@mixin searchColor($blueSearch: true) {
-	@if $blueSearch == true {
-		background: grey;
-	}
-	@else{
-		background: rgb(255, 255, 255);
-	}
-}

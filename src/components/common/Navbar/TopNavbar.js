@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // Components
-import MenuIcon from '../../../assets/svgs/menu.svg';
-import HomeIcon from '../../../assets/svgs/home.svg';
-import LupaIcon from '../../../assets/svgs/lupa.svg';
-import AddIcon from '../../../assets/svgs/add.svg';
 import ProfilePhoto from '../../../assets/svgs/unnamed.jpg';
-import NotificationIcon from '../../../assets/svgs/notification.svg';
+
 
 // Styles
 import '../../../css/top_navbar.css';
 
 export default function TopNavbar() {
+	useEffect(() => {
+		const searchColor = document.getElementById("searchBar");
+		const changeColor = document.getElementById("Lupa_svg");
+		searchColor.addEventListener("focus", () => {
+			changeColor.style.fill="#6e6e6e"
+		})
+		searchColor.addEventListener("focusout", () => {
+			changeColor.style.fill="#fff"
+		})
+	})
+
 	return (
 		<nav id="top-navbar">
 			<div className="left-nav">
@@ -50,9 +57,9 @@ export default function TopNavbar() {
 					</div>
 				</div>
 				<form className="navbar-searchbar">
-					<input className="searchbar-input" type="text" name="search-value" />
+					<input className="searchbar-input" type="text" name="search-value" id="searchBar"/>
 					<button className="searchbar-lupa-container">
-						<svg id="Capa_1" viewBox="0 0 512.005 512.005" className="searchbar-lupa-icon">
+						<svg id="Lupa_svg" viewBox="0 0 512.005 512.005" className="searchbar-lupa-icon">
 							<g>
 								<g>
 									<path
