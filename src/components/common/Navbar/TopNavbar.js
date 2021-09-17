@@ -1,12 +1,7 @@
 import React from 'react';
 
 // Components
-import MenuIcon from '../../../assets/svgs/menu.svg';
-import HomeIcon from '../../../assets/svgs/home.svg';
-import LupaIcon from '../../../assets/svgs/lupa.svg';
-import AddIcon from '../../../assets/svgs/add.svg';
 import ProfilePhoto from '../../../assets/svgs/unnamed.jpg';
-import NotificationIcon from '../../../assets/svgs/notification.svg';
 
 // Styles
 import '../../../css/top_navbar.css';
@@ -51,7 +46,7 @@ export default function TopNavbar() {
 				</div>
 				<form className="navbar-searchbar">
 					<input className="searchbar-input" type="text" name="search-value" />
-					<button className="searchbar-lupa-container">
+					<div className="searchbar-lupa-container">
 						<svg id="Capa_1" viewBox="0 0 512.005 512.005" className="searchbar-lupa-icon">
 							<g>
 								<g>
@@ -64,7 +59,7 @@ export default function TopNavbar() {
 								</g>
 							</g>
 						</svg>
-					</button>
+					</div>
 				</form>
 			</div>
 			<div className="right-nav">

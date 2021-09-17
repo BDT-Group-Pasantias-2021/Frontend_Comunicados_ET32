@@ -27,11 +27,9 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 				}}
 				onSubmit={(values, { setSubmitting }) => {
 					setSubmitting(false);
-					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/validateSession', values).then(
-						(res) => {
-							console.log(res.data);
-						}
-					);
+					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/login', values).then((res) => {
+						console.log(res.data);
+					});
 				}}
 			>
 				<Form className="login-form">

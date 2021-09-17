@@ -1,4 +1,5 @@
 @import '../../node_modules/bootstrap/scss/bootstrap';
+@import 'colors';
 @import 'fonts';
 
 * {
@@ -16,4 +17,10 @@ body,
 
 p {
 	margin-bottom: 0 !important;
+}
+
+.father-container-view {
+	width: 100%;
+	height: calc(100% - 45px);
+	background-color: #c22828;
 }

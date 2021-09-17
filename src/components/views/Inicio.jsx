@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+
+// Components
+
+// Styles
+import '../../css/home.css';
 
 export default function Inicio() {
-    return (
-        <div>
-            Inicio
-        </div>
-    )
+	return <main className="father-container-view">Inicio</main>;
 }
