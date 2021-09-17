@@ -7,7 +7,6 @@ import TopNavbar from './components/common/Navbar/TopNavbar';
 
 // Styles
 import './css/global.css';
-import './css/top_navbar.css';
 
 // Navigation
 import Login from './components/views/Login';

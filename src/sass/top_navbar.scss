@@ -2,45 +2,136 @@
 @import 'fonts.scss';
 @import 'mixins.scss';
 
-#top-navbar {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	padding: 0px;
-	background: #33b6ff;
+$navbar-height: 45px;
+$containers-border-radius: 5px;
 
+.nav-icons {
+	@include displayFlex(null, center, center);
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	border-radius: $containers-border-radius;
+	transition: all 100ms ease;
+
+	&:hover {
+		background-color: rgba(255, 255, 255, 0.255);
+	}
+
+	.right-nav-icon {
+		width: 21px;
+		height: 21px;
+		fill: #fff;
+	}
+}
+
+#top-navbar {
+	@include displayFlex(row, space-between, center);
+	width: 100%;
+	height: $navbar-height;
+
+	background: $blue;
 	position: absolute;
-	width: 1440px;
-	height: 50px;
-	right: 0px;
-	bottom: 974px;
+	top: 0;
 
 	.left-nav {
+		@include displayFlex(row, center, center);
+		margin-left: 20px;
+
+		position: static;
+		width: fit-content;
+
+		.icons-container {
+			@include displayFlex(row, space-between, center);
+			width: 75px;
+			height: $navbar-height;
+			margin-right: 75px - 64px;
+
+			.nav-icon-container {
+				@extend .nav-icons;
+			}
+		}
+
+		.navbar-searchbar {
+			@include displayFlex(row, flex-start, flex-end);
+
+			position: static;
+			width: 250px;
+			height: 27.5px;
+			top: calc(50% - 30px / 2 + 0px);
+
+			background: rgba(255, 255, 255, 0.275);
+			border-radius: $containers-border-radius;
+			&:focus {
+				background: rgba(255, 255, 255, 0.823);
+			}
+
+			.searchbar-input {
+				width: 85%;
+				height: 100%;
+				padding: 9px 11px;
+				border: none;
+				outline: none;
+				background: transparent;
+				border-top-left-radius: $containers-border-radius;
+				border-bottom-left-radius: $containers-border-radius;
+			}
+
+			.searchbar-lupa-container {
+				@include displayFlex(row, center, center);
+				width: 15%;
+				height: 100%;
+				background: transparent;
+
+				.searchbar-lupa-icon {
+					width: 18px;
+					height: 18px;
+					fill: #fff;
+				}
+			}
+		}
 	}
 
 	.right-nav {
-		display: flex;
-		flex-direction: row;
-		align-items: flex-start;
-		padding: 0px;
+		@include displayFlex(row, center, flex-start);
+		margin-right: 20px;
+		height: $navbar-height;
 
 		.icons-container {
-			position: static;
-			width: 174.45px;
-			height: 50px;
-			left: 1265.55px;
-			top: 0px;
+			@include displayFlex(row, space-between, center);
+			width: 75px;
+			height: $navbar-height;
+
+			.nav-icon-container {
+				@extend .nav-icons;
+			}
 		}
 
 		.profile-settings-container {
-			flex: none;
-			order: 1;
-			flex-grow: 0;
-			margin: 0px 0px;
+			@include displayFlex(null, center, center);
+			position: static;
+			width: 60px;
+			height: 60px;
+			border-radius: 50%;
+			margin-left: 7px;
+			background: $blue;
 
-			.profile-image {
+			.profile-image-btn {
+				width: 40px;
+				height: auto;
+				border-radius: 50%;
+				cursor: pointer;
+				transition: all 150ms ease;
+
+				&:hover {
+					filter: brightness(1.1);
+				}
 			}
 		}
+	}
+}
+
+@media (max-width: 600px) {
+	.navbar-searchbar {
+		width: calc(100vw - 366px) !important;
 	}
 }

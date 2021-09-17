@@ -150,10 +150,10 @@ const RegisterForm = ({ changeForm, showPassword, seePassword }) => {
 					return errors;
 				}}
 				onSubmit={(values, { setSubmitting }) => {
-					setTimeout(() => {
-						alert(JSON.stringify(values, null, 2));
-						setSubmitting(false);
-					}, 400);
+					setSubmitting(false);
+					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/register', values).then((res) => {
+						console.log(res.data);
+					});
 				}}
 			>
 				<Form
@@ -298,10 +298,10 @@ const ChangePassword = ({ changeForm }) => {
 					return errors;
 				}}
 				onSubmit={(values, { setSubmitting }) => {
-					setTimeout(() => {
-						alert(JSON.stringify(values, null, 2));
-						setSubmitting(false);
-					}, 400);
+					setSubmitting(false);
+					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/changePassword', values).then((res) => {
+						console.log(res.data);
+					});
 				}}
 			>
 				<Form
