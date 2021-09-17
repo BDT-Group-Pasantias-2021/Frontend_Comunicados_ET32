@@ -29,7 +29,7 @@ $containers-border-radius: 5px;
 	width: 100%;
 	height: $navbar-height;
 
-	background: $blue;
+	background: $primary-color;
 	position: absolute;
 	top: 0;
 
@@ -49,6 +49,8 @@ $containers-border-radius: 5px;
 			.nav-icon-container {
 				@extend .nav-icons;
 			}
+			
+		
 		}
 
 		.navbar-searchbar {
@@ -61,10 +63,9 @@ $containers-border-radius: 5px;
 
 			background: rgba(255, 255, 255, 0.275);
 			border-radius: $containers-border-radius;
-			&:focus {
-				background: rgba(255, 255, 255, 0.823);
+			&:focus-within {
+				background: rgb(255, 255, 255);
 			}
-
 			.searchbar-input {
 				width: 85%;
 				height: 100%;
@@ -74,7 +75,8 @@ $containers-border-radius: 5px;
 				background: transparent;
 				border-top-left-radius: $containers-border-radius;
 				border-bottom-left-radius: $containers-border-radius;
-			}
+				
+		}
 
 			.searchbar-lupa-container {
 				@include displayFlex(row, center, center);
@@ -113,7 +115,7 @@ $containers-border-radius: 5px;
 			height: 60px;
 			border-radius: 50%;
 			margin-left: 7px;
-			background: $blue;
+			background: $primary-color;
 
 			.profile-image-btn {
 				width: 40px;

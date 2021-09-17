@@ -134,7 +134,7 @@
 						.form-double-error {
 							//padding-left: 15px;
 							font-size: 13px;
-							color: $red;
+							color: $logo-color-red;
 						}
 					}
 
@@ -143,7 +143,7 @@
 
 						.input-error {
 							font-size: 13px;
-							color: $red;
+							color: $logo-color-red;
 						}
 
 						.form-password-container {
@@ -165,7 +165,7 @@
 
 							&:focus .form-password-container {
 								background-color: #f0f0f0;
-								border: 1px solid $blue;
+								border: 1px solid $primary-color;
 							}
 						}
 
@@ -175,7 +175,7 @@
 							transition: all 100ms ease-in-out;
 
 							&:hover {
-								color: $blue;
+								color: $primary-color;
 							}
 						}
 
@@ -197,7 +197,7 @@
 
 							&:focus {
 								background-color: #f0f0f0;
-								border: 1px solid $blue;
+								border: 1px solid $primary-color;
 							}
 						}
 					}
@@ -210,7 +210,7 @@
 
 			.enter-btn {
 				border-radius: 5px;
-				background-color: $blue;
+				background-color: $primary-color;
 				border: none;
 				text-align: center;
 				font-size: 17px;
@@ -270,7 +270,7 @@
 					cursor: pointer;
 					transition: all 150ms ease-in;
 					&:hover {
-						color: $blue--hover;
+						color: $primary-color--hover;
 						text-decoration: underline;
 					}
 				}
@@ -282,14 +282,14 @@
 				color: #727272;
 
 				span {
-					color: $blue;
+					color: $primary-color;
 					text-decoration: none;
 					transition: all 150ms ease-in-out;
 					cursor: pointer;
 					font-weight: 600;
 
 					&:hover {
-						color: $blue--hover;
+						color: $primary-color--hover;
 					}
 				}
 			}
