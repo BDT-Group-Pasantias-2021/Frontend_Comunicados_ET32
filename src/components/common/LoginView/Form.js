@@ -213,9 +213,9 @@ const RegisterForm = ({ changeForm, showPassword, seePassword }) => {
 										<option value="" defaultValue disabled hidden>
 											Tipo de documento
 										</option>
-										<option value="dni">DNI</option>
-										<option value="libreta_civica">Libreta Cívica</option>
-										<option value="pasaporte">Pasaporte</option>
+										<option value="1">DNI</option>
+										<option value="2">Libreta Cívica</option>
+										<option value="3">Pasaporte</option>
 									</Field>
 								</div>
 								<div className="form-input-container form-double-input">

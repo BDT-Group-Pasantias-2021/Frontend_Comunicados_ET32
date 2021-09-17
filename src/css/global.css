@@ -11136,7 +11136,8 @@ p {
 .father-container-view {
   width: 100%;
   height: calc(100% - 45px);
-  background-color: #c22828;
+  background-color: #f5f9fc;
+  overflow-y: scroll;
 }
 
 /*# sourceMappingURL=global.css.map */

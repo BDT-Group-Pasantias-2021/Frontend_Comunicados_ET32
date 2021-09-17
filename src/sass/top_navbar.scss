@@ -29,7 +29,7 @@ $containers-border-radius: 5px;
 	width: 100%;
 	height: $navbar-height;
 
-	background: $blue;
+	background: $primary-color;
 	position: relative;
 	top: 0;
 
@@ -115,7 +115,7 @@ $containers-border-radius: 5px;
 			height: 60px;
 			border-radius: 50%;
 			margin-left: 7px;
-			background: $blue;
+			background: $primary-color;
 
 			.profile-image-btn {
 				width: 40px;

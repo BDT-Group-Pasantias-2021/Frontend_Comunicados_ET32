@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":[],"names":[],"mappings":"","file":"home.css"}
+{"version":3,"sourceRoot":"","sources":["../sass/home.scss","../sass/_colors.scss"],"names":[],"mappings":"AAEA;EACC;EACA;EACA;;AAEA;EACC,OCFiB;EDGjB;EACA;EACA;;AAIA;EACC;EACA;EACA;EACA,kBChBK;EDiBL;EACA","file":"home.css"}

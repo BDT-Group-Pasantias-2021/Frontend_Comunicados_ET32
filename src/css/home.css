@@ -1,3 +1,21 @@
-
+.date-comunicados-container {
+  width: 100%;
+  height: fit-content;
+  margin: 20px 0px;
+}
+.date-comunicados-container .date-comunicados-header {
+  color: #323232;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 25px;
+}
+.date-comunicados-container .date-comunicados-cards .comunicado-card-container {
+  height: 125px;
+  margin: 20px 0px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 2px 7px -3px #00000021;
+}
 
 /*# sourceMappingURL=home.css.map */
