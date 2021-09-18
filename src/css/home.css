@@ -21,7 +21,7 @@
   transition: all 150ms ease-in-out;
 }
 .date-comunicados-container .date-comunicados-cards .comunicado-card-container {
-  max-height: 81px;
+  max-height: 127px;
   margin: 20px 0px;
   padding: 20px;
   background-color: #fff;
@@ -32,6 +32,14 @@
   	display: flex !important;
   } */
 }
+.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-title {
+  width: calc(100% - 40px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 700;
+  padding-bottom: 0.2rem;
+}
 .date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-header {
   display: flex;
   flex-direction: row;
@@ -39,14 +47,10 @@
   align-items: center;
   width: 100%;
   max-height: 24px;
-  padding-bottom: 0.2rem;
 }
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-header .comunicado-card-title {
-  width: calc(100% - 40px);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-weight: 700;
+.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-header .comunicado-card-from {
+  color: #888888;
+  font-size: 12px;
 }
 .date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-header .comunicado-card-functions {
   display: flex;
@@ -72,6 +76,35 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicados-tags-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicados-tags-container .comunicado-category {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 60px;
+  height: 8px;
+  margin-right: 7px;
+  border-radius: 25px;
+}
+.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicados-tags-container .comunicado-category .category-bubble {
+  width: 9px;
+  height: 9px;
+  margin: 0px 7px;
+  border-radius: 50%;
+}
+.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicados-tags-container .comunicado-category .tag-category {
+  color: #000;
+  font-size: 12px;
+  margin: 1px 7px 0px 0px;
+}
 .date-comunicados-container .date-comunicados-cards .comunicado-card-container .active-menu-list {
   visibility: visible !important;
   opacity: 1 !important;
@@ -83,9 +116,11 @@
   align-items: baseline;
   width: 100%;
   height: fit-content;
+  position: relative;
   visibility: hidden;
   opacity: 0;
   list-style: none;
+  z-index: 2;
   transition: all 70ms ease-in-out;
   margin: 0;
   padding: 7px 0 0 0;

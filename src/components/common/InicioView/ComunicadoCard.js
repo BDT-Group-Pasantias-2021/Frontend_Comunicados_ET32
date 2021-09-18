@@ -1,15 +1,14 @@
-import React, { useContext } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useContext, useEffect } from 'react';
 import { ComunicadoCardContext } from '../../../hooks/useContext/ComunicadoCardContext';
+import CategoryTag from './CategoryTag';
 
 export default function ComunicadoCard({ comunicado }) {
 	const cardId = comunicado.id_comunicaciones;
-	//const { activeOverlay, setActiveOverlay } = useContext(ComunicadoCardContext);
 
 	const toggleFunctionsMenu = () => {
-		//setActiveOverlay(!activeOverlay);
 		const functionsMenu = document.getElementById(`comunicado-options-menu${cardId}`);
 		functionsMenu.classList.toggle('active-menu-list');
-		//comunicadoCard.classList.toggle('expand-card');
 
 		const comunicadoCard = document.getElementById(`comunicado-card-container${cardId}`);
 		const realHeight = comunicadoCard.scrollHeight;
@@ -24,7 +23,7 @@ export default function ComunicadoCard({ comunicado }) {
 	return (
 		<div className="comunicado-card-container" id={`comunicado-card-container${cardId}`}>
 			<div className="comunicado-card-header">
-				<div className="comunicado-card-title">{comunicado.titulo}</div>
+				<div className="comunicado-card-from">De: {comunicado.emisor}</div>
 				<div className="comunicado-card-functions" onClick={() => toggleFunctionsMenu()}>
 					<svg className="functions-icon" id="Capa_1" viewBox="0 0 515.555 515.555">
 						<path d="m496.679 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0" />
@@ -33,7 +32,13 @@ export default function ComunicadoCard({ comunicado }) {
 					</svg>
 				</div>
 			</div>
+			<div className="comunicado-card-title">{comunicado.titulo}</div>
 			<p className="comunicado-card-body">{comunicado.descripcion}</p>
+			<div className="comunicados-tags-container">
+				{comunicado.categorias.map((tag) => (
+					<CategoryTag key={tag.id_categoria} categoria={tag} />
+				))}
+			</div>
 			<ul className="comunicado-options-menu" id={`comunicado-options-menu${cardId}`}>
 				<li className="comunicado-function">
 					<svg className="comunicado-function-icon" viewBox="0 -1 401.52289 401">
@@ -66,7 +71,7 @@ export default function ComunicadoCard({ comunicado }) {
 							</g>
 						</g>
 					</svg>
-					<p className="comunicado-function-label">Etiquetar</p>
+					<p className="comunicado-function-label">Etiquetas</p>
 				</li>
 				<li className="comunicado-function">
 					<svg className="comunicado-function-icon" viewBox="-40 0 427 427.00131">

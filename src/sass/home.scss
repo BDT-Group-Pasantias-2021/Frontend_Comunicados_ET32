@@ -30,7 +30,7 @@
 		}
 
 		.comunicado-card-container {
-			max-height: 81px;
+			max-height: 127px;
 			margin: 20px 0px;
 			padding: 20px;
 			background-color: $white;
@@ -42,18 +42,23 @@
 				display: flex !important;
 			} */
 
+			.comunicado-card-title {
+				width: calc(100% - 40px);
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				font-weight: 700;
+				padding-bottom: 0.2rem;
+			}
+
 			.comunicado-card-header {
 				@include displayFlex(row, space-between, center);
 				width: 100%;
 				max-height: 24px;
-				padding-bottom: 0.2rem;
 
-				.comunicado-card-title {
-					width: calc(100% - 40px);
-					white-space: nowrap;
-					overflow: hidden;
-					text-overflow: ellipsis;
-					font-weight: 700;
+				.comunicado-card-from {
+					color: $text-color-backgrey;
+					font-size: 12px;
 				}
 
 				.comunicado-card-functions {
@@ -85,6 +90,33 @@
 				text-overflow: ellipsis;
 			}
 
+			.comunicados-tags-container {
+				@include displayFlex(row, flex-start, center);
+				width: 100%;
+				margin-top: 10px;
+
+				.comunicado-category {
+					@include displayFlex(row, flex-start, center);
+					width: 60px;
+					height: 8px;
+					margin-right: 7px;
+					border-radius: 25px;
+
+					.category-bubble {
+						width: 9px;
+						height: 9px;
+						margin: 0px 7px;
+						border-radius: 50%;
+					}
+
+					.tag-category {
+						color: #000;
+						font-size: 12px;
+						margin: 1px 7px 0px 0px;
+					}
+				}
+			}
+
 			.active-menu-list {
 				visibility: visible !important;
 				opacity: 1 !important;
@@ -94,10 +126,12 @@
 				@include displayFlex(row, flex-start, baseline);
 				width: 100%;
 				height: fit-content;
+				position: relative;
 
 				visibility: hidden;
 				opacity: 0;
 				list-style: none;
+				z-index: 2;
 
 				transition: all 70ms ease-in-out;
 				margin: 0;
