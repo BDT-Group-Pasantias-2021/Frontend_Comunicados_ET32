@@ -2,18 +2,19 @@ import React, { useEffect, useState } from 'react';
 
 // Styles
 import '../../css/home.css';
+import { ComunicadoCardContext } from '../../hooks/useContext/ComunicadoCardContext';
 
 // Components
 import FechaComunicado from '../common/InicioView/FechaComunicado';
 
 const ComunicadosJSON = [
 	{
-		fecha: '2021-08-24',
+		fecha: '2021-08',
 		comunicados: [
 			{
 				id_comunicaciones: 5,
 				emisor: 'Gustavo Garcia',
-				titulo: 'Comunicaciones',
+				titulo: 'Compartimos con ustedes el nuevo protocolo de fecha 16/09/2021 para su conocimiento como así también el encuadre de caso sospechoso y sus indicaciones. Les recordamos que el 21/09 en conmemoración del día del estudiante  hay asueto escolar. Saludos cordiales.',
 				descripcion:
 					'Compartimos con ustedes el nuevo protocolo de fecha 16/09/2021 para su conocimiento como así también el encuadre de caso sospechoso y sus indicaciones. Les recordamos que el 21/09 en conmemoración del día del estudiante  hay asueto escolar. Saludos cordiales.',
 				leido: false,
@@ -69,6 +70,7 @@ const ComunicadosJSON = [
 export default function Inicio() {
 	const [fechaComunicados, setFechaComunicados] = useState([]);
 	const [comunicadosAñadidos, setComunicadosAñadidos] = useState(false);
+	const [activeOverlay, setActiveOverlay] = useState(false);
 
 	useEffect(() => {
 		if (!comunicadosAñadidos) {
@@ -78,21 +80,21 @@ export default function Inicio() {
 	}, [comunicadosAñadidos, fechaComunicados]);
 
 	return (
-		<main className="father-container-view">
-			<div className="container" style={{ paddingTop: '50px' }}>
-				<div className="row">
-					{fechaComunicados.map(
-						(element) => (
+		<ComunicadoCardContext.Provider value={{ activeOverlay, setActiveOverlay }}>
+			<main className="father-container-view">
+				{activeOverlay && <div className="cards-overlay-mask"></div>}
+				<div className="container" style={{ paddingTop: '35px' }}>
+					<div className="row">
+						{fechaComunicados.map((element) => (
 							<FechaComunicado
 								key={element.fecha}
 								fecha={element.fecha}
 								comunicados={element.comunicados}
 							/>
-						)
-						//return null;
-					)}
+						))}
+					</div>
 				</div>
-			</div>
-		</main>
+			</main>
+		</ComunicadoCardContext.Provider>
 	);
 }

@@ -6,10 +6,7 @@ import ComunicadoCard from './ComunicadoCard';
 export default function FechaComunicado({ fecha, comunicados }) {
 	const fechaFormat = new Date(fecha);
 	const fechaEsp = fechaFormat.toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' });
-	/* 
-	comunicados.map((e) => {
-		console.log(e);
-	}); */
+
 	return (
 		<div className="date-comunicados-container col-md-12">
 			<h4 className="date-comunicados-header">{fechaEsp}</h4>
