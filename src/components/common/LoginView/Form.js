@@ -27,11 +27,9 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 				}}
 				onSubmit={(values, { setSubmitting }) => {
 					setSubmitting(false);
-					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/validateSession', values).then(
-						(res) => {
-							console.log(res.data);
-						}
-					);
+					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/login', values).then((res) => {
+						console.log(res.data);
+					});
 				}}
 			>
 				<Form className="login-form">
@@ -215,9 +213,9 @@ const RegisterForm = ({ changeForm, showPassword, seePassword }) => {
 										<option value="" defaultValue disabled hidden>
 											Tipo de documento
 										</option>
-										<option value="dni">DNI</option>
-										<option value="libreta_civica">Libreta Cívica</option>
-										<option value="pasaporte">Pasaporte</option>
+										<option value="1">DNI</option>
+										<option value="2">Libreta Cívica</option>
+										<option value="3">Pasaporte</option>
 									</Field>
 								</div>
 								<div className="form-input-container form-double-input">

@@ -30,7 +30,7 @@ $containers-border-radius: 5px;
 	height: $navbar-height;
 
 	background: $primary-color;
-	position: absolute;
+	position: relative;
 	top: 0;
 
 	.left-nav {
@@ -49,8 +49,6 @@ $containers-border-radius: 5px;
 			.nav-icon-container {
 				@extend .nav-icons;
 			}
-			
-		
 		}
 
 		.navbar-searchbar {
@@ -64,10 +62,11 @@ $containers-border-radius: 5px;
 			background: rgba(255, 255, 255, 0.275);
 			border-radius: $containers-border-radius;
 			transition: all 100ms ease-in;
-			&:focus-within {
 
+			&:focus-within {
 				background: rgb(255, 255, 255);
 			}
+
 			.searchbar-input {
 				width: 85%;
 				height: 100%;
@@ -77,9 +76,7 @@ $containers-border-radius: 5px;
 				background: transparent;
 				border-top-left-radius: $containers-border-radius;
 				border-bottom-left-radius: $containers-border-radius;
-
-				
-		}
+			}
 
 			.searchbar-lupa-container {
 				@include displayFlex(row, center, center);
@@ -91,8 +88,8 @@ $containers-border-radius: 5px;
 					width: 18px;
 					height: 18px;
 					fill: #fff;
+					cursor: pointer;
 					transition: all 100ms ease-in;
-					
 				}
 			}
 		}
