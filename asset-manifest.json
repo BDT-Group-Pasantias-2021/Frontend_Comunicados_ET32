@@ -1,26 +1,25 @@
 {
   "files": {
-    "main.css": "/Frontend_Comunicados_ET32/static/css/main.7699cbae.chunk.css",
-    "main.js": "/Frontend_Comunicados_ET32/static/js/main.9cd5e7de.chunk.js",
-    "main.js.map": "/Frontend_Comunicados_ET32/static/js/main.9cd5e7de.chunk.js.map",
+    "main.css": "/Frontend_Comunicados_ET32/static/css/main.eb63f36c.chunk.css",
+    "main.js": "/Frontend_Comunicados_ET32/static/js/main.3fd8cf1e.chunk.js",
+    "main.js.map": "/Frontend_Comunicados_ET32/static/js/main.3fd8cf1e.chunk.js.map",
     "runtime-main.js": "/Frontend_Comunicados_ET32/static/js/runtime-main.182896b5.js",
     "runtime-main.js.map": "/Frontend_Comunicados_ET32/static/js/runtime-main.182896b5.js.map",
     "static/css/2.7785af68.chunk.css": "/Frontend_Comunicados_ET32/static/css/2.7785af68.chunk.css",
-    "static/js/2.b5d38d2a.chunk.js": "/Frontend_Comunicados_ET32/static/js/2.b5d38d2a.chunk.js",
-    "static/js/2.b5d38d2a.chunk.js.map": "/Frontend_Comunicados_ET32/static/js/2.b5d38d2a.chunk.js.map",
+    "static/js/2.9f419ff8.chunk.js": "/Frontend_Comunicados_ET32/static/js/2.9f419ff8.chunk.js",
+    "static/js/2.9f419ff8.chunk.js.map": "/Frontend_Comunicados_ET32/static/js/2.9f419ff8.chunk.js.map",
     "index.html": "/Frontend_Comunicados_ET32/index.html",
     "static/css/2.7785af68.chunk.css.map": "/Frontend_Comunicados_ET32/static/css/2.7785af68.chunk.css.map",
-    "static/css/main.7699cbae.chunk.css.map": "/Frontend_Comunicados_ET32/static/css/main.7699cbae.chunk.css.map",
-    "static/js/2.b5d38d2a.chunk.js.LICENSE.txt": "/Frontend_Comunicados_ET32/static/js/2.b5d38d2a.chunk.js.LICENSE.txt",
-    "static/media/logo-facebook.ec446621.svg": "/Frontend_Comunicados_ET32/static/media/logo-facebook.ec446621.svg",
-    "static/media/logo-google.d5ac168f.svg": "/Frontend_Comunicados_ET32/static/media/logo-google.d5ac168f.svg",
-    "static/media/login-view.css": "/Frontend_Comunicados_ET32/static/media/pencil-background.23e06f01.jpg"
+    "static/css/main.eb63f36c.chunk.css.map": "/Frontend_Comunicados_ET32/static/css/main.eb63f36c.chunk.css.map",
+    "static/js/2.9f419ff8.chunk.js.LICENSE.txt": "/Frontend_Comunicados_ET32/static/js/2.9f419ff8.chunk.js.LICENSE.txt",
+    "static/media/logo-escolar.161c9720.png": "/Frontend_Comunicados_ET32/static/media/logo-escolar.161c9720.png",
+    "static/media/login-view.css": "/Frontend_Comunicados_ET32/static/media/things-background.b5aee572.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.182896b5.js",
     "static/css/2.7785af68.chunk.css",
-    "static/js/2.b5d38d2a.chunk.js",
-    "static/css/main.7699cbae.chunk.css",
-    "static/js/main.9cd5e7de.chunk.js"
+    "static/js/2.9f419ff8.chunk.js",
+    "static/css/main.eb63f36c.chunk.css",
+    "static/js/main.3fd8cf1e.chunk.js"
   ]
 }
