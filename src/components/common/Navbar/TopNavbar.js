@@ -56,9 +56,9 @@ export default function TopNavbar() {
 					</div>
 				</div>
 				<form className="navbar-searchbar">
-					<input className="searchbar-input" type="text" name="search-value" />
+					<input className="searchbar-input" type="text" name="search-value" id="searchBar" />
 					<div className="searchbar-lupa-container">
-						<svg id="Capa_1" viewBox="0 0 512.005 512.005" className="searchbar-lupa-icon">
+						<svg id="Lupa_svg" viewBox="0 0 512.005 512.005" className="searchbar-lupa-icon">
 							<g>
 								<g>
 									<path
