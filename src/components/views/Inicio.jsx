@@ -130,7 +130,7 @@ export default function Inicio() {
 			<main className="father-container-view">
 				<div className="container" style={{ paddingTop: '35px' }}>
 					<div className="row">
-						<div className="date-comunicados-container col-md-12">
+						{/* <div className="date-comunicados-container col-md-12">
 							<h4 className="date-comunicados-header">Hoy</h4>
 							<div className="date-comunicados-cards">
 								<div className="comunicado-card-container" id={`comunicado-card-container`}>
@@ -147,7 +147,7 @@ export default function Inicio() {
 									<p className="comunicado-card-body">a</p>
 								</div>
 							</div>
-						</div>
+						</div> */}
 						{fechaComunicados.map((element) => (
 							<FechaComunicado
 								key={element.fecha}
