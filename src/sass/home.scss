@@ -46,9 +46,9 @@
 			box-shadow: 0px 2px 7px -3px #00000021;
 			transition: all 150ms ease-in-out;
 
-			/* &:hover > .comunicado-card-header > .comunicado-card-functions {
+			&:hover > .comunicado-card-header > .comunicado-card-functions {
 				display: flex !important;
-			} */
+			}
 
 			.comunicado-card-title {
 				width: calc(100% - 40px);
@@ -71,13 +71,12 @@
 
 				.comunicado-card-functions {
 					@include displayFlex(null, center, center);
-					//display: none;
+					display: none;
 					width: 30px;
-					height: 20px;
+					height: 16px;
 					cursor: pointer;
 					border-radius: 5px;
 					transition: all 100ms ease;
-					//padding-bottom: 0.8rem;
 					z-index: 2;
 
 					&:hover {
@@ -156,10 +155,6 @@
 					&:hover {
 						background-color: #bdbdbd34;
 					}
-
-					/* &:first-child {
-						padding-left: 0;
-					} */
 
 					.comunicado-function-icon {
 						width: 16px;

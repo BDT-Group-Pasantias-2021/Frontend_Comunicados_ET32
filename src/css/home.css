@@ -38,9 +38,9 @@
   border-radius: 5px;
   box-shadow: 0px 2px 7px -3px #00000021;
   transition: all 150ms ease-in-out;
-  /* &:hover > .comunicado-card-header > .comunicado-card-functions {
-  	display: flex !important;
-  } */
+}
+.date-comunicados-container .date-comunicados-cards .comunicado-card-container:hover > .comunicado-card-header > .comunicado-card-functions {
+  display: flex !important;
 }
 .date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-title {
   width: calc(100% - 40px);
@@ -66,8 +66,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  display: none;
   width: 30px;
-  height: 20px;
+  height: 16px;
   cursor: pointer;
   border-radius: 5px;
   transition: all 100ms ease;
@@ -145,9 +146,6 @@
   padding: 5px;
   border-radius: 5px;
   cursor: pointer;
-  /* &:first-child {
-  	padding-left: 0;
-  } */
 }
 .date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-options-menu .comunicado-function:hover {
   background-color: #bdbdbd34;
