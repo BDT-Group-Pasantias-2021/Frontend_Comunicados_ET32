@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Frontend_Comunicados_ET32/static/css/main.fd48248a.chunk.css",
+    "main.css": "/Frontend_Comunicados_ET32/static/css/main.030ef1ea.chunk.css",
     "main.js": "/Frontend_Comunicados_ET32/static/js/main.9b0a8e57.chunk.js",
     "main.js.map": "/Frontend_Comunicados_ET32/static/js/main.9b0a8e57.chunk.js.map",
     "runtime-main.js": "/Frontend_Comunicados_ET32/static/js/runtime-main.182896b5.js",
@@ -10,7 +10,7 @@
     "static/js/2.9c988c94.chunk.js.map": "/Frontend_Comunicados_ET32/static/js/2.9c988c94.chunk.js.map",
     "index.html": "/Frontend_Comunicados_ET32/index.html",
     "static/css/2.7785af68.chunk.css.map": "/Frontend_Comunicados_ET32/static/css/2.7785af68.chunk.css.map",
-    "static/css/main.fd48248a.chunk.css.map": "/Frontend_Comunicados_ET32/static/css/main.fd48248a.chunk.css.map",
+    "static/css/main.030ef1ea.chunk.css.map": "/Frontend_Comunicados_ET32/static/css/main.030ef1ea.chunk.css.map",
     "static/js/2.9c988c94.chunk.js.LICENSE.txt": "/Frontend_Comunicados_ET32/static/js/2.9c988c94.chunk.js.LICENSE.txt",
     "static/media/logo-escolar.161c9720.png": "/Frontend_Comunicados_ET32/static/media/logo-escolar.161c9720.png",
     "static/media/login-view.css": "/Frontend_Comunicados_ET32/static/media/things-background.b5aee572.jpg"
@@ -19,7 +19,7 @@
     "static/js/runtime-main.182896b5.js",
     "static/css/2.7785af68.chunk.css",
     "static/js/2.9c988c94.chunk.js",
-    "static/css/main.fd48248a.chunk.css",
+    "static/css/main.030ef1ea.chunk.css",
     "static/js/main.9b0a8e57.chunk.js"
   ]
 }
