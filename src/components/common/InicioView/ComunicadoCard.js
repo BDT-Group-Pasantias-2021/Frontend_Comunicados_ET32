@@ -6,8 +6,8 @@ import { ComunicadoCardContext } from '../../../hooks/useContext/ComunicadoCardC
 import CategoryTag from './CategoryTag';
 import SeenMarker from './SeenMarker';
 
-export default function ComunicadoCard({ comunicado, fecha }) {
-	const { activeComunicado, setActiveComunicado } = useContext(ComunicadoCardContext);
+export default function ComunicadoCard({ comunicado, fechas }) {
+	const { activeComunicado, setActiveComunicado, deleteComunicado } = useContext(ComunicadoCardContext);
 	const cardId = comunicado.id_comunicaciones;
 
 	const toggleFunctionsMenu = () => {
@@ -25,7 +25,7 @@ export default function ComunicadoCard({ comunicado, fecha }) {
 	};
 
 	const showComunicado = () => {
-		comunicado.fecha = fecha;
+		comunicado.fecha = fechas.renderDate;
 		setActiveComunicado(comunicado);
 	};
 
@@ -95,7 +95,10 @@ export default function ComunicadoCard({ comunicado, fecha }) {
 					</svg>
 					<p className="standard-icon-label">Etiquetas</p>
 				</li>
-				<li className="standard-icon-container standard-icon-container-margin">
+				<li
+					className="standard-icon-container standard-icon-container-margin"
+					onClick={() => deleteComunicado(cardId, fechas.fecha)}
+				>
 					<svg className="standard-icon standard-icon-margin" viewBox="-40 0 427 427.00131">
 						<path d="m232.398438 154.703125c-5.523438 0-10 4.476563-10 10v189c0 5.519531 4.476562 10 10 10 5.523437 0 10-4.480469 10-10v-189c0-5.523437-4.476563-10-10-10zm0 0" />
 						<path d="m114.398438 154.703125c-5.523438 0-10 4.476563-10 10v189c0 5.519531 4.476562 10 10 10 5.523437 0 10-4.480469 10-10v-189c0-5.523437-4.476563-10-10-10zm0 0" />

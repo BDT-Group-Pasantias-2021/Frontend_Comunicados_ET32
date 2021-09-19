@@ -10,7 +10,7 @@ import ComunicadoModal from '../common/InicioView/ComunicadoModal';
 
 const ComunicadosJSON = [
 	{
-		fecha: '10-08-2021',
+		fecha: '2021-10-08',
 		comunicados: [
 			{
 				id_comunicaciones: 5,
@@ -113,6 +113,20 @@ export default function Inicio() {
 	const [comunicadosAñadidos, setComunicadosAñadidos] = useState(false);
 	const [activeComunicado, setActiveComunicado] = useState(null);
 
+	const deleteComunicado = (id, selectedFecha) => {
+		const confirmState = window.confirm('¿Estás seguro de eliminar este comunicado?');
+		if (confirmState) {
+			const newFechaComunicados = fechaComunicados.map((element) => {
+				if (element.fecha === selectedFecha) {
+					const comunicados = element.comunicados.filter((comunicado) => comunicado.id_comunicaciones !== id);
+					return { fecha: element.fecha, comunicados };
+				}
+				return element;
+			});
+			setFechaComunicados(newFechaComunicados);
+		}
+	};
+
 	useEffect(() => {
 		if (!comunicadosAñadidos) {
 			setFechaComunicados(ComunicadosJSON);
@@ -125,19 +139,25 @@ export default function Inicio() {
 			value={{
 				activeComunicado,
 				setActiveComunicado,
+				deleteComunicado,
 			}}
 		>
 			<main className="father-container-view">
 				{activeComunicado && <ComunicadoModal />}
 				<div className="container" style={{ paddingTop: '35px' }}>
 					<div className="row">
-						{fechaComunicados.map((element) => (
-							<FechaComunicado
-								key={element.fecha}
-								fecha={element.fecha}
-								comunicados={element.comunicados}
-							/>
-						))}
+						{/* eslint-disable-next-line array-callback-return */}
+						{fechaComunicados.map((element) => {
+							if (element.fecha !== undefined && element.comunicados.length > 0) {
+								return (
+									<FechaComunicado
+										key={element.fecha}
+										fecha={element.fecha}
+										comunicados={element.comunicados}
+									/>
+								);
+							}
+						})}
 					</div>
 				</div>
 			</main>
