@@ -141,7 +141,8 @@ const ComunicadosJSON = [
 export default function Inicio() {
 	const [fechaComunicados, setFechaComunicados] = useState([]);
 	const [comunicadosAñadidos, setComunicadosAñadidos] = useState(false);
-	const [activeComunicado, setActiveComunicado] = useState(null);
+	const [activeModal, setActiveModal] = useState(null);
+	const [editModal, setEditModal] = useState(false);
 
 	const deleteComunicado = (id, selectedFecha) => {
 		const confirmState = window.confirm('¿Estás seguro de eliminar este comunicado?');
@@ -167,13 +168,15 @@ export default function Inicio() {
 	return (
 		<ComunicadoCardContext.Provider
 			value={{
-				activeComunicado,
-				setActiveComunicado,
+				activeModal,
+				setActiveModal,
+				editModal,
+				setEditModal,
 				deleteComunicado,
 			}}
 		>
 			<main className="father-container-view">
-				{activeComunicado && <ComunicadoModal />}
+				{activeModal && <ComunicadoModal editarModal={editModal} />}
 				<div className="container" style={{ paddingTop: '35px' }}>
 					<div className="row">
 						{/* eslint-disable-next-line array-callback-return */}

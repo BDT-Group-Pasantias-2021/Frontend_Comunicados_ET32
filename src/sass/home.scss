@@ -57,7 +57,7 @@
 			.modal-top-section {
 				@include displayFlex(column, space-between, center);
 				width: 100%;
-				height: fit-content;
+				height: calc(100% - 50px);
 
 				.modal-tags-close {
 					@include displayFlex(row, space-between, center);
@@ -99,7 +99,7 @@
 				.modal-content {
 					@include displayFlex(column, flex-start, center);
 					width: 100%;
-					max-height: 390px;
+					height: 100%;
 					overflow-y: auto;
 					position: relative;
 					pointer-events: auto;
@@ -117,6 +117,11 @@
 						max-height: 470px;
 					}
 
+					.modal-title-edit {
+						height: 50px;
+						resize: none;
+					}
+
 					.modal-title {
 						@include displayFlex(row, flex-start, center);
 						width: 100%;
@@ -124,9 +129,23 @@
 						line-height: 1.4;
 					}
 
+					.modal-text-edit {
+						min-height: 70%;
+						height: 90%;
+						font-size: 14px !important;
+						resize: none;
+
+						@media screen and (max-width: 532px) {
+							height: 85% !important;
+						}
+
+						@media screen and (min-width: 768px) and (max-width: 836px) {
+							height: 85% !important;
+						}
+					}
+
 					.modal-text {
 						width: 100%;
-						height: auto;
 						font-size: 1rem;
 						line-height: 1.8;
 					}
@@ -136,34 +155,91 @@
 			.modal-bottom-section {
 				@include displayFlex(row, space-between, center);
 				width: 100%;
+				transition: all 100ms ease-in-out;
 
 				@media screen and (max-width: 532px) {
-					flex-direction: column;
-					align-items: flex-start;
+					@include displayFlex(column, center, flex-start);
+				}
+
+				@media screen and (min-width: 768px) and (max-width: 836px) {
+					@include displayFlex(column, center, flex-start);
 				}
 
 				.modal-comuncado-info {
 					@include displayFlex(row, flex-start, center);
 					width: 100%;
 
-					@media screen and (max-width: 532px) {
+					@media screen and (max-width: 332px) {
 						margin-bottom: 10px;
+					}
+
+					@media screen and (min-width: 768px) and (max-width: 836px) {
+						margin-top: 5px;
 					}
 				}
 
-				.modal-change-state-button {
-					width: 200px;
-					color: #fff;
-					white-space: nowrap;
-					padding: 7px 13px;
-					border-radius: 7px;
-					text-align: center;
-					cursor: pointer;
-					background-color: $card-seen-color;
-					transition: all 150ms ease-in-out;
+				.modal-buttons {
+					@include displayFlex(row, center, center);
+					width: fit-content;
 
-					&:hover {
-						background-color: $card-seen-color-hover;
+					@media screen and (max-width: 332px) {
+						@include displayFlex(column, center, flex-start);
+					}
+
+					@media screen and (min-width: 332px) and (max-width: 532px) {
+						margin-top: 15px;
+					}
+
+					@media screen and (min-width: 768px) and (max-width: 836px) {
+						//@include displayFlex(column, center, flex-start);
+					}
+
+					.modal-button-standard {
+						width: fit-content;
+						color: #fff;
+						white-space: nowrap;
+						padding: 7px 13px;
+						border-radius: 7px;
+						text-align: center;
+						cursor: pointer;
+						transition: all 100ms ease-in-out;
+					}
+
+					.modal-save-btn {
+						@extend .modal-button-standard;
+						color: $primary-color;
+						border: 1px solid $primary-color;
+						margin-right: 15px;
+
+						&:hover {
+							color: #fff;
+							border: 1px solid $primary-color--hover;
+							background-color: $primary-color--hover;
+						}
+
+						@media screen and (max-width: 332px) {
+							margin-bottom: 15px;
+						}
+
+						@media screen and (min-width: 768px) and (max-width: 836px) {
+							margin: 5px 15px 0px 0px;
+						}
+					}
+
+					.modal-change-state-button {
+						@extend .modal-button-standard;
+						color: $card-seen-color;
+						border: 1px solid $card-seen-color;
+
+						&:hover {
+							color: #fff;
+							border: 1px solid $card-seen-color-hover;
+							background-color: $card-seen-color-hover;
+						}
+
+						@media screen and (min-width: 768px) and (max-width: 836px) {
+							margin-top: 5px;
+						}
 					}
 				}
 			}

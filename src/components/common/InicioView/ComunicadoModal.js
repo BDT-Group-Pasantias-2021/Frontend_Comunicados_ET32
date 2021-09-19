@@ -6,22 +6,34 @@ import CategoryTag from './CategoryTag';
 
 // Components
 
-export default function ComunicadoModal() {
-	const { activeComunicado, setActiveComunicado } = useContext(ComunicadoCardContext);
+export default function ComunicadoModal({ editarModal }) {
+	const { activeModal, setActiveModal, setEditModal } = useContext(ComunicadoCardContext);
 
 	return (
 		<>
-			<div className="cards-overlay-mask" onClick={() => setActiveComunicado(null)}></div>
+			<div
+				className="cards-overlay-mask"
+				onClick={() => {
+					setEditModal(false);
+					setActiveModal(null);
+				}}
+			></div>
 			<div className="modal-comunicado col-12 col-sm-10 col-md-7 col-lg-6">
 				<div className="modal-container">
 					<div className="modal-top-section">
 						<div className="modal-tags-close">
 							<div className="modal-etiquetas">
-								{activeComunicado.categorias.map((tag) => (
+								{activeModal.categorias.map((tag) => (
 									<CategoryTag key={tag.id_categoria} categoria={tag} tipo={'modal'} />
 								))}
 							</div>
-							<div className="standard-icon-container" onClick={() => setActiveComunicado(null)}>
+							<div
+								className="standard-icon-container"
+								onClick={() => {
+									setEditModal(false);
+									setActiveModal(null);
+								}}
+							>
 								<svg className="standard-icon" viewBox="0 0 512.001 512.001">
 									<g>
 										<g>
@@ -38,11 +50,21 @@ export default function ComunicadoModal() {
 							</div>
 						</div>
 						<div className="modal-from-who">
-							Comunicado por: <b>{activeComunicado.emisor}</b>
+							Comunicado por: <b>{activeModal.emisor}</b>
 						</div>
 						<div className="modal-content">
-							<h4 className="modal-title">{activeComunicado.titulo}</h4>
-							<div className="modal-text">{activeComunicado.descripcion}</div>
+							{editarModal ? (
+								<textarea className="modal-title modal-title-edit">{activeModal.titulo}</textarea>
+							) : (
+								<h4 className="modal-title">
+									<b>{activeModal.titulo}</b>
+								</h4>
+							)}
+							{editarModal ? (
+								<textarea className="modal-text modal-text-edit">{activeModal.descripcion}</textarea>
+							) : (
+								<div className="modal-text">{activeModal.descripcion}</div>
+							)}
 						</div>
 					</div>
 					<div className="modal-bottom-section">
@@ -62,7 +84,7 @@ export default function ComunicadoModal() {
 										<path d="m467 65h-36v-25c0-8.284-6.716-15-15-15s-15 6.716-15 15v25h-130v-25c0-8.284-6.716-15-15-15s-15 6.716-15 15v25h-130v-25c0-8.284-6.716-15-15-15s-15 6.716-15 15v25h-36c-24.813 0-45 20.187-45 45v332c0 24.813 20.187 45 45 45h422c24.813 0 45-20.187 45-45 0-9.682 0-323.575 0-332 0-24.813-20.187-45-45-45zm-437 45c0-8.271 6.729-15 15-15h36v25c0 8.284 6.716 15 15 15s15-6.716 15-15v-25h130v25c0 8.284 6.716 15 15 15s15-6.716 15-15v-25h130v25c0 8.284 6.716 15 15 15s15-6.716 15-15v-25h36c8.271 0 15 6.729 15 15v59h-452zm437 347h-422c-8.271 0-15-6.729-15-15v-243h452v243c0 8.271-6.729 15-15 15z" />
 									</g>
 								</svg>
-								<p className="standard-icon-label">{activeComunicado.fecha}</p>
+								<p className="standard-icon-label">{activeModal.fecha}</p>
 							</div>
 							<div className="standard-icon-container standard-icon-container-margin">
 								<svg className="standard-icon standard-icon-margin" viewBox="0 0 512 512">
@@ -90,14 +112,13 @@ export default function ComunicadoModal() {
 										</g>
 									</g>
 								</svg>
-								<p className="standard-icon-label">
-									{activeComunicado.leido ? 'Firmado' : 'Pendiente'}
-								</p>
+								<p className="standard-icon-label">{activeModal.leido ? 'Firmado' : 'Pendiente'}</p>
 							</div>
 						</div>
-						{activeComunicado.leido ? null : (
-							<div className="modal-change-state-button">Marcar como firmado</div>
-						)}
+						<div className="modal-buttons">
+							{editarModal && <div className="modal-save-btn">Guardar</div>}
+							{activeModal.leido || <div className="modal-change-state-button">Marcar como firmado</div>}
+						</div>
 					</div>
 				</div>
 			</div>
