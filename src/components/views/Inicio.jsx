@@ -6,6 +6,7 @@ import { ComunicadoCardContext } from '../../hooks/useContext/ComunicadoCardCont
 
 // Components
 import FechaComunicado from '../common/InicioView/FechaComunicado';
+import ComunicadoModal from '../common/InicioView/ComunicadoModal';
 
 const ComunicadosJSON = [
 	{
@@ -110,7 +111,7 @@ const ComunicadosJSON = [
 export default function Inicio() {
 	const [fechaComunicados, setFechaComunicados] = useState([]);
 	const [comunicadosAñadidos, setComunicadosAñadidos] = useState(false);
-	//const [activeOverlay, setActiveOverlay] = useState(false);
+	const [activeComunicado, setActiveComunicado] = useState(null);
 
 	useEffect(() => {
 		if (!comunicadosAñadidos) {
@@ -121,33 +122,15 @@ export default function Inicio() {
 
 	return (
 		<ComunicadoCardContext.Provider
-			value={
-				{
-					/* activeOverlay, setActiveOverlay */
-				}
-			}
+			value={{
+				activeComunicado,
+				setActiveComunicado,
+			}}
 		>
 			<main className="father-container-view">
+				{activeComunicado && <ComunicadoModal />}
 				<div className="container" style={{ paddingTop: '35px' }}>
 					<div className="row">
-						{/* <div className="date-comunicados-container col-md-12">
-							<h4 className="date-comunicados-header">Hoy</h4>
-							<div className="date-comunicados-cards">
-								<div className="comunicado-card-container" id={`comunicado-card-container`}>
-									<div className="comunicado-card-header">
-										<div className="comunicado-card-title">a</div>
-										<div className="comunicado-card-functions">
-											<svg className="functions-icon" id="Capa_1" viewBox="0 0 515.555 515.555">
-												<path d="m496.679 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0" />
-												<path d="m303.347 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0" />
-												<path d="m110.014 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0" />
-											</svg>
-										</div>
-									</div>
-									<p className="comunicado-card-body">a</p>
-								</div>
-							</div>
-						</div> */}
 						{fechaComunicados.map((element) => (
 							<FechaComunicado
 								key={element.fecha}

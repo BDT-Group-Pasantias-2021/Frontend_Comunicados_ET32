@@ -4,6 +4,7 @@ import { ComunicadoCardContext } from '../../../hooks/useContext/ComunicadoCardC
 import CategoryTag from './CategoryTag';
 
 export default function ComunicadoCard({ comunicado }) {
+	const { activeComunicado, setActiveComunicado } = useContext(ComunicadoCardContext);
 	const cardId = comunicado.id_comunicaciones;
 
 	const toggleFunctionsMenu = () => {
@@ -14,26 +15,58 @@ export default function ComunicadoCard({ comunicado }) {
 		const realHeight = comunicadoCard.scrollHeight;
 
 		if (!comunicadoCard.style.maxHeight) {
-			comunicadoCard.style.maxHeight = realHeight + 15 + 7 + 'px';
+			comunicadoCard.style.maxHeight = realHeight + 10 + 7 + 'px';
 		} else {
 			comunicadoCard.style.maxHeight = null;
 		}
 	};
 
+	const showComunicado = () => {
+		setActiveComunicado(comunicado);
+	};
+
+	const setRightFunctionsMenu = () => {
+		// get the left cords of comunicado-card-content${cardId} and assign all the children of all comunicado-card-functions elements to it
+		const comunicadoCardContent = document.getElementById(`comunicado-card-content1`);
+		const comunicadoCardFunctions = document.querySelectorAll(`.comunicado-card-functions`);
+		console.log(comunicadoCardFunctions);
+
+		const comunicadoCardFunctionsArray = Array.from(comunicadoCardFunctions);
+		//console.log(comunicadoCardFunctionsArray);
+
+		const comunicadoCardFunctionsLeftCords = comunicadoCardContent.getBoundingClientRect().right;
+		comunicadoCardFunctionsArray.forEach((element) => {
+			element.style.left = comunicadoCardFunctionsLeftCords + 'px';
+		});
+	};
+
+	useEffect(() => {
+		window.addEventListener('resize', () => setRightFunctionsMenu());
+		return () => {
+			window.removeEventListener('resize', () => setRightFunctionsMenu());
+		};
+	});
+
 	return (
 		<div className="comunicado-card-container" id={`comunicado-card-container${cardId}`}>
-			<div className="comunicado-card-header">
-				<div className="comunicado-card-from">De: {comunicado.emisor}</div>
-				<div className="comunicado-card-functions" onClick={() => toggleFunctionsMenu()}>
-					<svg className="functions-icon" id="Capa_1" viewBox="0 0 515.555 515.555">
-						<path d="m496.679 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0" />
-						<path d="m303.347 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0" />
-						<path d="m110.014 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0" />
-					</svg>
-				</div>
+			<div className="comunicado-card-functions" onClick={() => toggleFunctionsMenu()}>
+				<svg className="functions-icon" id="Capa_1" viewBox="0 0 515.555 515.555">
+					<path d="m496.679 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0" />
+					<path d="m303.347 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0" />
+					<path d="m110.014 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0" />
+				</svg>
 			</div>
-			<div className="comunicado-card-title">{comunicado.titulo}</div>
-			<p className="comunicado-card-body">{comunicado.descripcion}</p>
+			<div
+				className="comunicado-card-content"
+				id={`comunicado-card-content${cardId}`}
+				onClick={() => showComunicado()}
+			>
+				<div className="comunicado-card-header">
+					<div className="comunicado-card-from">De: {comunicado.emisor}</div>
+				</div>
+				<div className="comunicado-card-title">{comunicado.titulo}</div>
+				<p className="comunicado-card-body">{comunicado.descripcion}</p>
+			</div>
 			<div className="comunicados-tags-container">
 				{comunicado.categorias.map((tag) => (
 					<CategoryTag key={tag.id_categoria} categoria={tag} />
