@@ -21,7 +21,7 @@ function darkenColor(col, amt) {
 	return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
 }
 
-export default function CategoryTag({ categoria }) {
+export default function CategoryTag({ categoria, tipo }) {
 	const normalBackgroundStyle = () => {
 		const categoryTagsList = document.querySelectorAll(`.comunicado-category-id${categoria.id_categoria}`);
 		categoryTagsList.forEach((element) => {
@@ -39,10 +39,12 @@ export default function CategoryTag({ categoria }) {
 	return (
 		<div
 			className={`comunicado-category comunicado-category-id${categoria.id_categoria}`}
-			style={{ backgroundColor: categoria.color }}
 			onMouseEnter={() => hoverBackgroundStyle()}
 			onMouseLeave={() => normalBackgroundStyle()}
+			style={{ backgroundColor: categoria.color }}
 			title={categoria.nombre}
-		></div>
+		>
+			{tipo === 'card' ? null : <div className="tag-category">{categoria.nombre}</div>}
+		</div>
 	);
 }

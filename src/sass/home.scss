@@ -3,10 +3,12 @@
 
 /* SCSS DIRECTORY
 	1. = MODAL
-	2. = CARD
-	3. = FUNCTIONS BUTTON
-	4. = TAGS
-	5. = FUNCTIONS MENU
+	2. = MODAL TAGS
+	3. = CARD
+	4. = FUNCTIONS BUTTON
+	5. = CARD TAGS
+	6. = SEEN MARKER
+	7. = FUNCTIONS MENU
 */
 
 /* <====================================================================>
@@ -28,7 +30,7 @@
 		z-index: 1;
 	}
 	.modal-comunicado {
-		@include displayFlex(column, center, flex-end);
+		@include displayFlex(column, center, center);
 		height: 80%;
 		background-color: #fff;
 		border-radius: 10px;
@@ -42,18 +44,131 @@
 		z-index: 1;
 
 		@media (max-width: 575px) {
-			height: calc(100% + 45px) !important;
+			height: calc(100% - 45px) !important;
+			border-radius: 0px;
+		}
+
+		.modal-container {
+			@include displayFlex(column, space-between, center);
+			width: 100%;
+			height: 100%;
+			padding: 35px;
+
+			.modal-top-section {
+				@include displayFlex(column, space-between, center);
+				width: 100%;
+				height: fit-content;
+
+				.modal-tags-close {
+					@include displayFlex(row, space-between, center);
+					width: 100%;
+					margin-bottom: 25px;
+
+					/* <====================================================================>
+				   <============================ MODAL TAGS ============================>
+				   <====================================================================> */
+
+					.modal-etiquetas {
+						@include displayFlex(row, flex-start, center);
+						width: fit-content;
+
+						.comunicado-category {
+							@include displayFlex(row, center, center);
+							width: 80px;
+							height: 25px;
+							margin-right: 7px;
+							border-radius: 5px;
+							transition: all 100ms ease-in-out;
+							cursor: default;
+
+							.tag-category {
+								color: rgb(255, 255, 255);
+								font-size: 13px;
+								font-weight: 700;
+							}
+						}
+					}
+				}
+
+				.modal-from-who {
+					white-space: nowrap;
+					width: 100%;
+					margin-bottom: 10px;
+				}
+
+				.modal-content {
+					@include displayFlex(column, flex-start, center);
+					width: 100%;
+					max-height: 390px;
+					overflow-y: auto;
+					position: relative;
+					pointer-events: auto;
+					background-color: transparent;
+					background-clip: padding-box;
+					border: 0;
+					border-radius: 0;
+					outline: 0;
+
+					@media screen and (max-width: 575px) {
+						max-height: 490px;
+					}
+
+					@media screen and (max-width: 532px) {
+						max-height: 470px;
+					}
+
+					.modal-title {
+						@include displayFlex(row, flex-start, center);
+						width: 100%;
+						margin-bottom: 5px;
+						line-height: 1.4;
+					}
+
+					.modal-text {
+						width: 100%;
+						height: auto;
+						font-size: 1rem;
+						line-height: 1.8;
+					}
+				}
+			}
+
+			.modal-bottom-section {
+				@include displayFlex(row, space-between, center);
+				width: 100%;
+
+				@media screen and (max-width: 532px) {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+
+				.modal-comuncado-info {
+					@include displayFlex(row, flex-start, center);
+					width: 100%;
+
+					@media screen and (max-width: 532px) {
+						margin-bottom: 10px;
+					}
+				}
+
+				.modal-change-state-button {
+					width: 200px;
+					color: #fff;
+					white-space: nowrap;
+					padding: 7px 13px;
+					border-radius: 7px;
+					text-align: center;
+					cursor: pointer;
+					background-color: $card-seen-color;
+					transition: all 150ms ease-in-out;
+
+					&:hover {
+						background-color: $card-seen-color-hover;
+					}
+				}
+			}
 		}
 	}
-	/* 
-	.container-modal {
-		@include displayFlex(null, center, center);
-		width: 100%;
-		height: calc(100% - 45px);
-		position: absolute;
-		margin: 0;
-		z-index: 1;
-	} */
 }
 
 /* <====================================================================>
@@ -117,7 +232,6 @@
 					border-radius: 5px;
 					transition: all 100ms ease;
 					margin-top: -7px;
-					//position: relative;
 					z-index: 0;
 
 					@media screen and (max-width: 768px) {
@@ -140,11 +254,6 @@
 		.comunicado-card-content {
 			width: calc(100% - 30px);
 			cursor: pointer;
-			//padding-bottom: 15px;
-
-			/* &:hover {
-				background-color: $card-bg-hover;
-			} */
 
 			.comunicado-card-title {
 				width: calc(100% - 40px);
@@ -166,9 +275,10 @@
 			@include displayFlex(row, space-between, center);
 			width: 100%;
 			margin-top: 5px;
+
 			/* <===================================================================>
-		   		<============================== TAGS ===============================>
-		   		<===================================================================> */
+		   	   <============================ CARD TAGS ============================>
+		   	   <===================================================================> */
 
 			.comunicados-tags-container {
 				@include displayFlex(row, flex-start, center);
@@ -180,21 +290,13 @@
 					height: 8px;
 					margin-right: 7px;
 					border-radius: 25px;
-
-					.category-bubble {
-						width: 9px;
-						height: 9px;
-						margin: 0px 7px;
-						border-radius: 50%;
-					}
-
-					.tag-category {
-						color: #000;
-						font-size: 12px;
-						margin: 1px 7px 0px 0px;
-					}
+					transition: all 100ms ease-in-out;
 				}
 			}
+
+			/* <====================================================================>
+  			   <=========================== SEEN MARKER ============================>
+   			   <====================================================================> */
 
 			.comunicado-seen-marker {
 				@include displayFlex(row, center, center);
@@ -231,8 +333,8 @@
 		}
 
 		/* <===================================================================>
-			   <========================= FUNCTIONS MENU ==========================>
-			   <===================================================================> */
+		   <========================= FUNCTIONS MENU ==========================>
+		   <===================================================================> */
 
 		.active-menu-list {
 			visibility: visible !important;
@@ -248,35 +350,11 @@
 			visibility: hidden;
 			opacity: 0;
 			list-style: none;
-			z-index: 1;
+			z-index: 0;
 
 			transition: all 70ms ease-in-out;
 			margin: 0;
 			padding: 7px 0 0 0;
-
-			.comunicado-function {
-				@include displayFlex(row, flex-start, center);
-				width: fit-content;
-				margin-right: 10px;
-				padding: 5px;
-				border-radius: 5px;
-				cursor: pointer;
-
-				&:hover {
-					background-color: #bdbdbd34;
-				}
-
-				.comunicado-function-icon {
-					width: 16px;
-					margin-right: 7px;
-					fill: $text-color-white;
-				}
-
-				.comunicado-function-label {
-					font-size: 12px;
-					margin-top: 2.5px;
-				}
-			}
 		}
 	}
 }

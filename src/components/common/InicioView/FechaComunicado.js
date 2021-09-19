@@ -22,12 +22,14 @@ export default function FechaComunicado({ fecha, comunicados }) {
 		return finalFechaEsp;
 	};
 
+	const renderHeader = fecha === currentDate ? 'Hoy' : getFormatedDate();
+
 	return (
 		<div className="date-comunicados-container col-11 col-sm-12">
-			<h4 className="date-comunicados-header">{fecha === currentDate ? 'Hoy' : getFormatedDate()}</h4>
+			<h4 className="date-comunicados-header">{renderHeader}</h4>
 			<div className="date-comunicados-cards">
 				{comunicados.map((comunicado, index) => (
-					<ComunicadoCard key={index} comunicado={comunicado} />
+					<ComunicadoCard key={index} comunicado={comunicado} fecha={renderHeader} />
 				))}
 			</div>
 		</div>

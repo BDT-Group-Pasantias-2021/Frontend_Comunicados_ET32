@@ -11141,4 +11141,33 @@ p {
   overflow-y: scroll;
 }
 
+.standard-icon-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: fit-content;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.standard-icon-container:hover {
+  background-color: #bdbdbd34;
+}
+.standard-icon-container .standard-icon-margin {
+  margin-right: 7px;
+}
+.standard-icon-container .standard-icon {
+  width: 16px;
+  fill: #323232;
+}
+.standard-icon-container .standard-icon-label {
+  font-size: 12px;
+  margin-top: 2.5px;
+}
+
+.standard-icon-container-margin {
+  margin-right: 10px;
+}
+
 /*# sourceMappingURL=global.css.map */

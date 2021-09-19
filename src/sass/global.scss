@@ -1,6 +1,7 @@
 @import '../../node_modules/bootstrap/scss/bootstrap';
 @import 'colors';
 @import 'fonts';
+@import 'mixins';
 
 * {
 	padding: 0;
@@ -25,4 +26,34 @@ p {
 	height: calc(100% - 45px);
 	background-color: $white-background;
 	overflow-y: scroll;
+}
+
+.standard-icon-container {
+	@include displayFlex(row, flex-start, center);
+	width: fit-content;
+	padding: 5px;
+	border-radius: 5px;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #bdbdbd34;
+	}
+
+	.standard-icon-margin {
+		margin-right: 7px;
+	}
+
+	.standard-icon {
+		width: 16px;
+		fill: $text-color-white;
+	}
+
+	.standard-icon-label {
+		font-size: 12px;
+		margin-top: 2.5px;
+	}
+}
+
+.standard-icon-container-margin {
+	margin-right: 10px;
 }
