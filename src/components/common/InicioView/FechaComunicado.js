@@ -4,9 +4,11 @@ import React from 'react';
 import ComunicadoCard from './ComunicadoCard';
 
 export default function FechaComunicado({ fecha, comunicados }) {
-	const currentDate = () => {
+	const currentDate = (resta = 0) => {
 		const tempCurDate = new Date();
-		const curDate = `${tempCurDate.getFullYear()}/${tempCurDate.getMonth() + 1}/${tempCurDate.getDate()}`;
+		const curDate = `${tempCurDate.getFullYear()}-${tempCurDate.getMonth() < 10 && 0}${
+			tempCurDate.getMonth() + 1
+		}-${tempCurDate.getDate() - resta}`;
 		return curDate;
 	};
 
@@ -26,7 +28,7 @@ export default function FechaComunicado({ fecha, comunicados }) {
 		return finalFechaEsp;
 	};
 
-	const renderDate = fecha === currentDate ? 'Hoy' : getFormatedDate();
+	const renderDate = fecha === currentDate() ? 'Hoy' : fecha === currentDate(1) ? 'Ayer' : getFormatedDate();
 
 	return (
 		<div className="date-comunicados-container col-11 col-sm-12">

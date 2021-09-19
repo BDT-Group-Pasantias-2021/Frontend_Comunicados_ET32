@@ -10,6 +10,36 @@ import ComunicadoModal from '../common/InicioView/ComunicadoModal';
 
 const ComunicadosJSON = [
 	{
+		fecha: '2021-09-18',
+		comunicados: [
+			{
+				id_comunicaciones: 6,
+				emisor: 'Gustavo Garcia',
+				titulo: 'Asistencias normales',
+				descripcion:
+					'Estimadas Familias: \nA partir del 5/7 los estudiantes concurrirán de acuerdo al cronograma de burbujas establecido, respetando los protocolos vigentes.\nDurante esas dos semanas intensificarán los aprendizajes 2020 para poder tener aprobado dicho año\nEquipo de conducción\n\nSaludos, Gustavo García',
+				leido: false,
+				categorias: [
+					{
+						id_categoria: 1,
+						nombre: 'General',
+						color: '#a8a8a8',
+					},
+					{
+						id_categoria: 2,
+						nombre: 'Académico',
+						color: '#44abff',
+					},
+					{
+						id_categoria: 3,
+						nombre: 'Urgente',
+						color: '#ff4242',
+					},
+				],
+			},
+		],
+	},
+	{
 		fecha: '2021-10-08',
 		comunicados: [
 			{
