@@ -39,7 +39,7 @@
 		top: 45px;
 		margin: auto;
 		padding: 0;
-		z-index: 2;
+		z-index: 1;
 
 		@media (max-width: 575px) {
 			height: calc(100% + 45px) !important;
@@ -82,7 +82,7 @@
 		}
 
 		.comunicado-card-container {
-			max-height: 122px;
+			max-height: 135px;
 			margin: 20px 0px;
 			padding: 20px;
 			background-color: $card-bg;
@@ -90,78 +90,89 @@
 			box-shadow: 0px 2px 7px -3px #00000021;
 			transition: all 100ms ease-in-out;
 
-			&:hover > .comunicado-card-functions {
+			&:hover > .comunicado-card-header > .comunicado-card-functions {
 				display: flex !important;
 			}
 
-			/* <====================================================================>
-			   <========================= FUNCTIONS BUTTON =========================>
-			   <====================================================================> */
+			.comunicado-card-header {
+				@include displayFlex(row, space-between, center);
+				width: 100%;
+				max-height: 24px;
 
-			.comunicado-card-functions {
-				@include displayFlex(null, center, center);
-				display: none;
-				width: 30px;
-				height: 16px;
-				cursor: pointer;
-				border-radius: 5px;
-				transition: all 100ms ease;
-				z-index: 0;
-				position: absolute;
-
-				&:hover {
-					background-color: #bdbdbd41;
+				.comunicado-card-from {
+					color: $text-color-backgrey;
+					font-size: 12px;
 				}
 
-				.functions-icon {
-					width: 21px;
-					height: 21px;
-					fill: $text-color-backgrey;
-				}
-			}
-			.comunicado-card-content {
-				width: calc(100% - 30px);
-				cursor: pointer;
+				/* <====================================================================>
+				   <========================= FUNCTIONS BUTTON =========================>
+				   <====================================================================> */
 
-				/* &:hover {
-					background-color: $card-bg-hover;
-				} */
+				.comunicado-card-functions {
+					@include displayFlex(null, center, center);
+					display: none;
+					width: 35px;
+					height: 23px;
+					cursor: pointer;
+					border-radius: 5px;
+					transition: all 100ms ease;
+					margin-top: -7px;
+					//position: relative;
+					z-index: 0;
 
-				.comunicado-card-title {
-					width: calc(100% - 40px);
-					white-space: nowrap;
-					overflow: hidden;
-					text-overflow: ellipsis;
-					font-weight: 700;
-					padding-bottom: 0.2rem;
-				}
+					@media screen and (max-width: 768px) {
+						display: flex !important;
+					}
 
-				.comunicado-card-body {
-					white-space: nowrap;
-					overflow: hidden;
-					text-overflow: ellipsis;
-				}
+					&:hover {
+						background-color: #bdbdbd41;
+					}
 
-				.comunicado-card-header {
-					@include displayFlex(row, space-between, center);
-					width: 100%;
-					max-height: 24px;
-
-					.comunicado-card-from {
-						color: $text-color-backgrey;
-						font-size: 12px;
+					.functions-icon {
+						width: 21px;
+						height: 21px;
+						fill: $text-color-backgrey;
 					}
 				}
 			}
+		}
 
+		.comunicado-card-content {
+			width: calc(100% - 30px);
+			cursor: pointer;
+			//padding-bottom: 15px;
+
+			/* &:hover {
+				background-color: $card-bg-hover;
+			} */
+
+			.comunicado-card-title {
+				width: calc(100% - 40px);
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				font-weight: 700;
+				padding-bottom: 0.2rem;
+			}
+
+			.comunicado-card-body {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		}
+
+		.comunicados-bottom-bar {
+			@include displayFlex(row, space-between, center);
+			width: 100%;
+			margin-top: 5px;
 			/* <===================================================================>
-			   <============================== TAGS ===============================>
-			   <===================================================================> */
+		   		<============================== TAGS ===============================>
+		   		<===================================================================> */
 
 			.comunicados-tags-container {
 				@include displayFlex(row, flex-start, center);
-				width: 100%;
-				margin-top: 10px;
+				width: fit-content;
 
 				.comunicado-category {
 					@include displayFlex(row, flex-start, center);
@@ -185,52 +196,85 @@
 				}
 			}
 
-			/* <===================================================================>
+			.comunicado-seen-marker {
+				@include displayFlex(row, center, center);
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
+				cursor: pointer;
+				transition: all 100ms ease-in-out;
+
+				.seen-marker-icon {
+					width: 15px;
+					height: 15px;
+					fill: #fff;
+				}
+			}
+
+			.seen-marker-affirmative {
+				background-color: $card-seen-color;
+
+				&:hover {
+					background-color: $card-seen-color-hover;
+				}
+				//border: 1px solid $card-seen-border-color;
+			}
+
+			.seen-marker-pending {
+				background-color: $card-pending-color;
+
+				&:hover {
+					background-color: $card-pending-color-hover;
+				}
+				//border: 1px solid $card-pending-border-color;
+			}
+		}
+
+		/* <===================================================================>
 			   <========================= FUNCTIONS MENU ==========================>
 			   <===================================================================> */
 
-			.active-menu-list {
-				visibility: visible !important;
-				opacity: 1 !important;
-			}
+		.active-menu-list {
+			visibility: visible !important;
+			opacity: 1 !important;
+		}
 
-			.comunicado-options-menu {
-				@include displayFlex(row, flex-start, baseline);
-				width: 100%;
-				height: fit-content;
-				position: relative;
+		.comunicado-options-menu {
+			@include displayFlex(row, flex-start, baseline);
+			width: 100%;
+			height: fit-content;
+			position: relative;
 
-				visibility: hidden;
-				opacity: 0;
-				list-style: none;
-				z-index: 1;
+			visibility: hidden;
+			opacity: 0;
+			list-style: none;
+			z-index: 1;
 
-				transition: all 70ms ease-in-out;
-				margin: 0;
-				padding: 7px 0 0 0;
+			transition: all 70ms ease-in-out;
+			margin: 0;
+			padding: 7px 0 0 0;
 
-				.comunicado-function {
-					@include displayFlex(row, flex-start, center);
-					width: fit-content;
-					margin-right: 10px;
-					padding: 5px;
-					border-radius: 5px;
-					cursor: pointer;
+			.comunicado-function {
+				@include displayFlex(row, flex-start, center);
+				width: fit-content;
+				margin-right: 10px;
+				padding: 5px;
+				border-radius: 5px;
+				cursor: pointer;
 
-					&:hover {
-						background-color: #bdbdbd34;
-					}
+				&:hover {
+					background-color: #bdbdbd34;
+				}
 
-					.comunicado-function-icon {
-						width: 16px;
-						margin-right: 7px;
-						fill: $text-color-white;
-					}
+				.comunicado-function-icon {
+					width: 16px;
+					margin-right: 7px;
+					fill: $text-color-white;
+				}
 
-					.comunicado-function-label {
-						font-size: 12px;
-						margin-top: 2.5px;
-					}
+				.comunicado-function-label {
+					font-size: 12px;
+					margin-top: 2.5px;
 				}
 			}
 		}

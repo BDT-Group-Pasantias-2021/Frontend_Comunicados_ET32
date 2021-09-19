@@ -23,7 +23,7 @@ export default function FechaComunicado({ fecha, comunicados }) {
 	};
 
 	return (
-		<div className="date-comunicados-container col-11 col-sm-10 col-md-12 col-lg-12">
+		<div className="date-comunicados-container col-11 col-sm-12">
 			<h4 className="date-comunicados-header">{fecha === currentDate ? 'Hoy' : getFormatedDate()}</h4>
 			<div className="date-comunicados-cards">
 				{comunicados.map((comunicado, index) => (

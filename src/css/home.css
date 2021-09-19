@@ -50,7 +50,7 @@
   top: 45px;
   margin: auto;
   padding: 0;
-  z-index: 2;
+  z-index: 1;
 }
 @media (max-width: 575px) {
   .father-container-view .modal-comunicado {
@@ -76,60 +76,76 @@
   font-weight: 700;
   line-height: 25px;
 }
+.date-comunicados-container .date-comunicados-cards {
+  /* <===================================================================>
+  	   <========================= FUNCTIONS MENU ==========================>
+  	   <===================================================================> */
+}
 .date-comunicados-container .date-comunicados-cards .expand-card {
   max-height: fit-content !important;
   transition: all 150ms ease-in-out;
 }
 .date-comunicados-container .date-comunicados-cards .comunicado-card-container {
-  max-height: 122px;
+  max-height: 135px;
   margin: 20px 0px;
   padding: 20px;
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0px 2px 7px -3px #00000021;
   transition: all 100ms ease-in-out;
+}
+.date-comunicados-container .date-comunicados-cards .comunicado-card-container:hover > .comunicado-card-header > .comunicado-card-functions {
+  display: flex !important;
+}
+.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-height: 24px;
   /* <====================================================================>
      <========================= FUNCTIONS BUTTON =========================>
      <====================================================================> */
-  /* <===================================================================>
-     <============================== TAGS ===============================>
-     <===================================================================> */
-  /* <===================================================================>
-     <========================= FUNCTIONS MENU ==========================>
-     <===================================================================> */
 }
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container:hover > .comunicado-card-functions {
-  display: flex !important;
+.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-header .comunicado-card-from {
+  color: #888888;
+  font-size: 12px;
 }
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-functions {
+.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-header .comunicado-card-functions {
   display: flex;
   justify-content: center;
   align-items: center;
   display: none;
-  width: 30px;
-  height: 16px;
+  width: 35px;
+  height: 23px;
   cursor: pointer;
   border-radius: 5px;
   transition: all 100ms ease;
+  margin-top: -7px;
   z-index: 0;
-  position: absolute;
 }
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-functions:hover {
+@media screen and (max-width: 768px) {
+  .date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-header .comunicado-card-functions {
+    display: flex !important;
+  }
+}
+.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-header .comunicado-card-functions:hover {
   background-color: #bdbdbd41;
 }
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-functions .functions-icon {
+.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-header .comunicado-card-functions .functions-icon {
   width: 21px;
   height: 21px;
   fill: #888888;
 }
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-content {
+.date-comunicados-container .date-comunicados-cards .comunicado-card-content {
   width: calc(100% - 30px);
   cursor: pointer;
   /* &:hover {
   	background-color: $card-bg-hover;
   } */
 }
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-content .comunicado-card-title {
+.date-comunicados-container .date-comunicados-cards .comunicado-card-content .comunicado-card-title {
   width: calc(100% - 40px);
   white-space: nowrap;
   overflow: hidden;
@@ -137,32 +153,30 @@
   font-weight: 700;
   padding-bottom: 0.2rem;
 }
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-content .comunicado-card-body {
+.date-comunicados-container .date-comunicados-cards .comunicado-card-content .comunicado-card-body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-content .comunicado-card-header {
+.date-comunicados-container .date-comunicados-cards .comunicados-bottom-bar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-height: 24px;
+  margin-top: 5px;
+  /* <===================================================================>
+    		<============================== TAGS ===============================>
+    		<===================================================================> */
 }
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-card-content .comunicado-card-header .comunicado-card-from {
-  color: #888888;
-  font-size: 12px;
-}
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicados-tags-container {
+.date-comunicados-container .date-comunicados-cards .comunicados-bottom-bar .comunicados-tags-container {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
-  margin-top: 10px;
+  width: fit-content;
 }
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicados-tags-container .comunicado-category {
+.date-comunicados-container .date-comunicados-cards .comunicados-bottom-bar .comunicados-tags-container .comunicado-category {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -172,22 +186,50 @@
   margin-right: 7px;
   border-radius: 25px;
 }
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicados-tags-container .comunicado-category .category-bubble {
+.date-comunicados-container .date-comunicados-cards .comunicados-bottom-bar .comunicados-tags-container .comunicado-category .category-bubble {
   width: 9px;
   height: 9px;
   margin: 0px 7px;
   border-radius: 50%;
 }
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicados-tags-container .comunicado-category .tag-category {
+.date-comunicados-container .date-comunicados-cards .comunicados-bottom-bar .comunicados-tags-container .comunicado-category .tag-category {
   color: #000;
   font-size: 12px;
   margin: 1px 7px 0px 0px;
 }
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container .active-menu-list {
+.date-comunicados-container .date-comunicados-cards .comunicados-bottom-bar .comunicado-seen-marker {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 100ms ease-in-out;
+}
+.date-comunicados-container .date-comunicados-cards .comunicados-bottom-bar .comunicado-seen-marker .seen-marker-icon {
+  width: 15px;
+  height: 15px;
+  fill: #fff;
+}
+.date-comunicados-container .date-comunicados-cards .comunicados-bottom-bar .seen-marker-affirmative {
+  background-color: #00b14a;
+}
+.date-comunicados-container .date-comunicados-cards .comunicados-bottom-bar .seen-marker-affirmative:hover {
+  background-color: #00ce56;
+}
+.date-comunicados-container .date-comunicados-cards .comunicados-bottom-bar .seen-marker-pending {
+  background-color: #ebd31b;
+}
+.date-comunicados-container .date-comunicados-cards .comunicados-bottom-bar .seen-marker-pending:hover {
+  background-color: #fce325;
+}
+.date-comunicados-container .date-comunicados-cards .active-menu-list {
   visibility: visible !important;
   opacity: 1 !important;
 }
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-options-menu {
+.date-comunicados-container .date-comunicados-cards .comunicado-options-menu {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -203,7 +245,7 @@
   margin: 0;
   padding: 7px 0 0 0;
 }
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-options-menu .comunicado-function {
+.date-comunicados-container .date-comunicados-cards .comunicado-options-menu .comunicado-function {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -214,15 +256,15 @@
   border-radius: 5px;
   cursor: pointer;
 }
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-options-menu .comunicado-function:hover {
+.date-comunicados-container .date-comunicados-cards .comunicado-options-menu .comunicado-function:hover {
   background-color: #bdbdbd34;
 }
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-options-menu .comunicado-function .comunicado-function-icon {
+.date-comunicados-container .date-comunicados-cards .comunicado-options-menu .comunicado-function .comunicado-function-icon {
   width: 16px;
   margin-right: 7px;
   fill: #323232;
 }
-.date-comunicados-container .date-comunicados-cards .comunicado-card-container .comunicado-options-menu .comunicado-function .comunicado-function-label {
+.date-comunicados-container .date-comunicados-cards .comunicado-options-menu .comunicado-function .comunicado-function-label {
   font-size: 12px;
   margin-top: 2.5px;
 }
