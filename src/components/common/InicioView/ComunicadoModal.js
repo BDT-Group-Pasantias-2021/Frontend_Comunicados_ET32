@@ -18,7 +18,7 @@ export default function ComunicadoModal({ editarModal }) {
 					setActiveModal(null);
 				}}
 			></div>
-			<div className="modal-comunicado col-12 col-sm-10 col-md-7 col-lg-6">
+			<div className="modal-comunicado col-12 col-sm-11 col-md-8 col-lg-6">
 				<div className="modal-container">
 					<div className="modal-top-section">
 						<div className="modal-tags-close">
@@ -54,16 +54,23 @@ export default function ComunicadoModal({ editarModal }) {
 						</div>
 						<div className="modal-content">
 							{editarModal ? (
-								<textarea className="modal-title modal-title-edit">{activeModal.titulo}</textarea>
+								<textarea
+									className="modal-title modal-title-edit"
+									defaultValue={activeModal.titulo}
+								></textarea>
 							) : (
 								<h4 className="modal-title">
 									<b>{activeModal.titulo}</b>
 								</h4>
 							)}
 							{editarModal ? (
-								<textarea className="modal-text modal-text-edit">{activeModal.descripcion}</textarea>
+								<textarea className="modal-text-edit" defaultValue={activeModal.descripcion}></textarea>
 							) : (
-								<div className="modal-text">{activeModal.descripcion}</div>
+								<textarea
+									className="modal-text"
+									defaultValue={activeModal.descripcion}
+									disabled
+								></textarea>
 							)}
 						</div>
 					</div>
