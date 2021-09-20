@@ -18,16 +18,27 @@ export default function ComunicadoCard({ comunicado, fechas }) {
 		const realHeight = comunicadoCard.scrollHeight;
 
 		if (!comunicadoCard.style.maxHeight) {
-			comunicadoCard.style.maxHeight = realHeight + 10 + 7 + 'px';
+			comunicadoCard.style.maxHeight = realHeight + 20 + 10 + 'px';
 		} else {
 			comunicadoCard.style.maxHeight = null;
 		}
 	};
 
 	const showComunicado = () => {
-		comunicado.fecha = fechas.renderDate;
+		comunicado.renderFecha = fechas.renderDate;
+		comunicado.fecha = fechas.fecha;
 		setActiveModal(comunicado);
 	};
+
+	useEffect(() => {
+		if (!comunicado.leido) {
+			const comunicadoCard = document.getElementById(`comunicado-card-container${cardId}`);
+			comunicadoCard.classList.add('unread-comunicado');
+		} else if (comunicado.leido) {
+			const comunicadoCard = document.getElementById(`comunicado-card-container${cardId}`);
+			comunicadoCard.classList.remove('unread-comunicado');
+		}
+	});
 
 	return (
 		<div className="comunicado-card-container" id={`comunicado-card-container${cardId}`}>
@@ -59,7 +70,7 @@ export default function ComunicadoCard({ comunicado, fechas }) {
 						<CategoryTag key={tag.id_categoria} categoria={tag} tipo="card" />
 					))}
 				</div>
-				<SeenMarker estado={comunicado.leido} showComunicado={() => showComunicado()} />
+				{/* <SeenMarker estado={comunicado.leido} showComunicado={() => showComunicado()} /> */}
 			</div>
 			<ul className="comunicado-options-menu" id={`comunicado-options-menu${cardId}`}>
 				<li

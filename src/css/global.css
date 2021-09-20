@@ -11170,4 +11170,8 @@ p {
   margin-right: 10px;
 }
 
+.unread-comunicado {
+  border-top: 10px solid #fcd125;
+}
+
 /*# sourceMappingURL=global.css.map */

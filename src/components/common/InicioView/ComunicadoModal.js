@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 // Hooks
 import { ComunicadoCardContext } from '../../../hooks/useContext/ComunicadoCardContext';
@@ -7,7 +7,26 @@ import CategoryTag from './CategoryTag';
 // Components
 
 export default function ComunicadoModal({ editarModal }) {
-	const { activeModal, setActiveModal, setEditModal } = useContext(ComunicadoCardContext);
+	const { activeModal, setActiveModal, setEditModal, signComunicado } = useContext(ComunicadoCardContext);
+
+	const handleSignComunicado = (id, fecha) => {
+		const signBtn = document.getElementById('modal-sign-button');
+		signBtn.innerHTML =
+			'<svg class="seen-marker-icon" viewBox="0 0 512 512"><g><g><path d="M504.502,75.496c-9.997-9.998-26.205-9.998-36.204,0L161.594,382.203L43.702,264.311c-9.997-9.998-26.205-9.997-36.204,0 c-9.998,9.997-9.998,26.205,0,36.203l135.994,135.992c9.994,9.997,26.214,9.99,36.204,0L504.502,111.7 C514.5,101.703,514.499,85.494,504.502,75.496z"/></g></g></svg>';
+		signBtn.classList.add('modal-sign-button-active');
+		signComunicado(id, fecha);
+
+		setTimeout(() => {
+			activeModal.leido = true;
+		}, 1000);
+	};
+
+	useEffect(() => {
+		if (!activeModal.leido) {
+			const modal = document.getElementById(`modal-comunicado`);
+			modal.classList.add('unread-comunicado');
+		}
+	});
 
 	return (
 		<>
@@ -18,7 +37,7 @@ export default function ComunicadoModal({ editarModal }) {
 					setActiveModal(null);
 				}}
 			></div>
-			<div className="modal-comunicado col-12 col-sm-11 col-md-8 col-lg-6">
+			<div className="modal-comunicado col-12 col-sm-11 col-md-8 col-lg-7" id={`modal-comunicado`}>
 				<div className="modal-container">
 					<div className="modal-top-section">
 						<div className="modal-tags-close">
@@ -91,7 +110,7 @@ export default function ComunicadoModal({ editarModal }) {
 										<path d="m467 65h-36v-25c0-8.284-6.716-15-15-15s-15 6.716-15 15v25h-130v-25c0-8.284-6.716-15-15-15s-15 6.716-15 15v25h-130v-25c0-8.284-6.716-15-15-15s-15 6.716-15 15v25h-36c-24.813 0-45 20.187-45 45v332c0 24.813 20.187 45 45 45h422c24.813 0 45-20.187 45-45 0-9.682 0-323.575 0-332 0-24.813-20.187-45-45-45zm-437 45c0-8.271 6.729-15 15-15h36v25c0 8.284 6.716 15 15 15s15-6.716 15-15v-25h130v25c0 8.284 6.716 15 15 15s15-6.716 15-15v-25h130v25c0 8.284 6.716 15 15 15s15-6.716 15-15v-25h36c8.271 0 15 6.729 15 15v59h-452zm437 347h-422c-8.271 0-15-6.729-15-15v-243h452v243c0 8.271-6.729 15-15 15z" />
 									</g>
 								</svg>
-								<p className="standard-icon-label">{activeModal.fecha}</p>
+								<p className="standard-icon-label">{activeModal.renderFecha}</p>
 							</div>
 							<div className="standard-icon-container standard-icon-container-margin">
 								<svg className="standard-icon standard-icon-margin" viewBox="0 0 512 512">
@@ -123,8 +142,21 @@ export default function ComunicadoModal({ editarModal }) {
 							</div>
 						</div>
 						<div className="modal-buttons">
-							{editarModal && <div className="modal-save-btn">Guardar</div>}
-							{activeModal.leido || <div className="modal-change-state-button">Marcar como firmado</div>}
+							{editarModal ? (
+								<div className="modal-save-btn">Guardar</div>
+							) : (
+								activeModal.leido || (
+									<div
+										className="modal-sign-button"
+										id="modal-sign-button"
+										onClick={() =>
+											handleSignComunicado(activeModal.id_comunicaciones, activeModal.fecha)
+										}
+									>
+										Marcar como firmado
+									</div>
+								)
+							)}
 						</div>
 					</div>
 				</div>

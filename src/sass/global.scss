@@ -57,3 +57,7 @@ p {
 .standard-icon-container-margin {
 	margin-right: 10px;
 }
+
+.unread-comunicado {
+	border-top: 10px solid $card-pending-color-hover;
+}

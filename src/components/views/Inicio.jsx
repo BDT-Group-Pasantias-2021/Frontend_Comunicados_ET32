@@ -23,7 +23,7 @@ const ComunicadosJSON = [
 					{
 						id_categoria: 1,
 						nombre: 'General',
-						color: '#a8a8a8',
+						color: '#121212',
 					},
 					{
 						id_categoria: 2,
@@ -53,7 +53,7 @@ const ComunicadosJSON = [
 					{
 						id_categoria: 1,
 						nombre: 'General',
-						color: '#a8a8a8',
+						color: '#121212',
 					},
 					{
 						id_categoria: 3,
@@ -97,7 +97,7 @@ const ComunicadosJSON = [
 					{
 						id_categoria: 1,
 						nombre: 'General',
-						color: '#a8a8a8',
+						color: '#121212',
 					},
 				],
 			},
@@ -116,7 +116,7 @@ const ComunicadosJSON = [
 					{
 						id_categoria: 1,
 						nombre: 'General',
-						color: '#a8a8a8',
+						color: '#121212',
 					},
 				],
 			},
@@ -158,6 +158,23 @@ export default function Inicio() {
 		}
 	};
 
+	// function to mark firma as true in a comunicado
+	const signComunicado = (id, selectedFecha) => {
+		const newFechaComunicados = fechaComunicados.map((element) => {
+			if (element.fecha === selectedFecha) {
+				const comunicados = element.comunicados.map((comunicado) => {
+					if (comunicado.id_comunicaciones === id) {
+						return { ...comunicado, leido: true };
+					}
+					return comunicado;
+				});
+				return { fecha: element.fecha, comunicados };
+			}
+			return element;
+		});
+		setFechaComunicados(newFechaComunicados);
+	};
+
 	useEffect(() => {
 		if (!comunicadosAñadidos) {
 			setFechaComunicados(ComunicadosJSON);
@@ -173,6 +190,7 @@ export default function Inicio() {
 				editModal,
 				setEditModal,
 				deleteComunicado,
+				signComunicado,
 			}}
 		>
 			<main className="father-container-view">
