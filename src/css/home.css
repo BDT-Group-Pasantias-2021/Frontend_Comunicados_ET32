@@ -251,7 +251,7 @@
   }
 }
 .father-container-view .modal-comunicado .modal-container .modal-bottom-section .modal-buttons .modal-button-standard, .father-container-view .modal-comunicado .modal-container .modal-bottom-section .modal-buttons .modal-sign-button, .father-container-view .modal-comunicado .modal-container .modal-bottom-section .modal-buttons .modal-save-btn {
-  width: 160px;
+  width: fit-content;
   color: #fff;
   white-space: nowrap;
   padding: 7px 13px;
@@ -289,6 +289,12 @@
   border-radius: 50%;
   background-color: #00b191;
   border: 1px solid #00b191 !important;
+}
+@media screen and (max-width: 535px) {
+  .father-container-view .modal-comunicado .modal-container .modal-bottom-section .modal-buttons .modal-sign-button-active {
+    width: 50px;
+    height: 50px;
+  }
 }
 .father-container-view .modal-comunicado .modal-container .modal-bottom-section .modal-buttons .modal-sign-button-active:hover {
   color: #fff;
@@ -403,13 +409,19 @@
 }
 .date-comunicados-container .date-comunicados-cards .comunicado-card-content .comunicado-card-title {
   width: calc(100% - 40px);
+  font-weight: 700;
+  padding-bottom: 0.2rem;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #575757;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-weight: 700;
-  padding-bottom: 0.2rem;
 }
 .date-comunicados-container .date-comunicados-cards .comunicado-card-content .comunicado-card-body {
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #575757;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

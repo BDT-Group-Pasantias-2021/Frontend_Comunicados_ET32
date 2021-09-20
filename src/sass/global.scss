@@ -14,7 +14,8 @@ html,
 body,
 #root {
 	height: 100%;
-	overflow: hidden;
+	/* overflow: hidden;
+	Si se descomenta se imposibilita el scroll para recargar el navegador */
 }
 
 p {
