@@ -1,6 +1,6 @@
 {
 	"short_name": "Comunicados - Escuela Técnica 32",
-	"name": "Libreta de Comunicaciones - Escuela Técnica 32, Gral. José de San Martín",
+	"name": "Libreta de Comunicaciones - Escuela Técnica 32",
 	"icons": [
 		{
 			"src": "favicon.ico",
@@ -10,8 +10,7 @@
 		{
 			"src": "logo192.png",
 			"type": "image/png",
-			"sizes": "192x192",
-			"purpose": "any maskable"
+			"sizes": "192x192"
 		},
 		{
 			"src": "logo512.png",
