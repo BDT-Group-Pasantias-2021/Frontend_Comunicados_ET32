@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useHistory } from 'react-router';
 import Axios from 'axios';
 
 // Components
@@ -11,6 +12,8 @@ import 'rsuite/dist/styles/rsuite-default.css';
 
 // Forms
 const LoginForm = ({ changeForm, showPassword, seePassword }) => {
+	const history = useHistory();
+
 	return (
 		<div className="form-content">
 			<h2 className="form-title">Iniciar Sesión</h2>
@@ -28,7 +31,14 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 				onSubmit={(values, { setSubmitting }) => {
 					setSubmitting(false);
 					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/login', values).then((res) => {
-						console.log(res.data);
+						if (res.data.status === 'success') {
+							res.data.email = values.email;
+							localStorage.setItem('user-token', JSON.stringify(res.data.sessionID, res.data.email));
+							localStorage.setItem('user-email', JSON.stringify(res.data.email));
+							history.push('/home');
+						} else {
+							console.log(res.data);
+						}
 					});
 				}}
 			>

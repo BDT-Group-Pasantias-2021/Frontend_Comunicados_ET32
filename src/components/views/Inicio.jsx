@@ -7,6 +7,7 @@ import { ComunicadoCardContext } from '../../hooks/useContext/ComunicadoCardCont
 // Components
 import FechaComunicado from '../common/InicioView/FechaComunicado';
 import ComunicadoModal from '../common/InicioView/ComunicadoModal';
+import Axios from 'axios';
 
 const ComunicadosJSON = [
 	{
@@ -144,6 +145,24 @@ export default function Inicio() {
 	const [activeModal, setActiveModal] = useState(null);
 	const [editModal, setEditModal] = useState(false);
 
+	const sendLocalStorage = () => {
+		//obtener user-token from localStorage
+		const userToken = localStorage.getItem('user-token');
+		const userEmail = localStorage.getItem('user-email');
+		const sendData = { sessionID: userToken, sessionEmail: userEmail };
+		console.log(sendData);
+		Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/validateSession', sendData); /* .then((res) => {
+			if (res.data.status === 'success') {
+				res.data.email = values.email;
+				localStorage.setItem('user-token', JSON.stringify(res.data.sessionID, res.data.email));
+				localStorage.setItem('user-email', JSON.stringify(res.data.email));
+				history.push('/home');
+			} else {
+				console.log(res.data);
+			}
+		}); */
+	};
+
 	const deleteComunicado = (id, selectedFecha) => {
 		const confirmState = window.confirm('¿Estás seguro de eliminar este comunicado?');
 		if (confirmState) {
@@ -194,6 +213,12 @@ export default function Inicio() {
 			}}
 		>
 			<main className="father-container-view">
+				<div
+					style={{ padding: '20px', backgroundColor: 'red', width: '100px' }}
+					onClick={() => sendLocalStorage()}
+				>
+					refresh timeout
+				</div>
 				{activeModal && <ComunicadoModal editarModal={editModal} />}
 				<div className="container" style={{ paddingTop: '35px' }}>
 					<div className="row">

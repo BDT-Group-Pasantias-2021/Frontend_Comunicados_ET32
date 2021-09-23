@@ -17,8 +17,8 @@ export default function App() {
 		<Router basename="/Frontend_Comunicados_ET32">
 			<TopNavbar />
 			<Switch>
-				<Route path="/" component={Home} />
-				<Route path="/home" exact component={Login} />
+				<Route path="/home" component={Home} />
+				<Route path="/" exact component={Login} />
 			</Switch>
 		</Router>
 	);

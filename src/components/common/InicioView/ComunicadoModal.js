@@ -1,10 +1,76 @@
 import React, { useContext, useEffect } from 'react';
+import Axios from 'axios';
 
 // Hooks
 import { ComunicadoCardContext } from '../../../hooks/useContext/ComunicadoCardContext';
 import CategoryTag from './CategoryTag';
 
 // Components
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+
+const ChangePassword = ({ changeForm }) => {
+	return (
+		<div className="form-content">
+			<Formik
+				initialValues={{
+					documento: '',
+					email: '',
+				}}
+				validate={(values) => {
+					const errors = {};
+
+					//? Validación de correo electrónico.
+					if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+						errors.email = 'Correo electrónico inválido';
+					}
+
+					return errors;
+				}}
+				onSubmit={(values, { setSubmitting }) => {
+					setSubmitting(false);
+					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/changePassword', values).then((res) => {
+						console.log(res.data);
+					});
+				}}
+			>
+				<Form
+					className="login-form row"
+					style={{
+						height: '900px',
+						display: 'flex',
+						flexDirection: 'column',
+						justifyContent: 'space-between',
+					}}
+				>
+					<div className="forgot-password-inputs-container" style={{ marginTop: '20px', padding: '0' }}>
+						<div className="form-input-container">
+							<Field
+								className="login-form-input"
+								type="text"
+								name="documento"
+								placeholder="Documento"
+								required
+							/>
+						</div>
+						<div className="form-input-container">
+							<Field
+								className="login-form-input"
+								type="email"
+								name="email"
+								placeholder="Correo Electronico"
+								required
+							/>
+							<ErrorMessage className="input-error" name="email" component="div" />
+						</div>
+					</div>
+					<button type="submit" className="enter-btn" style={{ marginBottom: '20px' }}>
+						<span className="enter-span">Continuar</span>
+					</button>
+				</Form>
+			</Formik>
+		</div>
+	);
+};
 
 export default function ComunicadoModal({ editarModal }) {
 	const { activeModal, setActiveModal, setEditModal, signComunicado } = useContext(ComunicadoCardContext);
