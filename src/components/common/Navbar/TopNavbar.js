@@ -16,6 +16,7 @@ export default function TopNavbar() {
 		setSidebar(!sidebar);
 		if (sidebar === true) {
 			SideNavbar()
+			console.log(sidebar)
 		};
 	}
 	
