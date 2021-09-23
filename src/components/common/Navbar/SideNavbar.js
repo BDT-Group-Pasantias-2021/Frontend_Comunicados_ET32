@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 // Components
 
 // Styles
-import "../../../css/navbar.css";
+import "../../../css/side_navbar.css";
 
 export default function Sidenavbar() {
 	const [expanded, setExpanded] = useState(true);

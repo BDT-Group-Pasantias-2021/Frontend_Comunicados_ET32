@@ -1,12 +1,26 @@
-import React, { useEffect } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import SideNavbar from './SideNavbar.js';
 // Components
 import ProfilePhoto from '../../../assets/svgs/unnamed.jpg';
 
 // Styles
 import '../../../css/top_navbar.css';
 
+
 export default function TopNavbar() {
+
+	// Sidebar Code 
+	const[sidebar, setSidebar] = useState(false);
+	const showSidebar = () => {
+		setSidebar(!sidebar);
+		if (sidebar === true) {
+			SideNavbar()
+		};
+	}
+	
+	
+	
 	useEffect(() => {
 		const searchColor = document.getElementById('searchBar');
 		const changeColor = document.getElementById('Lupa_svg');
@@ -18,33 +32,40 @@ export default function TopNavbar() {
 		});
 	});
 
+
 	return (
 		<nav id="top-navbar">
 			<div className="left-nav">
 				<div className="icons-container" style={{ width: '69px', marginRight: '15px' }}>
-					<div className="nav-icon-container">
-						<svg
-							className="right-nav-icon"
-							id="Capa_1"
-							viewBox="0 0 384.97 384.97"
-							style={{ transform: 'rotateY(180deg)' }}
-						>
-							<g id="Menu_1_">
-								<path
-									d="M12.03,120.303h360.909c6.641,0,12.03-5.39,12.03-12.03c0-6.641-5.39-12.03-12.03-12.03H12.03
-										c-6.641,0-12.03,5.39-12.03,12.03C0,114.913,5.39,120.303,12.03,120.303z"
-								/>
-								<path
-									d="M372.939,180.455H12.03c-6.641,0-12.03,5.39-12.03,12.03s5.39,12.03,12.03,12.03h360.909c6.641,0,12.03-5.39,12.03-12.03
-										S379.58,180.455,372.939,180.455z"
-								/>
-								<path
-									d="M372.939,264.667H132.333c-6.641,0-12.03,5.39-12.03,12.03c0,6.641,5.39,12.03,12.03,12.03h240.606
-										c6.641,0,12.03-5.39,12.03-12.03C384.97,270.056,379.58,264.667,372.939,264.667z"
-								/>
-							</g>
-						</svg>
-					</div>
+					<Link to='#' className="open-sidebar">
+						<div className="nav-icon-container">
+							<svg
+								className="right-nav-icon"
+								id="Capa_1"
+								viewBox="0 0 384.97 384.97"
+								style={{ transform: 'rotateY(180deg)' }}
+								onClick={() => showSidebar()}
+							>
+								<g id="Menu_1_">
+									<path
+										d="M12.03,120.303h360.909c6.641,0,12.03-5.39,12.03-12.03c0-6.641-5.39-12.03-12.03-12.03H12.03
+											c-6.641,0-12.03,5.39-12.03,12.03C0,114.913,5.39,120.303,12.03,120.303z"
+									/>
+									<path
+										d="M372.939,180.455H12.03c-6.641,0-12.03,5.39-12.03,12.03s5.39,12.03,12.03,12.03h360.909c6.641,0,12.03-5.39,12.03-12.03
+											S379.58,180.455,372.939,180.455z"
+									/>
+									<path
+										d="M372.939,264.667H132.333c-6.641,0-12.03,5.39-12.03,12.03c0,6.641,5.39,12.03,12.03,12.03h240.606
+											c6.641,0,12.03-5.39,12.03-12.03C384.97,270.056,379.58,264.667,372.939,264.667z"
+									/>
+								</g>
+							</svg>
+						</div>
+					</Link>
+
+
+					
 					<div className="nav-icon-container">
 						<svg
 							className="right-nav-icon"
