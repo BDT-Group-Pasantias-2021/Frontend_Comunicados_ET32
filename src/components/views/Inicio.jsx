@@ -140,11 +140,14 @@ const ComunicadosJSON = [
 	},
 ];
 
-export default function Inicio() {
+export default function Inicio({ showNavbar }) {
 	const [fechaComunicados, setFechaComunicados] = useState([]);
 	const [comunicadosAñadidos, setComunicadosAñadidos] = useState(false);
 	const [activeModal, setActiveModal] = useState(null);
 	const [editModal, setEditModal] = useState(false);
+
+	//* Mostrar barras de navegación
+	showNavbar(true);
 
 	const deleteComunicado = (id, selectedFecha) => {
 		const confirmState = window.confirm('¿Estás seguro de eliminar este comunicado?');

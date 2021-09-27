@@ -7,12 +7,17 @@ import Form from '../common/LoginView/Form.js';
 // Styles
 import '../../css/login-view.css';
 
-export default function Login() {
+export default function Login({ hideNavbar }) {
 	const [loadContent, setLoadContent] = useState(false);
 	let history = useHistory();
+
+	//* Ocultar barras de navegación
+	hideNavbar(false);
+
 	useEffect(() => {
 		const token = localStorage.getItem('user-token');
 		if (token) {
+			alert('Borrá el token de sesión');
 			history.push('/home');
 		} else {
 			setLoadContent(true);

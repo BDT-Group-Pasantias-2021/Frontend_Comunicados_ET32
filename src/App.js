@@ -1,5 +1,5 @@
 /* eslint-disable no-sequences */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // Components
@@ -18,17 +18,7 @@ import Home from './components/views/Inicio';
 
 export default function App() {
 	const [activeSidebar, setActiveSidebar] = useState(false);
-	const [showNavbar, setShowNavbar] = useState(true);
-
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => {
-		const pathname = window.location.pathname;
-		if (pathname === '/Frontend_Comunicados_ET32/') {
-			setShowNavbar(false);
-		} else {
-			setShowNavbar(true);
-		}
-	});
+	const [showNavbar, setShowNavbar] = useState(false);
 
 	return (
 		<Router basename="/Frontend_Comunicados_ET32">
@@ -38,11 +28,16 @@ export default function App() {
 					setActiveSidebar,
 				}}
 			>
-				{showNavbar && ((<SideNavbar />), (<TopNavbar />))}
+				{showNavbar && <TopNavbar />}
+				{showNavbar && <SideNavbar />}
 			</NavbarContext.Provider>
 			<Switch>
-				<Route path="/home" component={Home} />
-				<Route path="/" exact component={Login} />
+				<Route path="/home">
+					<Home showNavbar={() => setShowNavbar(true)} />
+				</Route>
+				<Route path="/" exact>
+					<Login hideNavbar={() => setShowNavbar(false)} />
+				</Route>
 			</Switch>
 		</Router>
 	);

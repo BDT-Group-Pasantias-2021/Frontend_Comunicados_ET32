@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SideNavbar from './SideNavbar.js';
@@ -7,21 +8,10 @@ import ProfilePhoto from '../../../assets/svgs/unnamed.jpg';
 // Styles
 import '../../../css/top_navbar.css';
 
-
 export default function TopNavbar() {
+	// Sidebar Code
+	const [sidebar, setSidebar] = useState(false);
 
-	// Sidebar Code 
-	const[sidebar, setSidebar] = useState(false);
-	const showSidebar = () => {
-		setSidebar(!sidebar);
-		if (sidebar === true) {
-			SideNavbar()
-			console.log(sidebar)
-		};
-	}
-	
-	
-	
 	useEffect(() => {
 		const searchColor = document.getElementById('searchBar');
 		const changeColor = document.getElementById('Lupa_svg');
@@ -33,19 +23,18 @@ export default function TopNavbar() {
 		});
 	});
 
-
 	return (
 		<nav id="top-navbar">
 			<div className="left-nav">
 				<div className="icons-container" style={{ width: '69px', marginRight: '15px' }}>
-					<Link to='#' className="open-sidebar">
+					<Link to="#" className="open-sidebar">
 						<div className="nav-icon-container">
 							<svg
 								className="right-nav-icon"
 								id="Capa_1"
 								viewBox="0 0 384.97 384.97"
 								style={{ transform: 'rotateY(180deg)' }}
-								onClick={() => showSidebar()}
+								/* onClick={() => showSidebar()} */
 							>
 								<g id="Menu_1_">
 									<path
@@ -65,8 +54,6 @@ export default function TopNavbar() {
 						</div>
 					</Link>
 
-
-					
 					<div className="nav-icon-container">
 						<svg
 							className="right-nav-icon"
