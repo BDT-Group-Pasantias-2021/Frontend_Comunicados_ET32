@@ -20,6 +20,7 @@ export default function App() {
 	const [activeSidebar, setActiveSidebar] = useState(false);
 	const [showNavbar, setShowNavbar] = useState(true);
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(() => {
 		const pathname = window.location.pathname;
 		if (pathname === '/Frontend_Comunicados_ET32/') {
@@ -27,7 +28,7 @@ export default function App() {
 		} else {
 			setShowNavbar(true);
 		}
-	}, []);
+	});
 
 	return (
 		<Router basename="/Frontend_Comunicados_ET32">

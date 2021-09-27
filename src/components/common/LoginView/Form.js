@@ -8,9 +8,12 @@ import { Icon } from 'rsuite';
 
 // Styles
 import 'rsuite/dist/styles/rsuite-default.css';
+import { useHistory } from 'react-router';
 
 // Forms
 const LoginForm = ({ changeForm, showPassword, seePassword }) => {
+	let history = useHistory();
+
 	return (
 		<div className="form-content">
 			<h2 className="form-title">Iniciar Sesión</h2>
@@ -28,7 +31,16 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 				onSubmit={(values, { setSubmitting }) => {
 					setSubmitting(false);
 					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/login', values).then((res) => {
-						console.log(res.data);
+						console.log();
+						if (res.data.status === 'success') {
+							history.push('/home');
+						} else {
+							const messageContainer = document.getElementById('message-container');
+							messageContainer.innerText = res.data;
+							setTimeout(() => {
+								messageContainer.innerText = '';
+							}, 2500);
+						}
 					});
 				}}
 			>
@@ -62,6 +74,7 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 							</div>
 							<ErrorMessage className="input-error" name="password" component="div" />
 						</div>
+						<div className="session-validate-message" id="message-container"></div>
 						<button type="submit" className="enter-btn">
 							<span className="enter-span">Ingresar</span>
 						</button>
