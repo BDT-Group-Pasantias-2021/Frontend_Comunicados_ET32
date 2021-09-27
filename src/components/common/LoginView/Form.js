@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import Axios from 'axios';
 
 // Components
@@ -8,11 +9,10 @@ import { Icon } from 'rsuite';
 
 // Styles
 import 'rsuite/dist/styles/rsuite-default.css';
-import { useHistory } from 'react-router';
 
 // Forms
 const LoginForm = ({ changeForm, showPassword, seePassword }) => {
-	let history = useHistory();
+	const history = useHistory();
 
 	return (
 		<div className="form-content">
@@ -33,6 +33,9 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/login', values).then((res) => {
 						console.log();
 						if (res.data.status === 'success') {
+							res.data.email = values.email;
+							localStorage.setItem('user-token', JSON.stringify(res.data.sessionID, res.data.email));
+							localStorage.setItem('user-email', JSON.stringify(res.data.email));
 							history.push('/home');
 						} else {
 							const messageContainer = document.getElementById('message-container');

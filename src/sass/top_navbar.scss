@@ -29,10 +29,10 @@ $containers-border-radius: 5px;
 	width: 100%;
 	height: $navbar-height;
 
+	top: 0;
 	background: $primary-color;
 	position: relative;
 	z-index: 9999;
-	top: 0;
 
 	.left-nav {
 		@include displayFlex(row, center, center);
