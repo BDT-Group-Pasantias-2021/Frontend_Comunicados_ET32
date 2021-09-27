@@ -1,7 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect } from 'react';
-import { ComunicadoCardContext } from '../../../hooks/useContext/ComunicadoCardContext';
+
+// Components
 import CategoryTag from './CategoryTag';
+
+// Hooks
+import { ComunicadoCardContext } from '../../../hooks/useContext/ComunicadoCardContext';
 
 export default function ComunicadoCard({ comunicado }) {
 	const cardId = comunicado.id_comunicaciones;

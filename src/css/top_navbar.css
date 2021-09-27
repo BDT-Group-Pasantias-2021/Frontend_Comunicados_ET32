@@ -29,6 +29,7 @@
   height: 45px;
   background: #44abff;
   position: relative;
+  z-index: 9999;
   top: 0;
 }
 #top-navbar .left-nav {

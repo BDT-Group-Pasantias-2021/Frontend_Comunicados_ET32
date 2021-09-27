@@ -3,41 +3,44 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap");
 #sidenavbar-container {
   color: #f5f9fc;
+  position: fixed;
+  z-index: 9999;
 }
-#sidenavbar-container div {
+#sidenavbar-container .rs-sidenav {
   height: 100%;
   background-color: #44abff;
 }
-#sidenavbar-container div div div {
+#sidenavbar-container .rs-sidenav .rs-sidenav-body .rs-nav {
   transition: all 100ms ease-in-out;
 }
-#sidenavbar-container div div div ul .rs-btn-toggle {
+#sidenavbar-container .rs-sidenav .rs-sidenav-body .rs-nav ul .rs-btn-toggle {
   min-width: 40px;
   margin: 7px;
   transition: all 150ms ease-in-out;
 }
-#sidenavbar-container div div div ul .rs-nav-item {
+#sidenavbar-container .rs-sidenav .rs-sidenav-body .rs-nav ul .rs-nav-item {
   height: 50px;
 }
-#sidenavbar-container div div div ul .rs-nav-item > a > div:hover {
+#sidenavbar-container .rs-sidenav .rs-sidenav-body .rs-nav ul .rs-nav-item > a > div:hover {
   background-color: #0b87ed;
 }
-#sidenavbar-container div div div ul .rs-nav-item a {
+#sidenavbar-container .rs-sidenav .rs-sidenav-body .rs-nav ul .rs-nav-item a {
   text-decoration: none;
   color: #dadada;
   transition: all 50ms ease-in-out;
 }
-#sidenavbar-container div div div ul .rs-nav-item a:hover {
+#sidenavbar-container .rs-sidenav .rs-sidenav-body .rs-nav ul .rs-nav-item a:hover {
   color: #1675e0;
 }
-#sidenavbar-container div div div ul .rs-nav-item a div {
+#sidenavbar-container .rs-sidenav .rs-sidenav-body .rs-nav ul .rs-nav-item a div {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   white-space: nowrap;
+  height: 100%;
 }
-#sidenavbar-container div div div ul .rs-nav-item a div i {
+#sidenavbar-container .rs-sidenav .rs-sidenav-body .rs-nav ul .rs-nav-item a div i {
   top: auto;
 }
 

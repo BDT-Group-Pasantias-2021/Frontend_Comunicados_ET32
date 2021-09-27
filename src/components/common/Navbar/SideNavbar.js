@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { Toggle, Sidenav, Nav, Dropdown, Icon } from "rsuite";
-import { Link } from "react-router-dom";
+/* eslint-disable no-unused-vars */
+import React, { useContext, useEffect, useState } from 'react';
+import { Toggle, Sidenav, Nav, Dropdown, Icon } from 'rsuite';
+import { Link } from 'react-router-dom';
 
 // Components
 
+// Hooks
+import { NavbarContext } from '../../../hooks/useContext/NavbarContext';
+
 // Styles
-import "../../../css/side_navbar.css";
+import '../../../css/side_navbar.css';
 
 export default function Sidenavbar() {
 	const [expanded, setExpanded] = useState(true);
 	const [activeKey, setActiveKey] = useState(1);
 	const [navWidth, setNavWidth] = useState(250);
+
+	/* const { activeSidebar, setActiveSidebar } = useContext(NavbarContext);
+	console.log(activeSidebar); */
 
 	const handleToggle = () => {
 		setExpanded(!expanded);
@@ -39,8 +46,8 @@ export default function Sidenavbar() {
 	const NavLink = (props) => <Nav.Item componentClass={MyLink} {...props} />;
 
 	return (
-		<nav id="sidenavbar-container" style={{ width: navWidth, height: "100%" }}>
-			<Sidenav expanded={expanded} defaultOpenKeys={["3", "4"]} activeKey={activeKey} onSelect={handleSelect}>
+		<nav id="sidenavbar-container" style={{ width: navWidth, height: '100%' }}>
+			<Sidenav expanded={expanded} defaultOpenKeys={['3', '4']} activeKey={activeKey} onSelect={handleSelect}>
 				<Sidenav.Body>
 					<Nav>
 						<Toggle onChange={handleToggle} checked={expanded} />

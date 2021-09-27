@@ -6,6 +6,7 @@
 .pnp.js
 
 # testing
+/Backend_Comunicados_ET32
 /coverage
 
 # production
