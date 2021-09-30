@@ -19,7 +19,6 @@ import Home from './components/views/Inicio';
 export default function App() {
 	const [activeSidebar, setActiveSidebar] = useState(false);
 	const [showNavbar, setShowNavbar] = useState(false);
-
 	return (
 		<Router basename="/Frontend_Comunicados_ET32">
 			<NavbarContext.Provider
@@ -29,13 +28,13 @@ export default function App() {
 				}}
 			>
 				{showNavbar && <TopNavbar />}
-				{showNavbar && <SideNavbar />}
+				{activeSidebar && <SideNavbar />}
 			</NavbarContext.Provider>
 			<Switch>
-				<Route path="/home">
+				<Route path="/">
 					<Home showNavbar={() => setShowNavbar(true)} />
 				</Route>
-				<Route path="/" exact>
+				<Route path="/login" exact>
 					<Login hideNavbar={() => setShowNavbar(false)} />
 				</Route>
 			</Switch>

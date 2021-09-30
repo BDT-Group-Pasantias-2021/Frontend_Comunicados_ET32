@@ -12,7 +12,7 @@ export default function Login({ hideNavbar }) {
 	let history = useHistory();
 
 	//* Ocultar barras de navegación
-	hideNavbar(false);
+	hideNavbar(true);
 
 	useEffect(() => {
 		const token = localStorage.getItem('user-token');

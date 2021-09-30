@@ -1,16 +1,19 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SideNavbar from './SideNavbar.js';
 // Components
 import ProfilePhoto from '../../../assets/svgs/unnamed.jpg';
+import { NavbarContext } from '../../../hooks/useContext/NavbarContext';
 
 // Styles
 import '../../../css/top_navbar.css';
 
 export default function TopNavbar() {
+	const {activeSidebar , setActiveSidebar} =  useContext(NavbarContext);
 	// Sidebar Code
 	const [sidebar, setSidebar] = useState(false);
+	
 
 	useEffect(() => {
 		const searchColor = document.getElementById('searchBar');
@@ -34,7 +37,7 @@ export default function TopNavbar() {
 								id="Capa_1"
 								viewBox="0 0 384.97 384.97"
 								style={{ transform: 'rotateY(180deg)' }}
-								/* onClick={() => showSidebar()} */
+								onClick={() => setActiveSidebar(!activeSidebar)}
 							>
 								<g id="Menu_1_">
 									<path
