@@ -146,9 +146,6 @@ export default function Inicio({ showNavbar }) {
 	const [activeModal, setActiveModal] = useState(null);
 	const [editModal, setEditModal] = useState(false);
 
-	//* Mostrar barras de navegación
-	showNavbar(true);
-
 	const deleteComunicado = (id, selectedFecha) => {
 		const confirmState = window.confirm('¿Estás seguro de eliminar este comunicado?');
 		if (confirmState) {
@@ -181,11 +178,14 @@ export default function Inicio({ showNavbar }) {
 	};
 
 	useEffect(() => {
+		//* Mostrar barras de navegación
+		showNavbar(true);
+
 		if (!comunicadosAñadidos) {
 			setFechaComunicados(ComunicadosJSON);
 			setComunicadosAñadidos(true);
 		}
-	}, [comunicadosAñadidos, fechaComunicados]);
+	}, [comunicadosAñadidos, fechaComunicados, showNavbar]);
 
 	return (
 		<ComunicadoCardContext.Provider

@@ -11,10 +11,10 @@ export default function Login({ hideNavbar }) {
 	const [loadContent, setLoadContent] = useState(false);
 	let history = useHistory();
 
-	//* Ocultar barras de navegación
-	hideNavbar(true);
-
 	useEffect(() => {
+		//* Ocultar barras de navegación
+		hideNavbar(false);
+
 		const token = localStorage.getItem('user-token');
 		if (token) {
 			alert('Borrá el token de sesión');
@@ -22,7 +22,7 @@ export default function Login({ hideNavbar }) {
 		} else {
 			setLoadContent(true);
 		}
-	}, [history]);
+	}, [hideNavbar, history]);
 
 	return (
 		loadContent && (

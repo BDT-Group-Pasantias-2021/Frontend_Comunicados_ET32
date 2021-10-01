@@ -108,6 +108,8 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 };
 
 const RegisterForm = ({ changeForm, showPassword, seePassword }) => {
+	const history = useHistory();
+
 	return (
 		<div className="form-content">
 			<h2 className="form-title">Registrarse</h2>
@@ -167,6 +169,12 @@ const RegisterForm = ({ changeForm, showPassword, seePassword }) => {
 					setSubmitting(false);
 					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/register', values).then((res) => {
 						console.log(res.data);
+						if (res.data.status === 'success') {
+							res.data.email = values.email;
+							localStorage.setItem('user-token', JSON.stringify(res.data.sessionID, res.data.email));
+							localStorage.setItem('user-email', JSON.stringify(res.data.email));
+							history.push('/home');
+						}
 					});
 				}}
 			>
