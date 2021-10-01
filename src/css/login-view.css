@@ -194,6 +194,10 @@
   background-color: #f0f0f0;
   border: 1px solid #44abff;
 }
+.login-view .background-container .form-section .form-content .login-form .session-validate-message {
+  font-size: 13px;
+  color: #ff4242;
+}
 .login-view .background-container .form-section .container-btn {
   display: flex;
   flex-direction: column;

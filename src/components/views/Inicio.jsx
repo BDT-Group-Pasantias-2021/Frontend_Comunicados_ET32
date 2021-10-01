@@ -6,10 +6,43 @@ import { ComunicadoCardContext } from '../../hooks/useContext/ComunicadoCardCont
 
 // Components
 import FechaComunicado from '../common/InicioView/FechaComunicado';
+import ComunicadoModal from '../common/InicioView/ComunicadoModal';
+// eslint-disable-next-line no-unused-vars
+import Axios from 'axios';
 
 const ComunicadosJSON = [
 	{
-		fecha: '10-08-2021',
+		fecha: '2021-09-18',
+		comunicados: [
+			{
+				id_comunicaciones: 6,
+				emisor: 'Gustavo Garcia',
+				titulo: 'Asistencias normales',
+				descripcion:
+					'Estimadas Familias: \nA partir del 5/7 los estudiantes concurrirán de acuerdo al cronograma de burbujas establecido, respetando los protocolos vigentes.\nDurante esas dos semanas intensificarán los aprendizajes 2020 para poder tener aprobado dicho año\nEquipo de conducción\n\nSaludos, Gustavo García',
+				leido: false,
+				categorias: [
+					{
+						id_categoria: 1,
+						nombre: 'General',
+						color: '#121212',
+					},
+					{
+						id_categoria: 2,
+						nombre: 'Académico',
+						color: '#44abff',
+					},
+					{
+						id_categoria: 3,
+						nombre: 'Urgente',
+						color: '#ff4242',
+					},
+				],
+			},
+		],
+	},
+	{
+		fecha: '2021-10-08',
 		comunicados: [
 			{
 				id_comunicaciones: 5,
@@ -22,7 +55,7 @@ const ComunicadosJSON = [
 					{
 						id_categoria: 1,
 						nombre: 'General',
-						color: '#a8a8a8',
+						color: '#121212',
 					},
 					{
 						id_categoria: 3,
@@ -42,7 +75,7 @@ const ComunicadosJSON = [
 				titulo: 'Comunicaciones',
 				descripcion:
 					'Familias\n\nA partir del 20/9 iniciaremos la semana 1 nuevamente para los trayectos artísticos.\nCon relación al bachiller les comunicamos que desde el 20/9 la presencialidad será completa de lunes a viernes para el TM y el TT, las burbujas pasarán a ser únicas y se utilizarán aulas de movimiento para evitar los espacios reducidos. Algunos grupos transitarán jornada completa en ciertas semanas pudiendo utilizar los espacios abiertos de la escuela para almorzar. Recordamos que seguimos transitando una pandemia y que los protocolos siguen vigentes a la fecha.<br>Saludos cordiales\\\nEquipo de conducción',
-				leido: false,
+				leido: true,
 				categorias: [
 					{
 						id_categoria: 2,
@@ -66,7 +99,7 @@ const ComunicadosJSON = [
 					{
 						id_categoria: 1,
 						nombre: 'General',
-						color: '#a8a8a8',
+						color: '#121212',
 					},
 				],
 			},
@@ -85,7 +118,7 @@ const ComunicadosJSON = [
 					{
 						id_categoria: 1,
 						nombre: 'General',
-						color: '#a8a8a8',
+						color: '#121212',
 					},
 				],
 			},
@@ -107,54 +140,80 @@ const ComunicadosJSON = [
 	},
 ];
 
-export default function Inicio() {
+export default function Inicio({ showNavbar }) {
 	const [fechaComunicados, setFechaComunicados] = useState([]);
 	const [comunicadosAñadidos, setComunicadosAñadidos] = useState(false);
-	//const [activeOverlay, setActiveOverlay] = useState(false);
+	const [activeModal, setActiveModal] = useState(null);
+	const [editModal, setEditModal] = useState(false);
+
+	const deleteComunicado = (id, selectedFecha) => {
+		const confirmState = window.confirm('¿Estás seguro de eliminar este comunicado?');
+		if (confirmState) {
+			const newFechaComunicados = fechaComunicados.map((element) => {
+				if (element.fecha === selectedFecha) {
+					const comunicados = element.comunicados.filter((comunicado) => comunicado.id_comunicaciones !== id);
+					return { fecha: element.fecha, comunicados };
+				}
+				return element;
+			});
+			setFechaComunicados(newFechaComunicados);
+		}
+	};
+
+	// function to mark firma as true in a comunicado
+	const signComunicado = (id, selectedFecha) => {
+		const newFechaComunicados = fechaComunicados.map((element) => {
+			if (element.fecha === selectedFecha) {
+				const comunicados = element.comunicados.map((comunicado) => {
+					if (comunicado.id_comunicaciones === id) {
+						return { ...comunicado, leido: true };
+					}
+					return comunicado;
+				});
+				return { fecha: element.fecha, comunicados };
+			}
+			return element;
+		});
+		setFechaComunicados(newFechaComunicados);
+	};
 
 	useEffect(() => {
+		//* Mostrar barras de navegación
+		showNavbar(true);
+
 		if (!comunicadosAñadidos) {
 			setFechaComunicados(ComunicadosJSON);
 			setComunicadosAñadidos(true);
 		}
-	}, [comunicadosAñadidos, fechaComunicados]);
+	}, [comunicadosAñadidos, fechaComunicados, showNavbar]);
 
 	return (
 		<ComunicadoCardContext.Provider
-			value={
-				{
-					/* activeOverlay, setActiveOverlay */
-				}
-			}
+			value={{
+				activeModal,
+				setActiveModal,
+				editModal,
+				setEditModal,
+				deleteComunicado,
+				signComunicado,
+			}}
 		>
 			<main className="father-container-view">
+				{activeModal && <ComunicadoModal editarModal={editModal} />}
 				<div className="container" style={{ paddingTop: '35px' }}>
 					<div className="row">
-						{/* <div className="date-comunicados-container col-md-12">
-							<h4 className="date-comunicados-header">Hoy</h4>
-							<div className="date-comunicados-cards">
-								<div className="comunicado-card-container" id={`comunicado-card-container`}>
-									<div className="comunicado-card-header">
-										<div className="comunicado-card-title">a</div>
-										<div className="comunicado-card-functions">
-											<svg className="functions-icon" id="Capa_1" viewBox="0 0 515.555 515.555">
-												<path d="m496.679 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0" />
-												<path d="m303.347 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0" />
-												<path d="m110.014 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0" />
-											</svg>
-										</div>
-									</div>
-									<p className="comunicado-card-body">a</p>
-								</div>
-							</div>
-						</div> */}
-						{fechaComunicados.map((element) => (
-							<FechaComunicado
-								key={element.fecha}
-								fecha={element.fecha}
-								comunicados={element.comunicados}
-							/>
-						))}
+						{/* eslint-disable-next-line array-callback-return */}
+						{fechaComunicados.map((element) => {
+							if (element.fecha !== undefined && element.comunicados.length > 0) {
+								return (
+									<FechaComunicado
+										key={element.fecha}
+										fecha={element.fecha}
+										comunicados={element.comunicados}
+									/>
+								);
+							}
+						})}
 					</div>
 				</div>
 			</main>
