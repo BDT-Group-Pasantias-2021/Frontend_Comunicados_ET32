@@ -297,7 +297,7 @@ const ChangePassword = ({ changeForm }) => {
 				}}
 				onSubmit={(values, { setSubmitting }) => {
 					setSubmitting(false);
-					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/changePassword', values).then((res) => {
+					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/recoverPassword', values).then((res) => {
 						console.log(res.data);
 					});
 				}}
