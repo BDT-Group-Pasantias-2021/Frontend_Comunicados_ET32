@@ -136,6 +136,9 @@
   font-size: 13px;
   color: #ff4242;
 }
+.login-view .background-container .form-section .form-content .login-form .forgot-password-inputs-container .fp-instructions-text {
+  letter-spacing: 0.4px;
+}
 .login-view .background-container .form-section .form-content .login-form .form-input-container {
   padding: 0;
 }

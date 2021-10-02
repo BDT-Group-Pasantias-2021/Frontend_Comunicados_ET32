@@ -31,7 +31,7 @@ export default function FechaComunicado({ fecha, comunicados }) {
 	const renderDate = fecha === currentDate() ? 'Hoy' : fecha === currentDate(1) ? 'Ayer' : getFormatedDate();
 
 	return (
-		<div className="date-comunicados-container col-11 col-sm-12">
+		<div className="date-comunicados-container col-12 col-sm-12 col-md-10">
 			<h4 className="date-comunicados-header">{renderDate}</h4>
 			<div className="date-comunicados-cards">
 				{comunicados.map((comunicado, index) => (

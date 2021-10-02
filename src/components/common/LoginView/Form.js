@@ -300,7 +300,7 @@ const RegisterForm = ({ changeForm, showPassword, seePassword }) => {
 	);
 };
 
-const ChangePassword = ({ changeForm }) => {
+const RecoverPassword = ({ changeForm }) => {
 	return (
 		<div className="form-content">
 			<h2 className="form-title">Recuperar Contraseña</h2>
@@ -321,9 +321,11 @@ const ChangePassword = ({ changeForm }) => {
 				}}
 				onSubmit={(values, { setSubmitting }) => {
 					setSubmitting(false);
-					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/recoverPassword', values).then((res) => {
-						console.log(res.data);
-					});
+					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/recoverPassword', values).then(
+						(res) => {
+							console.log(res.data);
+						}
+					);
 				}}
 			>
 				<Form
@@ -336,6 +338,11 @@ const ChangePassword = ({ changeForm }) => {
 					}}
 				>
 					<div className="forgot-password-inputs-container" style={{ marginTop: '20px', padding: '0' }}>
+						<p className="fp-instructions-text">
+							Por favor introduce el documento y la dirección de correo electrónico asociados a tu cuenta.
+							<br />
+							Te enviaremos un correo electrónico con instrucciones.
+						</p>
 						<div className="form-input-container">
 							<Field
 								className="login-form-input"
@@ -364,7 +371,7 @@ const ChangePassword = ({ changeForm }) => {
 			<div className="login-form-divisor" style={{ marginBottom: '0px' }}>
 				<div className="divisor-text">
 					<p className="form-register-text">
-						¿Pudiste recordar la contraseña? <span onClick={() => changeForm('Login')}>Iniciá Sesión</span>
+						¿Recordaste tú contraseña? <span onClick={() => changeForm('Login')}>Iniciá Sesión</span>
 					</p>
 				</div>
 			</div>
@@ -391,7 +398,7 @@ export default function Formulario() {
 			) : formulario === 'Register' ? (
 				<RegisterForm changeForm={changeForm} showPassword={showPassword} seePassword={seePassword} />
 			) : (
-				<ChangePassword changeForm={changeForm} />
+				<RecoverPassword changeForm={changeForm} />
 			)}
 		</div>
 	);

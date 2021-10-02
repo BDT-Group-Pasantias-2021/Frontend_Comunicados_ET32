@@ -9,72 +9,9 @@ import CategoryTag from './CategoryTag';
 // Components
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 
-const ChangePassword = ({ changeForm }) => {
-	return (
-		<div className="form-content">
-			<Formik
-				initialValues={{
-					documento: '',
-					email: '',
-				}}
-				validate={(values) => {
-					const errors = {};
-
-					//? Validación de correo electrónico.
-					if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-						errors.email = 'Correo electrónico inválido';
-					}
-
-					return errors;
-				}}
-				onSubmit={(values, { setSubmitting }) => {
-					setSubmitting(false);
-					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/changePassword', values).then((res) => {
-						console.log(res.data);
-					});
-				}}
-			>
-				<Form
-					className="login-form row"
-					style={{
-						height: '900px',
-						display: 'flex',
-						flexDirection: 'column',
-						justifyContent: 'space-between',
-					}}
-				>
-					<div className="forgot-password-inputs-container" style={{ marginTop: '20px', padding: '0' }}>
-						<div className="form-input-container">
-							<Field
-								className="login-form-input"
-								type="text"
-								name="documento"
-								placeholder="Documento"
-								required
-							/>
-						</div>
-						<div className="form-input-container">
-							<Field
-								className="login-form-input"
-								type="email"
-								name="email"
-								placeholder="Correo Electronico"
-								required
-							/>
-							<ErrorMessage className="input-error" name="email" component="div" />
-						</div>
-					</div>
-					<button type="submit" className="enter-btn" style={{ marginBottom: '20px' }}>
-						<span className="enter-span">Continuar</span>
-					</button>
-				</Form>
-			</Formik>
-		</div>
-	);
-};
-
 export default function ComunicadoModal({ editarModal }) {
-	const { activeModal, setActiveModal, setEditModal, signComunicado } = useContext(ComunicadoCardContext);
+	const { activeModal, setActiveModal, setEditModal, signComunicado, updateComunicado } =
+		useContext(ComunicadoCardContext);
 
 	const handleSignComunicado = (id, fecha) => {
 		window.navigator.vibrate([50]);
@@ -86,6 +23,23 @@ export default function ComunicadoModal({ editarModal }) {
 			activeModal.leido = true;
 		}, 5);
 		signComunicado(id, fecha);
+	};
+
+	const handleUpdateComunicado = (id, fecha, comunicado) => {
+		window.navigator.vibrate([50]);
+		const signBtn = document.getElementById('modal-save-button');
+		signBtn.innerHTML = 'Guardado satisfactoriamente ';
+		signBtn.classList.add('modal-save-button-active');
+		updateComunicado(id, fecha, comunicado);
+		setTimeout(() => {
+			signBtn.innerHTML = 'Guardar';
+			signBtn.classList.remove('modal-save-button-active');
+		}, 2500);
+	};
+
+	const sendForm = () => {
+		let mainForm = document.getElementById('btn-submit-form');
+		mainForm.click();
 	};
 
 	useEffect(() => {
@@ -143,23 +97,67 @@ export default function ComunicadoModal({ editarModal }) {
 						</div>
 						<div className="modal-content">
 							{editarModal ? (
-								<textarea
-									className="modal-title modal-title-edit"
-									defaultValue={activeModal.titulo}
-								></textarea>
+								<>
+									<Formik
+										initialValues={{
+											titulo: activeModal.titulo,
+											descripcion: activeModal.descripcion,
+										}}
+										validate={(values) => {
+											const errors = {};
+											/* //? Validación de correo electrónico.
+											if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+												errors.email = 'Correo electrónico inválido';
+											} */
+											return errors;
+										}}
+										onSubmit={(values, { setSubmitting }) => {
+											handleUpdateComunicado(
+												activeModal.id_comunicaciones,
+												activeModal.fecha,
+												values
+											);
+											/* Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/login', values); */
+										}}
+									>
+										<Form className="modal-form-data-container">
+											<div className="form-input-container">
+												<Field
+													component="textarea"
+													className="modal-title modal-title-edit"
+													name="titulo"
+												/>
+
+												<ErrorMessage className="input-error" name="titulo" component="div" />
+											</div>
+											<div className="modal-text-edit">
+												<Field
+													component="textarea"
+													className="modal-text-edit"
+													name="descripcion"
+												/>
+
+												<ErrorMessage
+													className="input-error"
+													name="descripcion"
+													component="div"
+												/>
+											</div>
+											<button type="submit" className="enter-btn" id="btn-submit-form"></button>
+										</Form>
+									</Formik>
+								</>
 							) : (
-								<h4 className="modal-title">
-									<b>{activeModal.titulo}</b>
-								</h4>
-							)}
-							{editarModal ? (
-								<textarea className="modal-text-edit" defaultValue={activeModal.descripcion}></textarea>
-							) : (
-								<textarea
-									className="modal-text"
-									defaultValue={activeModal.descripcion}
-									disabled
-								></textarea>
+								<>
+									<h4 className="modal-title">
+										<b>{activeModal.titulo}</b>
+									</h4>
+									<textarea
+										className="modal-text"
+										defaultValue={activeModal.descripcion}
+										disabled
+									></textarea>
+								</>
 							)}
 						</div>
 					</div>
@@ -213,7 +211,9 @@ export default function ComunicadoModal({ editarModal }) {
 						</div>
 						<div className="modal-buttons">
 							{editarModal ? (
-								<div className="modal-save-btn">Guardar</div>
+								<div className="modal-save-btn" id="modal-save-button" onClick={sendForm}>
+									Guardar
+								</div>
 							) : (
 								activeModal.leido || (
 									<div

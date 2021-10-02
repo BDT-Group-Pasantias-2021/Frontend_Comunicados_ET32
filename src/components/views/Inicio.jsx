@@ -160,7 +160,22 @@ export default function Inicio({ showNavbar }) {
 		}
 	};
 
-	// function to mark firma as true in a comunicado
+	const updateComunicado = (id, selectedFecha, comunicado) => {
+		const newFechaComunicados = fechaComunicados.map((element) => {
+			if (element.fecha === selectedFecha) {
+				const comunicados = element.comunicados.map((comunicadoElement) => {
+					if (comunicadoElement.id_comunicaciones === id) {
+						return { ...comunicadoElement, titulo: comunicado.titulo, descripcion: comunicado.descripcion };
+					}
+					return comunicadoElement;
+				});
+				return { fecha: element.fecha, comunicados };
+			}
+			return element;
+		});
+		setFechaComunicados(newFechaComunicados);
+	};
+
 	const signComunicado = (id, selectedFecha) => {
 		const newFechaComunicados = fechaComunicados.map((element) => {
 			if (element.fecha === selectedFecha) {
@@ -194,6 +209,7 @@ export default function Inicio({ showNavbar }) {
 				setActiveModal,
 				editModal,
 				setEditModal,
+				updateComunicado,
 				deleteComunicado,
 				signComunicado,
 			}}

@@ -31,10 +31,10 @@ export default function App() {
 				{activeSidebar && <SideNavbar />}
 			</NavbarContext.Provider>
 			<Switch>
-				<Route path="/">
+				<Route path="/home">
 					<Home showNavbar={() => setShowNavbar(true)} />
 				</Route>
-				<Route path="/login" exact>
+				<Route path="/" exact>
 					<Login hideNavbar={() => setShowNavbar(false)} />
 				</Route>
 			</Switch>

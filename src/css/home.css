@@ -132,6 +132,13 @@
     max-height: 470px;
   }
 }
+.father-container-view .modal-comunicado .modal-container .modal-top-section .modal-content .modal-form-data-container {
+  width: 100%;
+  height: 100%;
+}
+.father-container-view .modal-comunicado .modal-container .modal-top-section .modal-content .modal-form-data-container .enter-btn {
+  display: none;
+}
 .father-container-view .modal-comunicado .modal-container .modal-top-section .modal-content .modal-title-edit {
   height: 50px;
   resize: none;
@@ -147,7 +154,7 @@
 }
 .father-container-view .modal-comunicado .modal-container .modal-top-section .modal-content .modal-text-edit {
   width: 100%;
-  height: 100%;
+  height: 85%;
   resize: none;
   font-size: 14px !important;
 }
@@ -258,7 +265,7 @@
   border-radius: 7px;
   text-align: center;
   cursor: pointer;
-  transition: all 100ms ease-in-out;
+  transition: all 300ms ease-in-out;
 }
 .father-container-view .modal-comunicado .modal-container .modal-bottom-section .modal-buttons .modal-save-btn {
   color: #44abff;
@@ -277,6 +284,36 @@
 @media screen and (min-width: 768px) and (max-width: 836px) {
   .father-container-view .modal-comunicado .modal-container .modal-bottom-section .modal-buttons .modal-save-btn {
     margin: 5px 15px 0px 0px;
+  }
+}
+.father-container-view .modal-comunicado .modal-container .modal-bottom-section .modal-buttons .modal-save-button-active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 36px;
+  padding: 0;
+  color: #fff;
+  background-color: #00b191;
+  border: 1px solid #00b191 !important;
+}
+.father-container-view .modal-comunicado .modal-container .modal-bottom-section .modal-buttons .modal-save-button-active:hover {
+  border: 1px solid #05c29f !important;
+  background-color: #05c29f !important;
+}
+.father-container-view .modal-comunicado .modal-container .modal-bottom-section .modal-buttons .modal-sign-button {
+  color: #d1a000;
+  border: 1px solid #fcd125;
+  transition: all 100ms ease-in-out;
+}
+.father-container-view .modal-comunicado .modal-container .modal-bottom-section .modal-buttons .modal-sign-button:hover {
+  color: #fff;
+  border: 1px solid #d1a000;
+  background-color: #d1a000;
+}
+@media screen and (min-width: 768px) and (max-width: 836px) {
+  .father-container-view .modal-comunicado .modal-container .modal-bottom-section .modal-buttons .modal-sign-button {
+    margin-top: 5px;
   }
 }
 .father-container-view .modal-comunicado .modal-container .modal-bottom-section .modal-buttons .modal-sign-button-active {
@@ -306,21 +343,6 @@
   height: 15px;
   fill: #fff;
 }
-.father-container-view .modal-comunicado .modal-container .modal-bottom-section .modal-buttons .modal-sign-button {
-  color: #d1a000;
-  border: 1px solid #fcd125;
-  transition: all 100ms ease-in-out;
-}
-.father-container-view .modal-comunicado .modal-container .modal-bottom-section .modal-buttons .modal-sign-button:hover {
-  color: #fff;
-  border: 1px solid #d1a000;
-  background-color: #d1a000;
-}
-@media screen and (min-width: 768px) and (max-width: 836px) {
-  .father-container-view .modal-comunicado .modal-container .modal-bottom-section .modal-buttons .modal-sign-button {
-    margin-top: 5px;
-  }
-}
 
 /* <====================================================================>
    <=============================== CARD ===============================>
@@ -328,11 +350,9 @@
 .date-comunicados-container {
   height: fit-content;
   margin: 20px 0px;
-}
-@media screen and (min-width: 768px) {
-  .date-comunicados-container {
-    width: 100%;
-  }
+  /* @media screen and (min-width: 768px) {
+  	width: 100%;
+  } */
 }
 .date-comunicados-container .date-comunicados-header {
   color: #323232;
