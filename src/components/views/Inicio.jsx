@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react';
 
 // Styles
 import '../../css/home.css';
+
+// Hooks
 import { ComunicadoCardContext } from '../../hooks/useContext/ComunicadoCardContext';
 
 // Components
-import FechaComunicado from '../common/InicioView/FechaComunicado';
+import SortAndFilter from '../common/InicioView/SortAndFilter';
 import ComunicadoModal from '../common/InicioView/ComunicadoModal';
+import FechaComunicado from '../common/InicioView/FechaComunicado';
+
 // eslint-disable-next-line no-unused-vars
 import Axios from 'axios';
 
@@ -218,6 +222,7 @@ export default function Inicio({ showNavbar }) {
 				{activeModal && <ComunicadoModal editarModal={editModal} />}
 				<div className="container" style={{ paddingTop: '35px' }}>
 					<div className="row">
+						<SortAndFilter />
 						{/* eslint-disable-next-line array-callback-return */}
 						{fechaComunicados.map((element) => {
 							if (element.fecha !== undefined && element.comunicados.length > 0) {

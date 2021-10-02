@@ -1,12 +1,15 @@
+.filter-bar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
 /* SCSS DIRECTORY
 	1. = MODAL
-	2. = MODAL TAGS
-	3. = CARD
-	4. = FUNCTIONS BUTTON
-	5. = CARD TAGS
-	6. = SEEN MARKER
-	7. = FUNCTIONS MENU
-*/
+	2. = MODAL TAGS */
 /* <====================================================================>
    <============================== MODAL ===============================>
    <====================================================================> */
@@ -344,15 +347,18 @@
   fill: #fff;
 }
 
+/* 	SCSS DIRECTORY
+    1. = CARD
+    2. = FUNCTIONS BUTTON
+    3. = CARD TAGS
+    4. = SEEN MARKER
+    5. = FUNCTIONS MENU */
 /* <====================================================================>
    <=============================== CARD ===============================>
    <====================================================================> */
 .date-comunicados-container {
   height: fit-content;
   margin: 20px 0px;
-  /* @media screen and (min-width: 768px) {
-  	width: 100%;
-  } */
 }
 .date-comunicados-container .date-comunicados-header {
   color: #323232;

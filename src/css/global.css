@@ -11140,6 +11140,7 @@ p {
   height: calc(100% - 45px);
   background-color: #f5f9fc;
   overflow-y: scroll;
+  padding-left: 56px;
 }
 
 .standard-icon-container {
