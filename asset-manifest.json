@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/Frontend_Comunicados_ET32/static/css/main.c4518fbb.chunk.css",
-    "main.js": "/Frontend_Comunicados_ET32/static/js/main.879b65b6.chunk.js",
-    "main.js.map": "/Frontend_Comunicados_ET32/static/js/main.879b65b6.chunk.js.map",
+    "main.css": "/Frontend_Comunicados_ET32/static/css/main.d713369c.chunk.css",
+    "main.js": "/Frontend_Comunicados_ET32/static/js/main.fe5911d9.chunk.js",
+    "main.js.map": "/Frontend_Comunicados_ET32/static/js/main.fe5911d9.chunk.js.map",
     "runtime-main.js": "/Frontend_Comunicados_ET32/static/js/runtime-main.182896b5.js",
     "runtime-main.js.map": "/Frontend_Comunicados_ET32/static/js/runtime-main.182896b5.js.map",
     "static/css/2.7785af68.chunk.css": "/Frontend_Comunicados_ET32/static/css/2.7785af68.chunk.css",
-    "static/js/2.36acddd7.chunk.js": "/Frontend_Comunicados_ET32/static/js/2.36acddd7.chunk.js",
-    "static/js/2.36acddd7.chunk.js.map": "/Frontend_Comunicados_ET32/static/js/2.36acddd7.chunk.js.map",
+    "static/js/2.060c761a.chunk.js": "/Frontend_Comunicados_ET32/static/js/2.060c761a.chunk.js",
+    "static/js/2.060c761a.chunk.js.map": "/Frontend_Comunicados_ET32/static/js/2.060c761a.chunk.js.map",
     "index.html": "/Frontend_Comunicados_ET32/index.html",
     "service-worker.js": "/Frontend_Comunicados_ET32/service-worker.js",
     "service-worker.js.map": "/Frontend_Comunicados_ET32/service-worker.js.map",
     "static/css/2.7785af68.chunk.css.map": "/Frontend_Comunicados_ET32/static/css/2.7785af68.chunk.css.map",
-    "static/css/main.c4518fbb.chunk.css.map": "/Frontend_Comunicados_ET32/static/css/main.c4518fbb.chunk.css.map",
-    "static/js/2.36acddd7.chunk.js.LICENSE.txt": "/Frontend_Comunicados_ET32/static/js/2.36acddd7.chunk.js.LICENSE.txt",
+    "static/css/main.d713369c.chunk.css.map": "/Frontend_Comunicados_ET32/static/css/main.d713369c.chunk.css.map",
+    "static/js/2.060c761a.chunk.js.LICENSE.txt": "/Frontend_Comunicados_ET32/static/js/2.060c761a.chunk.js.LICENSE.txt",
     "static/media/logo-escolar.161c9720.png": "/Frontend_Comunicados_ET32/static/media/logo-escolar.161c9720.png",
     "static/media/login-view.css": "/Frontend_Comunicados_ET32/static/media/things-background.b5aee572.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.182896b5.js",
     "static/css/2.7785af68.chunk.css",
-    "static/js/2.36acddd7.chunk.js",
-    "static/css/main.c4518fbb.chunk.css",
-    "static/js/main.879b65b6.chunk.js"
+    "static/js/2.060c761a.chunk.js",
+    "static/css/main.d713369c.chunk.css",
+    "static/js/main.fe5911d9.chunk.js"
   ]
 }
