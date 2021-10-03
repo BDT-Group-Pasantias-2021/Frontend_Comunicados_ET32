@@ -211,6 +211,106 @@ export default function ComunicadoModal({ modalAction }) {
 		);
 	};
 
+	const InsertModalContent = () => {
+		return (
+			<div className="modal-container">
+				<div className="modal-top-section">
+					<div className="modal-tags-close">
+						<div className="modal-etiquetas">[static]</div>
+						<div className="standard-icon-container" onClick={() => setActiveModal(null)}>
+							<svg className="standard-icon" viewBox="0 0 512.001 512.001">
+								<g>
+									<g>
+										<path
+											d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717
+											L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859
+											c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287
+											l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285
+											L284.286,256.002z"
+										/>
+									</g>
+								</g>
+							</svg>
+						</div>
+					</div>
+					<div className="modal-from-who">
+						Comunicado por: <b>[static]</b>
+					</div>
+					<div className="modal-content">
+						<Formik
+							initialValues={{
+								emisor: '[Static]',
+								titulo: '',
+								descripcion: '',
+								categorias: [],
+							}}
+							validate={(values) => {
+								const errors = {};
+
+								return errors;
+							}}
+							onSubmit={(values) => {
+								alert(JSON.stringify(values, null, 2));
+								/* handleUpdateComunicado(activeModal.id_comunicaciones, activeModal.fecha, values); */
+								/* Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/login', values); */
+							}}
+						>
+							<Form className="modal-form-data-container">
+								<div className="form-input-container">
+									<Field
+										component="textarea"
+										className="modal-title modal-title-edit"
+										name="titulo"
+										placeholder="Escriba el título acá"
+										required
+									/>
+									<ErrorMessage className="input-error" name="titulo" component="div" />
+								</div>
+								<div className="modal-text-edit">
+									<Field
+										component="textarea"
+										className="modal-text-edit"
+										name="descripcion"
+										placeholder="Escriba el contenido del comunicado acá"
+										required
+									/>
+									<ErrorMessage className="input-error" name="descripcion" component="div" />
+								</div>
+								<button type="submit" className="enter-btn" id="btn-submit-form"></button>
+							</Form>
+						</Formik>
+					</div>
+				</div>
+				<div className="modal-bottom-section">
+					<div className="modal-comuncado-info">
+						<div className="standard-icon-container standard-icon-container-margin">
+							<svg className="standard-icon standard-icon-margin" viewBox="0 0 512 512">
+								<g>
+									<path d="m144 249h-32c-8.284 0-15 6.716-15 15s6.716 15 15 15h32c8.284 0 15-6.716 15-15s-6.716-15-15-15z" />
+									<path d="m144 313h-32c-8.284 0-15 6.716-15 15s6.716 15 15 15h32c8.284 0 15-6.716 15-15s-6.716-15-15-15z" />
+									<path d="m144 377h-32c-8.284 0-15 6.716-15 15s6.716 15 15 15h32c8.284 0 15-6.716 15-15s-6.716-15-15-15z" />
+									<path d="m272 249h-32c-8.284 0-15 6.716-15 15s6.716 15 15 15h32c8.284 0 15-6.716 15-15s-6.716-15-15-15z" />
+									<path d="m272 313h-32c-8.284 0-15 6.716-15 15s6.716 15 15 15h32c8.284 0 15-6.716 15-15s-6.716-15-15-15z" />
+									<path d="m272 377h-32c-8.284 0-15 6.716-15 15s6.716 15 15 15h32c8.284 0 15-6.716 15-15s-6.716-15-15-15z" />
+									<path d="m400 249h-32c-8.284 0-15 6.716-15 15s6.716 15 15 15h32c8.284 0 15-6.716 15-15s-6.716-15-15-15z" />
+									<path d="m400 313h-32c-8.284 0-15 6.716-15 15s6.716 15 15 15h32c8.284 0 15-6.716 15-15s-6.716-15-15-15z" />
+									<path d="m400 377h-32c-8.284 0-15 6.716-15 15s6.716 15 15 15h32c8.284 0 15-6.716 15-15s-6.716-15-15-15z" />
+									<path d="m467 65h-36v-25c0-8.284-6.716-15-15-15s-15 6.716-15 15v25h-130v-25c0-8.284-6.716-15-15-15s-15 6.716-15 15v25h-130v-25c0-8.284-6.716-15-15-15s-15 6.716-15 15v25h-36c-24.813 0-45 20.187-45 45v332c0 24.813 20.187 45 45 45h422c24.813 0 45-20.187 45-45 0-9.682 0-323.575 0-332 0-24.813-20.187-45-45-45zm-437 45c0-8.271 6.729-15 15-15h36v25c0 8.284 6.716 15 15 15s15-6.716 15-15v-25h130v25c0 8.284 6.716 15 15 15s15-6.716 15-15v-25h130v25c0 8.284 6.716 15 15 15s15-6.716 15-15v-25h36c8.271 0 15 6.729 15 15v59h-452zm437 347h-422c-8.271 0-15-6.729-15-15v-243h452v243c0 8.271-6.729 15-15 15z" />
+								</g>
+							</svg>
+							<p className="standard-icon-label">Hoy</p>
+						</div>
+					</div>
+					<div className="modal-buttons">
+						<div className="modal-save-btn" id="modal-save-button" onClick={sendForm}>
+							Guardar
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	};
+
 	const handleSignComunicado = (id, fecha) => {
 		window.navigator.vibrate([50]);
 		const signBtn = document.getElementById('modal-sign-button');
@@ -244,12 +344,14 @@ export default function ComunicadoModal({ modalAction }) {
 	};
 
 	useEffect(() => {
-		if (!activeModal.leido) {
-			const modal = document.getElementById(`modal-comunicado`);
-			modal.classList.add('unread-comunicado');
-		} else if (activeModal.leido) {
-			const modal = document.getElementById(`modal-comunicado`);
-			modal.classList.remove('unread-comunicado');
+		if (activeModal.leido !== undefined) {
+			if (!activeModal.leido) {
+				const modal = document.getElementById(`modal-comunicado`);
+				modal.classList.add('unread-comunicado');
+			} else if (activeModal.leido) {
+				const modal = document.getElementById(`modal-comunicado`);
+				modal.classList.remove('unread-comunicado');
+			}
 		}
 	});
 
@@ -263,7 +365,13 @@ export default function ComunicadoModal({ modalAction }) {
 				}}
 			></div>
 			<div className="modal-comunicado col-12 col-sm-11 col-md-8 col-lg-7" id={`modal-comunicado`}>
-				{modalAction === 'read' ? <ReadModalContent /> : modalAction === 'edit' ? <EditModalContent /> : null}
+				{modalAction === 'read' ? (
+					<ReadModalContent />
+				) : modalAction === 'edit' ? (
+					<EditModalContent />
+				) : (
+					modalAction === 'insert' && <InsertModalContent />
+				)}
 			</div>
 		</>
 	);

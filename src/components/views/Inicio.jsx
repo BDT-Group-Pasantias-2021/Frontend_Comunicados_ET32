@@ -204,6 +204,24 @@ export default function Inicio({ showNavbar }) {
 			setFechaComunicados(ComunicadosJSON);
 			setComunicadosAñadidos(true);
 		}
+
+		const newComunicadoButton = document.getElementById('new-comunicado-button');
+		console.log(newComunicadoButton);
+		if (newComunicadoButton) {
+			newComunicadoButton.addEventListener('click', () => {
+				setModalAction('insert');
+				setActiveModal(true);
+			});
+		}
+
+		return () => {
+			if (newComunicadoButton) {
+				newComunicadoButton.removeEventListener('click', () => {
+					setModalAction('insert');
+					setActiveModal(true);
+				});
+			}
+		};
 	}, [comunicadosAñadidos, fechaComunicados, showNavbar]);
 
 	return (
