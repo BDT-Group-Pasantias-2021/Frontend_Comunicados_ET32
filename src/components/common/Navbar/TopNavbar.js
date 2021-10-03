@@ -10,10 +10,9 @@ import { NavbarContext } from '../../../hooks/useContext/NavbarContext';
 import '../../../css/top_navbar.css';
 
 export default function TopNavbar() {
-	const {activeSidebar , setActiveSidebar} =  useContext(NavbarContext);
+	const { activeSidebar, setActiveSidebar } = useContext(NavbarContext);
 	// Sidebar Code
 	const [sidebar, setSidebar] = useState(false);
-	
 
 	useEffect(() => {
 		const searchColor = document.getElementById('searchBar');

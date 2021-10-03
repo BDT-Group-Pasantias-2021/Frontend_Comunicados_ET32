@@ -10,7 +10,7 @@ export default function SortAndFilter() {
 			<div className="standard-icon-container standard-icon-container-margin">
 				<svg
 					className="standard-icon standard-icon-margin"
-					enable-background="new 0 0 64 64"
+					enableBackground="new 0 0 64 64"
 					viewBox="0 0 64 64"
 				>
 					<path d="m31.414 15.586-7-7c-.78-.781-2.048-.781-2.828 0l-7 7c-.781.781-.781 2.047 0 2.828.78.781 2.048.781 2.828 0l3.586-3.586v39.172c0 1.104.896 2 2 2s2-.896 2-2v-39.172l3.586 3.586c.39.391.902.586 1.414.586s1.024-.195 1.414-.586c.781-.781.781-2.047 0-2.828z" />

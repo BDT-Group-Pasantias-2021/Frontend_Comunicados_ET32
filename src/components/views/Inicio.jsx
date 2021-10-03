@@ -148,7 +148,7 @@ export default function Inicio({ showNavbar }) {
 	const [fechaComunicados, setFechaComunicados] = useState([]);
 	const [comunicadosAñadidos, setComunicadosAñadidos] = useState(false);
 	const [activeModal, setActiveModal] = useState(null);
-	const [editModal, setEditModal] = useState(false);
+	const [modalAction, setModalAction] = useState('read');
 
 	const deleteComunicado = (id, selectedFecha) => {
 		const confirmState = window.confirm('¿Estás seguro de eliminar este comunicado?');
@@ -211,15 +211,15 @@ export default function Inicio({ showNavbar }) {
 			value={{
 				activeModal,
 				setActiveModal,
-				editModal,
-				setEditModal,
+				modalAction,
+				setModalAction,
 				updateComunicado,
 				deleteComunicado,
 				signComunicado,
 			}}
 		>
 			<main className="father-container-view">
-				{activeModal && <ComunicadoModal editarModal={editModal} />}
+				{activeModal && <ComunicadoModal modalAction={modalAction} />}
 				<div className="container" style={{ paddingTop: '35px' }}>
 					<div className="row">
 						<SortAndFilter />
