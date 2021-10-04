@@ -12,14 +12,18 @@
 			@include displayFlex(column, center, center);
 		}
 	}
+
 	.cards-overlay-mask {
 		@include displayFlex(null, center, center);
 		width: 100%;
-		height: calc(100% - 45px);
+		height: 100%;
 		background-color: rgba(0, 0, 0, 0.4);
 		position: absolute;
-		z-index: 1;
+		top: 0;
+		left: 0;
+		z-index: 2;
 	}
+
 	.modal-comunicado {
 		@include displayFlex(column, center, center);
 		height: 80%;
@@ -32,7 +36,7 @@
 		top: 45px;
 		margin: auto;
 		padding: 0;
-		z-index: 1;
+		z-index: 3;
 
 		@media (max-width: 575px) {
 			height: calc(100% - 45px) !important;

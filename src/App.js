@@ -28,7 +28,7 @@ export default function App() {
 				}}
 			>
 				{showNavbar && <TopNavbar />}
-				<SideNavbar />
+				{showNavbar && <SideNavbar />}
 			</NavbarContext.Provider>
 			<Switch>
 				<Route path="/home">

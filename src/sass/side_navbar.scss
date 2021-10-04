@@ -14,8 +14,8 @@
 	//width: $nav-width;
 	color: $white-background;
 	position: fixed;
-	z-index: 9999;
-	transition: all 100ms ease-in-out;
+	z-index: 1;
+	transition: all 170ms ease-in-out;
 
 	.rs-sidenav-collapse-in {
 		visibility: visible !important;
@@ -25,7 +25,7 @@
 		width: auto;
 		height: 100%;
 		visibility: hidden;
-		background-color: $primary-color;
+		background-color: $sidenavbar-background;
 		transition: all 100ms ease-in-out;
 
 		.rs-sidenav-body {

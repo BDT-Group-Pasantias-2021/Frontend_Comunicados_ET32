@@ -11140,7 +11140,7 @@ p {
   height: calc(100% - 45px);
   background-color: #f5f9fc;
   overflow-y: scroll;
-  transition: all 100ms ease-in-out;
+  transition: all 170ms ease-in-out;
 }
 
 .standard-icon-container {

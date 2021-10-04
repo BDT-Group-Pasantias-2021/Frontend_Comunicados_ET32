@@ -24,13 +24,6 @@ export default function TopNavbar() {
 		searchColor.addEventListener('focusout', () => {
 			changeColor.style.fill = '#fff';
 		});
-
-		const fatherContainer = document.getElementById('father-container-view');
-		if (activeSidebar) {
-			fatherContainer.style.paddingLeft = '250px';
-		} else {
-			fatherContainer.style.paddingLeft = '0px';
-		}
 	});
 
 	return (
