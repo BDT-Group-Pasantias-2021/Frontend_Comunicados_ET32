@@ -16,8 +16,7 @@ export default function Sidenavbar() {
 	const [activeKey, setActiveKey] = useState(1);
 	const [navWidth, setNavWidth] = useState(250);
 
-	/* const { activeSidebar, setActiveSidebar } = useContext(NavbarContext);
-	console.log(activeSidebar); */
+	const { activeSidebar } = useContext(NavbarContext);
 
 	const handleToggle = () => {
 		setExpanded(!expanded);
@@ -28,12 +27,12 @@ export default function Sidenavbar() {
 	};
 
 	useEffect(() => {
-		if (!expanded) {
-			setNavWidth(56);
+		if (!activeSidebar) {
+			setNavWidth(0);
 		} else {
 			setNavWidth(250);
 		}
-	}, [expanded]);
+	}, [activeSidebar]);
 
 	const MyLink = React.forwardRef((props, ref) => {
 		const { href, as, ...rest } = props;
@@ -47,10 +46,15 @@ export default function Sidenavbar() {
 
 	return (
 		<nav id="sidenavbar-container" style={{ width: navWidth, height: '100%' }}>
-			<Sidenav expanded={expanded} defaultOpenKeys={['3', '4']} activeKey={activeKey} onSelect={handleSelect}>
+			<Sidenav
+				expanded={activeSidebar}
+				defaultOpenKeys={['3', '4']}
+				activeKey={activeKey}
+				onSelect={handleSelect}
+			>
 				<Sidenav.Body>
 					<Nav>
-						<Toggle onChange={handleToggle} checked={expanded} />
+						{/* <Toggle onChange={handleToggle} checked={expanded} /> */}
 						<NavLink href="/">
 							<Icon icon="dashboard" />
 							Login

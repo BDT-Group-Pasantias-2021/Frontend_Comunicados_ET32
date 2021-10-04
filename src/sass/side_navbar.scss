@@ -15,41 +15,53 @@
 	color: $white-background;
 	position: fixed;
 	z-index: 9999;
+	transition: all 100ms ease-in-out;
+
+	.rs-sidenav-collapse-in {
+		visibility: visible !important;
+	}
 
 	.rs-sidenav {
+		width: auto;
 		height: 100%;
+		visibility: hidden;
 		background-color: $primary-color;
+		transition: all 100ms ease-in-out;
 
 		.rs-sidenav-body {
+			width: auto;
+
 			.rs-nav {
+				width: auto;
 				transition: all 100ms ease-in-out;
+
 				ul {
+					width: auto;
+
 					.rs-btn-toggle {
 						min-width: 40px;
 						margin: 7px;
-						transition: all 150ms ease-in-out;
+						transition: all 100ms ease-in-out;
 					}
 
 					.rs-nav-item {
+						width: 100%;
 						height: 50px;
 
 						& > a > div:hover {
-							background-color: $primary-color--hover;
+							background-color: #ffffff2d;
 						}
 
 						a {
 							text-decoration: none;
-							color: #dadada;
+							color: #fff;
 							transition: all 50ms ease-in-out;
-
-							&:hover {
-								color: #1675e0;
-							}
 
 							div {
 								@include displayFlex(row, flex-start, center);
 								white-space: nowrap;
 								height: 100%;
+								transition: all 200ms ease-in-out;
 
 								i {
 									top: auto;

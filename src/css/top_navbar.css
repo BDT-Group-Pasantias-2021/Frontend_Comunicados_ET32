@@ -61,7 +61,7 @@
   top: calc(50% - 30px / 2 + 0px);
   background: rgba(255, 255, 255, 0.275);
   border-radius: 5px;
-  transition: all 100ms ease-in;
+  transition: all 80ms ease-in;
 }
 #top-navbar .left-nav .navbar-searchbar:focus-within {
   background: white;

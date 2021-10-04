@@ -5,32 +5,44 @@
   color: #f5f9fc;
   position: fixed;
   z-index: 9999;
+  transition: all 100ms ease-in-out;
+}
+#sidenavbar-container .rs-sidenav-collapse-in {
+  visibility: visible !important;
 }
 #sidenavbar-container .rs-sidenav {
+  width: auto;
   height: 100%;
+  visibility: hidden;
   background-color: #44abff;
+  transition: all 100ms ease-in-out;
+}
+#sidenavbar-container .rs-sidenav .rs-sidenav-body {
+  width: auto;
 }
 #sidenavbar-container .rs-sidenav .rs-sidenav-body .rs-nav {
+  width: auto;
   transition: all 100ms ease-in-out;
+}
+#sidenavbar-container .rs-sidenav .rs-sidenav-body .rs-nav ul {
+  width: auto;
 }
 #sidenavbar-container .rs-sidenav .rs-sidenav-body .rs-nav ul .rs-btn-toggle {
   min-width: 40px;
   margin: 7px;
-  transition: all 150ms ease-in-out;
+  transition: all 100ms ease-in-out;
 }
 #sidenavbar-container .rs-sidenav .rs-sidenav-body .rs-nav ul .rs-nav-item {
+  width: 100%;
   height: 50px;
 }
 #sidenavbar-container .rs-sidenav .rs-sidenav-body .rs-nav ul .rs-nav-item > a > div:hover {
-  background-color: #0b87ed;
+  background-color: #ffffff2d;
 }
 #sidenavbar-container .rs-sidenav .rs-sidenav-body .rs-nav ul .rs-nav-item a {
   text-decoration: none;
-  color: #dadada;
+  color: #fff;
   transition: all 50ms ease-in-out;
-}
-#sidenavbar-container .rs-sidenav .rs-sidenav-body .rs-nav ul .rs-nav-item a:hover {
-  color: #1675e0;
 }
 #sidenavbar-container .rs-sidenav .rs-sidenav-body .rs-nav ul .rs-nav-item a div {
   display: flex;
@@ -39,6 +51,7 @@
   align-items: center;
   white-space: nowrap;
   height: 100%;
+  transition: all 200ms ease-in-out;
 }
 #sidenavbar-container .rs-sidenav .rs-sidenav-body .rs-nav ul .rs-nav-item a div i {
   top: auto;

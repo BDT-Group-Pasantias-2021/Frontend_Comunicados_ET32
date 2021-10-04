@@ -62,7 +62,7 @@ $containers-border-radius: 5px;
 
 			background: rgba(255, 255, 255, 0.275);
 			border-radius: $containers-border-radius;
-			transition: all 100ms ease-in;
+			transition: all 80ms ease-in;
 
 			&:focus-within {
 				background: rgb(255, 255, 255);

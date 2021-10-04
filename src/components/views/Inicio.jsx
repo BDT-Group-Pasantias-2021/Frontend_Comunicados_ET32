@@ -236,7 +236,7 @@ export default function Inicio({ showNavbar }) {
 				signComunicado,
 			}}
 		>
-			<main className="father-container-view">
+			<main className="father-container-view" id="father-container-view">
 				{activeModal && <ComunicadoModal modalAction={modalAction} />}
 				<div className="container" style={{ paddingTop: '35px' }}>
 					<div className="row">

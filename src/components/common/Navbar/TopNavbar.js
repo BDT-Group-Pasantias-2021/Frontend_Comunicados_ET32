@@ -24,13 +24,20 @@ export default function TopNavbar() {
 		searchColor.addEventListener('focusout', () => {
 			changeColor.style.fill = '#fff';
 		});
+
+		const fatherContainer = document.getElementById('father-container-view');
+		if (activeSidebar) {
+			fatherContainer.style.paddingLeft = '250px';
+		} else {
+			fatherContainer.style.paddingLeft = '0px';
+		}
 	});
 
 	return (
 		<nav id="top-navbar">
 			<div className="left-nav">
 				<div className="icons-container" style={{ width: '69px', marginRight: '15px' }}>
-					<div className="nav-icon-container" /* onClick={() => setActiveSidebar(!activeSidebar)} */>
+					<div className="nav-icon-container" onClick={() => setActiveSidebar(!activeSidebar)}>
 						<svg
 							className="right-nav-icon"
 							id="Capa_1"
