@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router';
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from 'react';
+import { useHistory, useLocation } from 'react-router';
 import Axios from 'axios';
 
 // Components
@@ -79,7 +80,7 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 						</div>
 						<div className="session-validate-message" id="message-container"></div>
 						<button type="submit" className="enter-btn">
-							<span className="enter-span">Ingresar</span>
+							Ingresar
 						</button>
 						<div className="form-forgot-keep-container">
 							<div className="form-keep-login">
@@ -88,7 +89,7 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 									Mantener sesión iniciada
 								</label>
 							</div>
-							<span className="form-forgot-password" onClick={() => changeForm('changePassword')}>
+							<span className="form-forgot-password" onClick={() => changeForm('RecoverPassword')}>
 								¿Olvidaste tu contraseña?
 							</span>
 						</div>
@@ -285,7 +286,7 @@ const RegisterForm = ({ changeForm, showPassword, seePassword }) => {
 						</div>
 					</div>
 					<button type="submit" className="enter-btn" style={{ marginBottom: '20px' }}>
-						<span className="enter-span">Continuar</span>
+						Continuar
 					</button>
 				</Form>
 			</Formik>
@@ -323,7 +324,16 @@ const RecoverPassword = ({ changeForm }) => {
 					setSubmitting(false);
 					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/recoverPassword', values).then(
 						(res) => {
-							console.log(res.data);
+							console.log(res);
+							const resetPassBtn = document.getElementById('reset-password-btn');
+							if (res.status === 250) {
+								resetPassBtn.classList.add('reset-password-btn-success');
+								resetPassBtn.innerHTML = 'Enviado';
+								resetPassBtn.disabled = true;
+							} else if (res.status === 200) {
+								resetPassBtn.classList.add('reset-password-btn-wait');
+								resetPassBtn.innerHTML = 'Espere 30 minutos';
+							}
 						}
 					);
 				}}
@@ -363,8 +373,13 @@ const RecoverPassword = ({ changeForm }) => {
 							<ErrorMessage className="input-error" name="email" component="div" />
 						</div>
 					</div>
-					<button type="submit" className="enter-btn" style={{ marginBottom: '20px' }}>
-						<span className="enter-span">Continuar</span>
+					<button
+						type="submit"
+						id="reset-password-btn"
+						className="enter-btn"
+						style={{ marginBottom: '20px' }}
+					>
+						Enviar
 					</button>
 				</Form>
 			</Formik>
@@ -375,6 +390,99 @@ const RecoverPassword = ({ changeForm }) => {
 					</p>
 				</div>
 			</div>
+		</div>
+	);
+};
+
+const ChangePassword = () => {
+	const history = useHistory();
+
+	return (
+		<div className="form-content">
+			<h2 className="form-title">Cambiar Contraseña</h2>
+			<Formik
+				initialValues={{
+					nueva_contraseña: '',
+					confirmar_nueva_contraseña: '',
+				}}
+				validate={(values) => {
+					const errors = {};
+
+					//? Validaciones de longitud (entre 8 y 24) y coincidencias de contraseñas. Debe incluir
+					//? al menos una mayuscula, una minuscula, un número y un caracter especial.
+					if (
+						!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_\\`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@[\]^_\\`{|}~]{8,24}/.test(
+							values.nueva_contraseña
+						)
+					) {
+						errors.nueva_contraseña =
+							'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un caracter especial.';
+					}
+					//? Validaciones de contraseñas coincidentes.
+					if (values.nueva_contraseña !== values.confirmar_nueva_contraseña) {
+						errors.confirmar_nueva_contraseña = 'Las contraseñas no coinciden';
+					}
+
+					return errors;
+				}}
+				onSubmit={(values) => {
+					alert(JSON.stringify(values, null, 2));
+					/* Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/login', values).then((res) => {
+						console.log();
+						if (res.data.status === 'success') {
+							res.data.email = values.email;
+							localStorage.setItem('user-token', JSON.stringify(res.data.sessionID, res.data.email));
+							localStorage.setItem('user-email', JSON.stringify(res.data.email));
+							history.push('/home');
+						} else {
+							const messageContainer = document.getElementById('message-container');
+							messageContainer.innerText = res.data;
+							setTimeout(() => {
+								messageContainer.innerText = '';
+							}, 2500);
+						}
+					}); */
+				}}
+			>
+				<Form
+					className="login-form row"
+					style={{
+						height: '900px',
+						display: 'flex',
+						flexDirection: 'column',
+						justifyContent: 'space-between',
+					}}
+				>
+					<div className="forgot-password-inputs-container" style={{ marginTop: '20px', padding: '0' }}>
+						<p className="fp-instructions-text">
+							Ingrese la nueva contraseña que desea utilizar para acceder a su cuenta.
+						</p>
+						<div className="form-input-container">
+							<Field
+								className="login-form-input"
+								type="text"
+								name="nueva_contraseña"
+								placeholder="Nueva contraseña"
+								required
+							/>
+							<ErrorMessage className="input-error" name="nueva_contraseña" component="div" />
+						</div>
+						<div className="form-input-container">
+							<Field
+								className="login-form-input"
+								type="text"
+								name="confirmar_nueva_contraseña"
+								placeholder="Confirmar contraseña"
+								required
+							/>
+							<ErrorMessage className="input-error" name="confirmar_nueva_contraseña" component="div" />
+						</div>
+					</div>
+					<button type="submit" className="enter-btn" style={{ marginBottom: '20px' }}>
+						Continuar
+					</button>
+				</Form>
+			</Formik>
 		</div>
 	);
 };
@@ -391,14 +499,23 @@ export default function Formulario() {
 		setSeePassword(!seePassword);
 	}
 
+	const location = useLocation();
+	useEffect(() => {
+		if (location.search === '?change-password') {
+			setFormulario('ChangePassword');
+		}
+	}, [location]);
+
 	return (
-		<div className="form-section col-10 col-sm-8 col-md-5 col-lg-4">
+		<div className="form-section col-10 col-sm-8 col-md-6 col-lg-5">
 			{formulario === 'Login' ? (
 				<LoginForm changeForm={changeForm} showPassword={showPassword} seePassword={seePassword} />
 			) : formulario === 'Register' ? (
 				<RegisterForm changeForm={changeForm} showPassword={showPassword} seePassword={seePassword} />
-			) : (
+			) : formulario === 'RecoverPassword' ? (
 				<RecoverPassword changeForm={changeForm} />
+			) : (
+				formulario === 'ChangePassword' && <ChangePassword />
 			)}
 		</div>
 	);

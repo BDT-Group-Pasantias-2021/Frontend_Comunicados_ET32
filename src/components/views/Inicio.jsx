@@ -206,7 +206,6 @@ export default function Inicio({ showNavbar }) {
 		}
 
 		const newComunicadoButton = document.getElementById('new-comunicado-button');
-		console.log(newComunicadoButton);
 		if (newComunicadoButton) {
 			newComunicadoButton.addEventListener('click', () => {
 				setModalAction('insert');

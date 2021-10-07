@@ -28,7 +28,7 @@
   width: 100%;
   height: 45px;
   top: 0;
-  background: #44abff;
+  background: #39a2f8;
   position: relative;
   z-index: 9999;
 }
@@ -117,7 +117,7 @@
   height: 60px;
   border-radius: 50%;
   margin-left: 7px;
-  background: #44abff;
+  background: #39a2f8;
 }
 #top-navbar .right-nav .profile-settings-container .profile-image-btn {
   width: 40px;

@@ -21,33 +21,29 @@ export default function Sidenavbar() {
 		setActiveKey(eventKey);
 	};
 
-	const resizePadding = (fatherContainer) => {
-		if (window.innerWidth < 768) {
-			fatherContainer.style.paddingLeft = '0px';
-		} else {
-			fatherContainer.style.paddingLeft = '300px';
-		}
-	};
-
 	useEffect(() => {
+		const resizePadding = () => {
+			const fatherContainer = document.getElementById('father-container-view');
+			if (fatherContainer !== null) {
+				console.log(fatherContainer);
+				if (activeSidebar && window.innerWidth > 768) {
+					fatherContainer.style.paddingLeft = '300px';
+				} else {
+					fatherContainer.style.paddingLeft = '0px';
+				}
+			}
+		};
+
 		if (!activeSidebar) {
 			setNavWidth(0);
 		} else {
 			setNavWidth(300);
 		}
 
-		const fatherContainer = document.getElementById('father-container-view');
-		if (window.innerWidth > 750) {
-			if (activeSidebar) {
-				fatherContainer.style.paddingLeft = '300px';
-			} else {
-				fatherContainer.style.paddingLeft = '0px';
-			}
-		}
-
-		window.addEventListener('resize', () => resizePadding(fatherContainer));
+		resizePadding();
+		window.addEventListener('resize', () => resizePadding());
 		return () => {
-			window.removeEventListener('resize', () => resizePadding(fatherContainer));
+			window.removeEventListener('resize', () => resizePadding());
 		};
 	}, [activeSidebar, setActiveSidebar]);
 
