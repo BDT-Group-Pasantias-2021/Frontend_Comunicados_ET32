@@ -326,11 +326,11 @@ const RecoverPassword = ({ changeForm }) => {
 						(res) => {
 							console.log(res);
 							const resetPassBtn = document.getElementById('reset-password-btn');
-							if (res.status === 250) {
+							if (res.data.status === 1) {
 								resetPassBtn.classList.add('reset-password-btn-success');
 								resetPassBtn.innerHTML = 'Enviado';
 								resetPassBtn.disabled = true;
-							} else if (res.status === 200) {
+							} else if (res.data.status === 2) {
 								resetPassBtn.classList.add('reset-password-btn-wait');
 								resetPassBtn.innerHTML = 'Espere 30 minutos';
 							}
@@ -394,16 +394,18 @@ const RecoverPassword = ({ changeForm }) => {
 	);
 };
 
-const ChangePassword = () => {
+const ChangePassword = ({ searchVars }) => {
 	const history = useHistory();
+	const recoveryToken = searchVars.split('=')[1];
 
 	return (
 		<div className="form-content">
 			<h2 className="form-title">Cambiar Contraseña</h2>
 			<Formik
 				initialValues={{
-					nueva_contraseña: '',
-					confirmar_nueva_contraseña: '',
+					recovery_token: recoveryToken,
+					new_password: '',
+					confirm_new_password: '',
 				}}
 				validate={(values) => {
 					const errors = {};
@@ -427,21 +429,9 @@ const ChangePassword = () => {
 				}}
 				onSubmit={(values) => {
 					alert(JSON.stringify(values, null, 2));
-					/* Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/login', values).then((res) => {
-						console.log();
-						if (res.data.status === 'success') {
-							res.data.email = values.email;
-							localStorage.setItem('user-token', JSON.stringify(res.data.sessionID, res.data.email));
-							localStorage.setItem('user-email', JSON.stringify(res.data.email));
-							history.push('/home');
-						} else {
-							const messageContainer = document.getElementById('message-container');
-							messageContainer.innerText = res.data;
-							setTimeout(() => {
-								messageContainer.innerText = '';
-							}, 2500);
-						}
-					}); */
+					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/login', values).then((res) => {
+						console.log(res);
+					});
 				}}
 			>
 				<Form
@@ -501,7 +491,7 @@ export default function Formulario() {
 
 	const location = useLocation();
 	useEffect(() => {
-		if (location.search === '?change-password') {
+		if (location.search.includes('?change-password')) {
 			setFormulario('ChangePassword');
 		}
 	}, [location]);
@@ -515,7 +505,7 @@ export default function Formulario() {
 			) : formulario === 'RecoverPassword' ? (
 				<RecoverPassword changeForm={changeForm} />
 			) : (
-				formulario === 'ChangePassword' && <ChangePassword />
+				formulario === 'ChangePassword' && <ChangePassword searchVars={location.search} />
 			)}
 		</div>
 	);
