@@ -414,22 +414,23 @@ const ChangePassword = ({ searchVars }) => {
 					//? al menos una mayuscula, una minuscula, un número y un caracter especial.
 					if (
 						!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_\\`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@[\]^_\\`{|}~]{8,24}/.test(
-							values.nueva_contraseña
+							values.new_password
 						)
 					) {
-						errors.nueva_contraseña =
+						errors.new_password =
 							'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un caracter especial.';
 					}
 					//? Validaciones de contraseñas coincidentes.
-					if (values.nueva_contraseña !== values.confirmar_nueva_contraseña) {
-						errors.confirmar_nueva_contraseña = 'Las contraseñas no coinciden';
+					if (values.new_password !== values.confirm_new_password) {
+						errors.confirm_new_password = 'Las contraseñas no coinciden';
 					}
 
 					return errors;
 				}}
 				onSubmit={(values) => {
 					alert(JSON.stringify(values, null, 2));
-					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/login', values).then((res) => {
+					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/setNewPassword', values).then((res) => {
+						alert("hi");
 						console.log(res);
 					});
 				}}
@@ -451,7 +452,7 @@ const ChangePassword = ({ searchVars }) => {
 							<Field
 								className="login-form-input"
 								type="text"
-								name="nueva_contraseña"
+								name="new_password"
 								placeholder="Nueva contraseña"
 								required
 							/>
@@ -461,7 +462,7 @@ const ChangePassword = ({ searchVars }) => {
 							<Field
 								className="login-form-input"
 								type="text"
-								name="confirmar_nueva_contraseña"
+								name="confirm_new_password"
 								placeholder="Confirmar contraseña"
 								required
 							/>
