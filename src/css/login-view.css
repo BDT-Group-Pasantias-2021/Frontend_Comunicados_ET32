@@ -155,6 +155,16 @@
   font-size: 13px;
   color: #ff4242;
 }
+.login-view .background-container .form-section .form-content .login-form .form-input-container .status-response-message {
+  margin-top: 15px;
+  font-size: 13px;
+}
+.login-view .background-container .form-section .form-content .login-form .form-input-container .status-response-message-success {
+  color: #009d47;
+}
+.login-view .background-container .form-section .form-content .login-form .form-input-container .status-response-message-error {
+  color: #ff4242;
+}
 .login-view .background-container .form-section .form-content .login-form .form-input-container .form-password-container {
   display: flex;
   justify-content: space-between;

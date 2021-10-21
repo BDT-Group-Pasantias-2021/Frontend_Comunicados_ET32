@@ -160,6 +160,19 @@
 							color: $logo-color-red;
 						}
 
+						.status-response-message {
+							margin-top: 15px;
+							font-size: 13px;
+						}
+
+						.status-response-message-success {
+							color: $text-confirm-color;
+						}
+
+						.status-response-message-error {
+							color: $logo-color-red;
+						}
+
 						.form-password-container {
 							@include displayFlex(null, space-between, center);
 							flex-direction: row !important;

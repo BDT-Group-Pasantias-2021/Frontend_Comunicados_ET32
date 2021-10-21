@@ -83,13 +83,10 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 							Ingresar
 						</button>
 						<div className="form-forgot-keep-container">
-							<div className="form-keep-login">
-								<input type="checkbox" name="keep-login"></input>
-								<label className="form-keep-login-label" htmlFor="keep-login">
-									Mantener sesión iniciada
-								</label>
-							</div>
-							<span className="form-forgot-password" onClick={() => changeForm('RecoverPassword')}>
+							<span
+								className="form-forgot-password form-keep-login"
+								onClick={() => changeForm('RecoverPassword')}
+							>
 								¿Olvidaste tu contraseña?
 							</span>
 						</div>
@@ -148,17 +145,17 @@ const RegisterForm = ({ changeForm, showPassword, seePassword }) => {
 					}
 
 					//? Validaciones de longitud y caracteres del documento correspondiente al documento seleccionado.
-					if (values.tipo_documento === 'dni' && values.documento.length !== 8) {
+					if (values.tipo_documento === '1' && values.documento.length !== 8) {
 						errors.documento = 'El numero de DNI debe tener 8 digitos.';
 					} else if (
-						values.tipo_documento === 'libreta_civica' &&
+						values.tipo_documento === '2' &&
 						(values.documento.length < 4 || values.documento.length > 8)
 					) {
 						errors.documento = 'El numero de Libreta Civica debe tener entre 4 y 8 digitos';
-					} else if (values.tipo_documento === 'pasaporte' && values.documento.length !== 9) {
+					} else if (values.tipo_documento === '3' && values.documento.length !== 9) {
 						errors.documento = 'El numero de Pasaporte debe tener 9 digitos.';
 					}
-					if (values.tipo_documento === 'dni' || values.tipo_documento === 'libreta_civica') {
+					if (values.tipo_documento === '1' || values.tipo_documento === '2') {
 						if (/[a-zA-Z]/.test(values.documento)) {
 							errors.documento = 'Documento inválido';
 						}
@@ -396,7 +393,11 @@ const RecoverPassword = ({ changeForm }) => {
 
 const ChangePassword = ({ searchVars }) => {
 	const history = useHistory();
-	const recoveryToken = searchVars.split('=')[1];
+	const recoveryTokenDirty = searchVars.split('=')[1];
+	let recoveryToken;
+	if (recoveryTokenDirty) {
+		recoveryToken = recoveryTokenDirty.split('&')[0];
+	}
 
 	return (
 		<div className="form-content">
@@ -428,10 +429,21 @@ const ChangePassword = ({ searchVars }) => {
 					return errors;
 				}}
 				onSubmit={(values) => {
-					alert(JSON.stringify(values, null, 2));
 					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/setNewPassword', values).then((res) => {
-						alert("hi");
-						console.log(res);
+						const statusResponseMessage = document.getElementById('status-response-message');
+						if (res.data.status === 1) {
+							statusResponseMessage.innerHTML = 'Contraseña cambiada con éxito. Redireccionando...';
+							statusResponseMessage.classList.add('status-response-message-success');
+							setTimeout(() => {
+								window.location.replace('http://localhost:3000/Frontend_Comunicados_ET32');
+								console.log('Redireccionando a Login');
+							}, 3000);
+						} else if (res.data.status === 2) {
+							statusResponseMessage.innerHTML = 'Token inválido';
+							statusResponseMessage.classList.add('status-response-message-error');
+						} else if (res.data.status === 3) {
+							statusResponseMessage.innerHTML = 'Error al cambiar la contraseña';
+						}
 					});
 				}}
 			>
@@ -456,7 +468,7 @@ const ChangePassword = ({ searchVars }) => {
 								placeholder="Nueva contraseña"
 								required
 							/>
-							<ErrorMessage className="input-error" name="nueva_contraseña" component="div" />
+							<ErrorMessage className="input-error" name="new_password" component="div" />
 						</div>
 						<div className="form-input-container">
 							<Field
@@ -466,7 +478,8 @@ const ChangePassword = ({ searchVars }) => {
 								placeholder="Confirmar contraseña"
 								required
 							/>
-							<ErrorMessage className="input-error" name="confirmar_nueva_contraseña" component="div" />
+							<ErrorMessage className="input-error" name="confirm_new_password" component="div" />
+							<p id="status-response-message" className="status-response-message"></p>
 						</div>
 					</div>
 					<button type="submit" className="enter-btn" style={{ marginBottom: '20px' }}>
