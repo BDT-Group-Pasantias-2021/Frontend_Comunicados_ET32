@@ -5,7 +5,7 @@ import '../../css/home.css';
 
 // Hooks
 import { ComunicadoCardContext } from '../../hooks/useContext/ComunicadoCardContext';
-
+import { useHistory } from 'react-router';
 // Components
 import SortAndFilter from '../common/InicioView/SortAndFilter';
 import ComunicadoModal from '../common/InicioView/ComunicadoModal';
@@ -149,7 +149,7 @@ export default function Inicio({ showNavbar }) {
 	const [comunicadosAñadidos, setComunicadosAñadidos] = useState(false);
 	const [activeModal, setActiveModal] = useState(null);
 	const [modalAction, setModalAction] = useState('read');
-
+	
 	const deleteComunicado = (id, selectedFecha) => {
 		const confirmState = window.confirm('¿Estás seguro de eliminar este comunicado?');
 		if (confirmState) {
@@ -196,10 +196,17 @@ export default function Inicio({ showNavbar }) {
 		setFechaComunicados(newFechaComunicados);
 	};
 
+	// PETICION AXIOS AL BACKEND PARA VERIFICAR QUE LA TOKEN EXISTA EN LA DB
+	let history = useHistory();
 	useEffect(() => {
 		//* Mostrar barras de navegación
 		showNavbar(true);
-
+		const userToken = localStorage.getItem('user-token');
+		const emailToken = localStorage.getItem('user-email');
+		if (!userToken || !emailToken) {
+		
+			history.push('/');
+		} 
 		if (!comunicadosAñadidos) {
 			setFechaComunicados(ComunicadosJSON);
 			setComunicadosAñadidos(true);
