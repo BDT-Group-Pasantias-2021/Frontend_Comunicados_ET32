@@ -18,13 +18,17 @@ import Home from './components/views/Inicio';
 
 export default function App() {
 	const [activeSidebar, setActiveSidebar] = useState(false);
+	const [searchValue, setSearchValue] = useState('');
 	const [showNavbar, setShowNavbar] = useState(false);
+
 	return (
 		<Router basename="/Frontend_Comunicados_ET32">
 			<NavbarContext.Provider
 				value={{
 					activeSidebar,
 					setActiveSidebar,
+					searchValue,
+					setSearchValue,
 				}}
 			>
 				{showNavbar && <TopNavbar />}
@@ -32,7 +36,7 @@ export default function App() {
 			</NavbarContext.Provider>
 			<Switch>
 				<Route path="/home">
-					<Home showNavbar={() => setShowNavbar(true)} />
+					<Home showNavbar={() => setShowNavbar(true)} searchValue={searchValue} />
 				</Route>
 				<Route path="/" exact>
 					<Login hideNavbar={() => setShowNavbar(false)} />

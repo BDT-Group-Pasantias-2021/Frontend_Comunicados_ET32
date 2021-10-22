@@ -13,10 +13,14 @@ import ProfilePhoto from '../../../assets/svgs/unnamed.jpg';
 import '../../../css/top_navbar.css';
 
 export default function TopNavbar() {
-	const { activeSidebar, setActiveSidebar } = useContext(NavbarContext);
+	const { searchValue, setSearchValue, activeSidebar, setActiveSidebar } = useContext(NavbarContext);
+
+	const writeSearchValue = (e) => {
+		setSearchValue(e.target.value);
+	};
 
 	useEffect(() => {
-		const searchColor = document.getElementById('searchBar');
+		const searchColor = document.getElementById('search-bar');
 		const changeColor = document.getElementById('Lupa_svg');
 		searchColor.addEventListener('focus', () => {
 			changeColor.style.fill = '#6e6e6e';
@@ -65,8 +69,19 @@ export default function TopNavbar() {
 						</div>
 					</Link>
 				</div>
-				<form className="navbar-searchbar">
-					<input className="searchbar-input" type="text" name="search-value" id="searchBar" />
+				<form
+					className="navbar-searchbar"
+					onSubmit={(e) => {
+						e.preventDefault();
+					}}
+				>
+					<input
+						className="searchbar-input"
+						type="text"
+						name="search-value"
+						id="search-bar"
+						onChange={(e) => writeSearchValue(e)}
+					/>
 					<div className="searchbar-lupa-container">
 						<svg id="Lupa_svg" viewBox="0 0 512.005 512.005" className="searchbar-lupa-icon">
 							<g>

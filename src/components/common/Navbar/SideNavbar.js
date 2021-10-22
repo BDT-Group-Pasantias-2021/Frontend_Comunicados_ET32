@@ -25,7 +25,6 @@ export default function Sidenavbar() {
 		const resizePadding = () => {
 			const fatherContainer = document.getElementById('father-container-view');
 			if (fatherContainer !== null) {
-				console.log(fatherContainer);
 				if (activeSidebar && window.innerWidth > 768) {
 					fatherContainer.style.paddingLeft = '300px';
 				} else {

@@ -149,7 +149,7 @@ export default function Inicio({ showNavbar }) {
 	const [comunicadosAñadidos, setComunicadosAñadidos] = useState(false);
 	const [activeModal, setActiveModal] = useState(null);
 	const [modalAction, setModalAction] = useState('read');
-	
+
 	const deleteComunicado = (id, selectedFecha) => {
 		const confirmState = window.confirm('¿Estás seguro de eliminar este comunicado?');
 		if (confirmState) {
@@ -199,14 +199,32 @@ export default function Inicio({ showNavbar }) {
 	// PETICION AXIOS AL BACKEND PARA VERIFICAR QUE LA TOKEN EXISTA EN LA DB
 	let history = useHistory();
 	useEffect(() => {
+		const searchComunicadoBySearchValue = (value) => {
+			console.log(value);
+			const newFechaComunicados = fechaComunicados.map((element) => {
+				const comunicados = element.comunicados.map((comunicado) => {
+					if (
+						comunicado.titulo.toLowerCase().includes(value.toLowerCase()) ||
+						comunicado.descripcion.toLowerCase().includes(value.toLowerCase())
+					) {
+						/* console.log(comunicado); */
+						return { ...comunicado };
+					}
+					return comunicado;
+				});
+				return { fecha: element.fecha, comunicados };
+			});
+			setFechaComunicados(newFechaComunicados);
+		};
+
 		//* Mostrar barras de navegación
 		showNavbar(true);
 		const userToken = localStorage.getItem('user-token');
 		const emailToken = localStorage.getItem('user-email');
 		if (!userToken || !emailToken) {
-		
 			history.push('/');
-		} 
+		}
+
 		if (!comunicadosAñadidos) {
 			setFechaComunicados(ComunicadosJSON);
 			setComunicadosAñadidos(true);
@@ -220,6 +238,15 @@ export default function Inicio({ showNavbar }) {
 			});
 		}
 
+		const searchBar = document.getElementById('search-bar');
+		if (searchBar) {
+			searchBar.addEventListener('input', (event) => {
+				event.preventDefault();
+				event.stopPropagation();
+				searchComunicadoBySearchValue(searchBar.value);
+			});
+		}
+
 		return () => {
 			if (newComunicadoButton) {
 				newComunicadoButton.removeEventListener('click', () => {
@@ -227,8 +254,15 @@ export default function Inicio({ showNavbar }) {
 					setActiveModal(true);
 				});
 			}
+			if (searchBar) {
+				searchBar.removeEventListener('input', (event) => {
+					event.preventDefault();
+					event.stopPropagation();
+					searchComunicadoBySearchValue(searchBar.value);
+				});
+			}
 		};
-	}, [comunicadosAñadidos, fechaComunicados, showNavbar]);
+	}, [comunicadosAñadidos, fechaComunicados, history, showNavbar]);
 
 	return (
 		<ComunicadoCardContext.Provider
