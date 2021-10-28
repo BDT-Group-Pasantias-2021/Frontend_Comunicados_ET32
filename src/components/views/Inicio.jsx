@@ -146,6 +146,7 @@ const ComunicadosJSON = [
 
 export default function Inicio({ showNavbar }) {
 	const [fechaComunicados, setFechaComunicados] = useState([]);
+	const [fechaComunicadosAux, setFechaComunicadosAux] = useState([]);
 	const [comunicadosAñadidos, setComunicadosAñadidos] = useState(false);
 	const [activeModal, setActiveModal] = useState(null);
 	const [modalAction, setModalAction] = useState('read');
@@ -199,22 +200,22 @@ export default function Inicio({ showNavbar }) {
 	// PETICION AXIOS AL BACKEND PARA VERIFICAR QUE LA TOKEN EXISTA EN LA DB
 	let history = useHistory();
 	useEffect(() => {
-		const searchComunicadoBySearchValue = (value) => {
-			console.log(value);
-			const newFechaComunicados = fechaComunicados.map((element) => {
-				const comunicados = element.comunicados.map((comunicado) => {
-					if (
-						comunicado.titulo.toLowerCase().includes(value.toLowerCase()) ||
-						comunicado.descripcion.toLowerCase().includes(value.toLowerCase())
-					) {
-						/* console.log(comunicado); */
-						return { ...comunicado };
-					}
-					return comunicado;
+		// search in fechaComunicados and returns an array of comunicados that match the search value
+		const searchComunicadoBySearchValue = (searchValue) => {
+			const newFechaComunicados = fechaComunicados.reduce((acc, element) => {
+				const comunicados = element.comunicados.filter((comunicado) => {
+					return (
+						comunicado.titulo.toLowerCase().includes(searchValue.toLowerCase()) ||
+						comunicado.descripcion.toLowerCase().includes(searchValue.toLowerCase())
+					);
 				});
-				return { fecha: element.fecha, comunicados };
-			});
-			setFechaComunicados(newFechaComunicados);
+				if (comunicados.length > 0) {
+					acc.push({ fecha: element.fecha, comunicados });
+				}
+				return acc;
+			}, []);
+			console.log(newFechaComunicados);
+			setFechaComunicadosAux(newFechaComunicados);
 		};
 
 		//* Mostrar barras de navegación
@@ -227,6 +228,7 @@ export default function Inicio({ showNavbar }) {
 
 		if (!comunicadosAñadidos) {
 			setFechaComunicados(ComunicadosJSON);
+			setFechaComunicadosAux(ComunicadosJSON);
 			setComunicadosAñadidos(true);
 		}
 
@@ -241,9 +243,7 @@ export default function Inicio({ showNavbar }) {
 		const searchBar = document.getElementById('search-bar');
 		if (searchBar) {
 			searchBar.addEventListener('input', (event) => {
-				event.preventDefault();
-				event.stopPropagation();
-				searchComunicadoBySearchValue(searchBar.value);
+				searchComunicadoBySearchValue(event.target.value);
 			});
 		}
 
@@ -254,11 +254,10 @@ export default function Inicio({ showNavbar }) {
 					setActiveModal(true);
 				});
 			}
+
 			if (searchBar) {
 				searchBar.removeEventListener('input', (event) => {
-					event.preventDefault();
-					event.stopPropagation();
-					searchComunicadoBySearchValue(searchBar.value);
+					searchComunicadoBySearchValue(event.target.value);
 				});
 			}
 		};
@@ -281,18 +280,20 @@ export default function Inicio({ showNavbar }) {
 				<div className="container" style={{ paddingTop: '35px' }}>
 					<div className="row">
 						<SortAndFilter />
-						{/* eslint-disable-next-line array-callback-return */}
-						{fechaComunicados.map((element) => {
-							if (element.fecha !== undefined && element.comunicados.length > 0) {
-								return (
-									<FechaComunicado
-										key={element.fecha}
-										fecha={element.fecha}
-										comunicados={element.comunicados}
-									/>
-								);
-							}
-						})}
+						{fechaComunicadosAux.length > 0
+							? // eslint-disable-next-line array-callback-return
+							  fechaComunicadosAux.map((element) => {
+									if (element.fecha !== undefined && element.comunicados.length > 0) {
+										return (
+											<FechaComunicado
+												key={element.fecha}
+												fecha={element.fecha}
+												comunicados={element.comunicados}
+											/>
+										);
+									}
+							  })
+							: 'No se encontraron resultados'}
 					</div>
 				</div>
 			</main>
