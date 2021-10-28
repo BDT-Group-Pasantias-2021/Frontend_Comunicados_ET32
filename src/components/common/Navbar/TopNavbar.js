@@ -80,14 +80,13 @@ export default function TopNavbar() {
 						e.preventDefault();
 					}}
 				>
-					<input
-						className="searchbar-input"
-						type="text"
-						name="search-value"
-						id="search-bar"
-						onChange={(e) => writeSearchValue(e)}
-					/>
-					<div className="searchbar-lupa-container">
+					<input className="searchbar-input" type="text" id="search-bar" />
+					<div
+						className="searchbar-lupa-container"
+						onClick={() => {
+							document.getElementById('search-bar').focus();
+						}}
+					>
 						<svg id="Lupa_svg" viewBox="0 0 512.005 512.005" className="searchbar-lupa-icon">
 							<g>
 								<g>
