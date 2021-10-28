@@ -8,12 +8,22 @@ import { NavbarContext } from '../../../hooks/useContext/NavbarContext';
 
 // Components
 import ProfilePhoto from '../../../assets/svgs/unnamed.jpg';
+import NotificationMenu from './NotificationMenu.js';
 
 // Styles
 import '../../../css/top_navbar.css';
 
 export default function TopNavbar() {
 	const { activeSidebar, setActiveSidebar } = useContext(NavbarContext);
+
+	const toggleNotificationMenu = () => {
+		const notificationMenu = document.getElementById('notification-menu');
+		if (!notificationMenu.style.maxHeight) {
+			notificationMenu.style.maxHeight = '400px';
+		} else {
+			notificationMenu.style.maxHeight = null;
+		}
+	};
 
 	useEffect(() => {
 		const searchColor = document.getElementById('search-bar');
@@ -101,7 +111,13 @@ export default function TopNavbar() {
 							<path d="m268.15625-.0742188c-108.457031-.0195312-206.242188 65.3085938-247.746094 165.5117188-41.496094 100.207031-18.542968 215.542969 58.171875 292.210938 104.703125 104.703124 274.453125 104.703124 379.152344 0 104.699219-104.695313 104.699219-274.445313 0-379.148438-50.167969-50.453125-118.429687-78.746094-189.578125-78.5742188zm0 511.3554688c-134.074219 0-243.203125-109.132812-243.203125-243.207031s109.128906-243.203125 243.203125-243.203125 243.207031 109.128906 243.207031 243.203125-109.132812 243.207031-243.207031 243.207031zm0 0" />
 						</svg>
 					</div>
-					<div className="nav-icon-container">
+					<div
+						className="nav-icon-container"
+						id="notifications-button"
+						onClick={() => {
+							toggleNotificationMenu();
+						}}
+					>
 						<svg
 							id="Layer_2"
 							className="right-nav-icon"
@@ -119,6 +135,7 @@ export default function TopNavbar() {
 							</g>
 						</svg>
 					</div>
+					<NotificationMenu />
 				</div>
 				<div className="profile-settings-container">
 					<img className="profile-image-btn" src={ProfilePhoto} alt="profile_image" />
