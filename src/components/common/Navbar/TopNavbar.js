@@ -8,12 +8,17 @@ import { NavbarContext } from '../../../hooks/useContext/NavbarContext';
 
 // Components
 import ProfilePhoto from '../../../assets/svgs/unnamed.jpg';
-
+import LogOutIcon from '../../../assets/svgs/log-out-logo.svg';
 // Styles
 import '../../../css/top_navbar.css';
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 
 export default function TopNavbar() {
 	const { searchValue, setSearchValue, activeSidebar, setActiveSidebar } = useContext(NavbarContext);
+
+	//Hooks Dropdown
+	const [dropdownOpen, setDropdownOpen] = useState(false);
+	const openDropdown = () => setDropdownOpen((prevState) => !prevState);
 
 	const writeSearchValue = (e) => {
 		setSearchValue(e.target.value);
@@ -126,7 +131,26 @@ export default function TopNavbar() {
 					</div>
 				</div>
 				<div className="profile-settings-container">
-					<img className="profile-image-btn" src={ProfilePhoto} alt="profile_image" />
+					<Dropdown isOpen={dropdownOpen} toggle={openDropdown}>
+						<DropdownToggle className="user-config profile-image-container">
+							<img className="profile-image-btn" src={ProfilePhoto} alt="profile_image" />
+						</DropdownToggle>
+
+						<DropdownMenu className="user-config-menu">
+							<DropdownItem header>
+								<p className="user-config-menu-name">Agustin Rezett</p>
+							</DropdownItem>
+							<DropdownItem>Perfil</DropdownItem>
+							<DropdownItem>Configuración</DropdownItem>
+							<DropdownItem divider />
+							<DropdownItem>
+								<div className="log-out-container">
+									<span>Cerrar Sesión</span>
+									<img className="log-out-icon" src={LogOutIcon} alt="img"></img>
+								</div>
+							</DropdownItem>
+						</DropdownMenu>
+					</Dropdown>
 				</div>
 			</div>
 		</nav>
