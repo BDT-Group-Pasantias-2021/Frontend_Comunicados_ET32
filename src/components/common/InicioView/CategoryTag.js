@@ -23,14 +23,14 @@ function darkenColor(col, amt) {
 
 export default function CategoryTag({ categoria, tipo }) {
 	const normalBackgroundStyle = () => {
-		const categoryTagsList = document.querySelectorAll(`.comunicado-category-id${categoria.id_categoria}`);
+		const categoryTagsList = document.querySelectorAll(`.comunicado-category-id${categoria.id_etiqueta}`);
 		categoryTagsList.forEach((element) => {
 			element.style.backgroundColor = categoria.color;
 		});
 	};
 
 	const hoverBackgroundStyle = () => {
-		const categoryTagsList = document.querySelectorAll(`.comunicado-category-id${categoria.id_categoria}`);
+		const categoryTagsList = document.querySelectorAll(`.comunicado-category-id${categoria.id_etiqueta}`);
 		categoryTagsList.forEach((element) => {
 			element.style.backgroundColor = darkenColor(categoria.color, -20);
 		});
@@ -38,13 +38,13 @@ export default function CategoryTag({ categoria, tipo }) {
 
 	return (
 		<div
-			className={`comunicado-category comunicado-category-id${categoria.id_categoria}`}
+			className={`comunicado-category comunicado-category-id${categoria.id_etiqueta}`}
 			onMouseEnter={() => hoverBackgroundStyle()}
 			onMouseLeave={() => normalBackgroundStyle()}
 			style={{ backgroundColor: categoria.color }}
 			title={categoria.nombre}
 		>
-			{tipo === 'card' ? null : <div className="tag-category">{categoria.nombre}</div>}
+			{tipo === 'card' ? null : <div className="tag-category">{categoria.etiqueta}</div>}
 		</div>
 	);
 }
