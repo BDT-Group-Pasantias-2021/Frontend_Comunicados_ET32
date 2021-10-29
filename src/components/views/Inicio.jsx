@@ -14,7 +14,7 @@ import FechaComunicado from '../common/InicioView/FechaComunicado';
 // eslint-disable-next-line no-unused-vars
 import Axios from 'axios';
 
-const ComunicadosJSON = [
+/* const ComunicadosJSON = [
 	{
 		fecha: '2021-09-18',
 		comunicados: [
@@ -142,14 +142,26 @@ const ComunicadosJSON = [
 			},
 		],
 	},
-];
+]; */
 
 export default function Inicio({ showNavbar }) {
+	//* Obtención de comunicados
 	const [fechaComunicados, setFechaComunicados] = useState([]);
 	const [fechaComunicadosAux, setFechaComunicadosAux] = useState([]);
-	const [comunicadosAñadidos, setComunicadosAñadidos] = useState(false);
+	const [firstFetch, setFirstFetch] = useState(true);
+
+	//* Activación de modal
 	const [activeModal, setActiveModal] = useState(null);
 	const [modalAction, setModalAction] = useState('read');
+
+	const getComunicados = (setFechaComunicados, setFechaComunicadosAux, setFirstFetch) => {
+		const values = { titulo: '' };
+		Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/search_titulo_comunicados', values).then((res) => {
+			setFechaComunicados(res.data);
+			setFechaComunicadosAux(res.data);
+			setFirstFetch(false);
+		});
+	};
 
 	const deleteComunicado = (id, selectedFecha) => {
 		const confirmState = window.confirm('¿Estás seguro de eliminar este comunicado?');
@@ -200,6 +212,10 @@ export default function Inicio({ showNavbar }) {
 	// PETICION AXIOS AL BACKEND PARA VERIFICAR QUE LA TOKEN EXISTA EN LA DB
 	let history = useHistory();
 	useEffect(() => {
+		if (firstFetch) {
+			getComunicados(setFechaComunicados, setFechaComunicadosAux, setFirstFetch);
+		}
+
 		// search in fechaComunicados and returns an array of comunicados that match the search value
 		const searchComunicadoBySearchValue = (searchValue) => {
 			const newFechaComunicados = fechaComunicados.reduce((acc, element) => {
@@ -224,12 +240,6 @@ export default function Inicio({ showNavbar }) {
 		const emailToken = localStorage.getItem('user-email');
 		if (!userToken || !emailToken) {
 			history.push('/');
-		}
-
-		if (!comunicadosAñadidos) {
-			setFechaComunicados(ComunicadosJSON);
-			setFechaComunicadosAux(ComunicadosJSON);
-			setComunicadosAñadidos(true);
 		}
 
 		const newComunicadoButton = document.getElementById('new-comunicado-button');
@@ -261,7 +271,7 @@ export default function Inicio({ showNavbar }) {
 				});
 			}
 		};
-	}, [comunicadosAñadidos, fechaComunicados, history, showNavbar]);
+	}, [firstFetch, fechaComunicados, history, showNavbar]);
 
 	return (
 		<ComunicadoCardContext.Provider

@@ -1,14 +1,17 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import SideNavbar from './SideNavbar.js';
+import Axios from 'axios';
 
 // Hooks
 import { NavbarContext } from '../../../hooks/useContext/NavbarContext';
 
 // Components
-import ProfilePhoto from '../../../assets/svgs/unnamed.jpg';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 import NotificationMenu from './NotificationMenu.js';
+import SideNavbar from './SideNavbar.js';
+
+import ProfilePhoto from '../../../assets/svgs/unnamed.jpg';
 import LogOutIcon from '../../../assets/svgs/log-out-logo.svg';
 
 // Styles
@@ -16,15 +19,11 @@ import '../../../css/top_navbar.css';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 
 export default function TopNavbar() {
-	const { searchValue, setSearchValue, activeSidebar, setActiveSidebar } = useContext(NavbarContext);
+	const { activeSidebar, setActiveSidebar } = useContext(NavbarContext);
 
 	//Hooks Dropdown
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 	const openDropdown = () => setDropdownOpen((prevState) => !prevState);
-
-	const writeSearchValue = (e) => {
-		setSearchValue(e.target.value);
-	};
 
 	const toggleNotificationMenu = () => {
 		const notificationMenu = document.getElementById('notification-menu');
@@ -44,7 +43,7 @@ export default function TopNavbar() {
 		searchColor.addEventListener('focusout', () => {
 			changeColor.style.fill = '#fff';
 		});
-	});
+	}, []);
 
 	return (
 		<nav id="top-navbar">

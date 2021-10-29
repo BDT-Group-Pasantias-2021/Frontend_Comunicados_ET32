@@ -69,9 +69,10 @@ export default function ComunicadoCard({ comunicado, fechas }) {
 			</div>
 			<div className="comunicados-bottom-bar">
 				<div className="comunicados-tags-container">
-					{comunicado.categorias.map((tag) => (
-						<CategoryTag key={tag.id_categoria} categoria={tag} tipo="card" />
-					))}
+					{comunicado.etiquetas &&
+						comunicado.etiquetas.map((etiqueta) => (
+							<CategoryTag key={etiqueta.id_etiqueta} categoria={etiqueta} tipo="card" />
+						))}
 				</div>
 			</div>
 			<ul className="comunicado-options-menu" id={`comunicado-options-menu${cardId}`}>

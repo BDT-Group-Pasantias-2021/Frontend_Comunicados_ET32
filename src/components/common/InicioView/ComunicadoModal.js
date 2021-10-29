@@ -19,8 +19,8 @@ export default function ComunicadoModal({ modalAction }) {
 				<div className="modal-top-section">
 					<div className="modal-tags-close">
 						<div className="modal-etiquetas">
-							{activeModal.categorias.map((tag) => (
-								<CategoryTag key={tag.id_categoria} categoria={tag} tipo={'modal'} />
+							{activeModal.etiquetas.map((tag) => (
+								<CategoryTag key={tag.id_etiqueta} categoria={tag} tipo={'modal'} />
 							))}
 						</div>
 						<div className="standard-icon-container" onClick={() => setActiveModal(null)}>
