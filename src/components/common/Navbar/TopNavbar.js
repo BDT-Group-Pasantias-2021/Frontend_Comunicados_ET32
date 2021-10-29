@@ -9,6 +9,10 @@ import { NavbarContext } from '../../../hooks/useContext/NavbarContext';
 // Components
 import ProfilePhoto from '../../../assets/svgs/unnamed.jpg';
 import LogOutIcon from '../../../assets/svgs/log-out-logo.svg';
+import PersonalAreaIcon from '../../../assets/svgs/personal-area.svg';
+import ConfigIcon from '../../../assets/svgs/config.svg';
+import PerfilIcon from '../../../assets/svgs/perfil-icon.svg';
+import CalificationIcon from '../../../assets/svgs/calification.svg';
 // Styles
 import '../../../css/top_navbar.css';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
@@ -139,8 +143,31 @@ export default function TopNavbar() {
 							<DropdownItem header>
 								<p className="user-config-menu-name">Agustin Rezett</p>
 							</DropdownItem>
-							<DropdownItem>Perfil</DropdownItem>
-							<DropdownItem>Configuración</DropdownItem>
+							<DropdownItem divider />
+							<DropdownItem>
+								<div className="perfil-container">
+									<span>Perfil</span>
+									<img className="perfil-icon" src={PerfilIcon} alt="img"></img>
+								</div>
+							</DropdownItem>
+							<DropdownItem>
+								<div className="config-icon-container">
+									<span>Configuración</span>
+									<img className="config-icon" src={ConfigIcon} alt="img"></img>
+								</div>
+							</DropdownItem>
+							<DropdownItem>
+								<div className="calificacion-container">
+									<span>Calificación</span>
+									<img className="calificacion-icon" src={CalificationIcon} alt="img"></img>
+								</div>
+							</DropdownItem>
+							<DropdownItem>
+								<div className="personal-area-container">
+									<span>Area Personal</span>
+									<img className="personal-area-icon" src={PersonalAreaIcon} alt="img"></img>
+								</div>
+							</DropdownItem>
 							<DropdownItem divider />
 							<DropdownItem>
 								<div className="log-out-container">

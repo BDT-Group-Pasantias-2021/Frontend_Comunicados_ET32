@@ -160,6 +160,34 @@ $containers-border-radius: 5px;
 						&:hover {
 							background-color: #dddddd !important;
 						}
+						.perfil-container {
+							@include displayFlex(row, space-between, center);
+							.perfil-icon {
+								width: 20px;
+								height: auto;
+							}
+						}
+						.calificacion-container {
+							@include displayFlex(row, space-between, center);
+							.calificacion-icon {
+								width: 20px;
+								height: auto;
+							}
+						}
+						.config-icon-container {
+							@include displayFlex(row, space-between, center);
+							.config-icon {
+								width: 20px;
+								height: auto;
+							}
+						}
+						.personal-area-container {
+							@include displayFlex(row, space-between, center);
+							.personal-area-icon {
+								width: 22px;
+								height: auto;
+							}
+						}
 						.log-out-container {
 							@include displayFlex(row, space-between, center);
 

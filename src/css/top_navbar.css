@@ -159,6 +159,46 @@
 #top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item:hover {
   background-color: #dddddd !important;
 }
+#top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item .perfil-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+#top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item .perfil-container .perfil-icon {
+  width: 20px;
+  height: auto;
+}
+#top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item .calificacion-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+#top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item .calificacion-container .calificacion-icon {
+  width: 20px;
+  height: auto;
+}
+#top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item .config-icon-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+#top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item .config-icon-container .config-icon {
+  width: 20px;
+  height: auto;
+}
+#top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item .personal-area-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+#top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item .personal-area-container .personal-area-icon {
+  width: 22px;
+  height: auto;
+}
 #top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item .log-out-container {
   display: flex;
   flex-direction: row;
