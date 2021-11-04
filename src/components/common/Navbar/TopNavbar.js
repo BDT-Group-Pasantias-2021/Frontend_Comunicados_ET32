@@ -28,11 +28,17 @@ export default function TopNavbar() {
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 	const openDropdown = () => setDropdownOpen((prevState) => !prevState);
 
-	const toggleNotificationMenu = () => {
+	const toggleNotificationMenu = (action = 0) => {
 		const notificationMenu = document.getElementById('notification-menu');
-		if (!notificationMenu.style.maxHeight) {
+		if (action === 0) {
+			if (!notificationMenu.style.maxHeight) {
+				notificationMenu.style.maxHeight = '400px';
+			} else {
+				notificationMenu.style.maxHeight = null;
+			}
+		} else if (action === 1) {
 			notificationMenu.style.maxHeight = '400px';
-		} else {
+		} else if (action === 2) {
 			notificationMenu.style.maxHeight = null;
 		}
 	};
@@ -147,7 +153,7 @@ export default function TopNavbar() {
 							</g>
 						</svg>
 					</div>
-					<NotificationMenu />
+					<NotificationMenu toggleFunction={toggleNotificationMenu} />
 				</div>
 				<div className="profile-settings-container">
 					<Dropdown isOpen={dropdownOpen} toggle={openDropdown}>

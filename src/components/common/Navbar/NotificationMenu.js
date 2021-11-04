@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 
 // Styles
 
-export default function NotificationMenu() {
+export default function NotificationMenu({ toggleFunction }) {
 	const [typeNotificationMenu, setTypeNotificationMenu] = useState(0);
 
 	useEffect(() => {
@@ -20,7 +20,26 @@ export default function NotificationMenu() {
 			pendingBtn.classList.remove('function-active');
 			signedBtn.classList.add('function-active');
 		}
-	}, [typeNotificationMenu]);
+
+		window.addEventListener('click', function (e) {
+			if (!document.getElementById('notification-menu').contains(e.target)) {
+				if (!document.getElementById('notifications-button').contains(e.target)) {
+					toggleFunction(2);
+				}
+			}
+		});
+
+		return () => {
+			window.addEventListener('click', function (e) {
+				if (!document.getElementById('notification-menu').contains(e.target)) {
+					if (!document.getElementById('notifications-button').contains(e.target)) {
+						toggleFunction(2);
+					}
+				}
+			});
+		};
+	}, [toggleFunction, typeNotificationMenu]);
+
 	return (
 		<div className="notification-menu-container" id="notification-menu">
 			<div className="principal-notification-container">
