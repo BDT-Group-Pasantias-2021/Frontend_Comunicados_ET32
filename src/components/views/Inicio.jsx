@@ -156,7 +156,7 @@ export default function Inicio({ showNavbar }) {
 
 	const getComunicados = (setFechaComunicados, setFechaComunicadosAux, setFirstFetch) => {
 		const values = { titulo: '' };
-		Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/search_titulo_comunicados', values).then((res) => {
+		Axios.post('http://192.168.43.121:3005/Frontend_Comunicados_ET32/search_titulo_comunicados', values).then((res) => {
 			setFechaComunicados(res.data);
 			setFechaComunicadosAux(res.data);
 			setFirstFetch(false);

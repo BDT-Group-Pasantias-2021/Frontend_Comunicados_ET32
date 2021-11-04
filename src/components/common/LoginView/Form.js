@@ -31,7 +31,7 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 				}}
 				onSubmit={(values, { setSubmitting }) => {
 					setSubmitting(false);
-					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/login', values).then((res) => {
+					Axios.post('http://192.168.43.121:3005/Frontend_Comunicados_ET32/login', values).then((res) => {
 						console.log();
 						if (res.data.status === 'success') {
 							res.data.email = values.email;
@@ -165,7 +165,7 @@ const RegisterForm = ({ changeForm, showPassword, seePassword }) => {
 				}}
 				onSubmit={(values, { setSubmitting }) => {
 					setSubmitting(false);
-					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/register', values).then((res) => {
+					Axios.post('http://192.168.43.121:3005/Frontend_Comunicados_ET32/register', values).then((res) => {
 						console.log(res.data);
 						if (res.data.status === 'success') {
 							res.data.email = values.email;
@@ -319,7 +319,7 @@ const RecoverPassword = ({ changeForm }) => {
 				}}
 				onSubmit={(values, { setSubmitting }) => {
 					setSubmitting(false);
-					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/recoverPassword', values).then(
+					Axios.post('http://192.168.43.121:3005/Frontend_Comunicados_ET32/recoverPassword', values).then(
 						(res) => {
 							console.log(res);
 							const resetPassBtn = document.getElementById('reset-password-btn');
@@ -429,13 +429,13 @@ const ChangePassword = ({ searchVars }) => {
 					return errors;
 				}}
 				onSubmit={(values) => {
-					Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/setNewPassword', values).then((res) => {
+					Axios.post('http://192.168.43.121:3005/Frontend_Comunicados_ET32/setNewPassword', values).then((res) => {
 						const statusResponseMessage = document.getElementById('status-response-message');
 						if (res.data.status === 1) {
 							statusResponseMessage.innerHTML = 'Contraseña cambiada con éxito. Redireccionando...';
 							statusResponseMessage.classList.add('status-response-message-success');
 							setTimeout(() => {
-								window.location.replace('http://localhost:3000/Frontend_Comunicados_ET32');
+								window.location.replace('http://192.168.43.121:3000/Frontend_Comunicados_ET32');
 								console.log('Redireccionando a Login');
 							}, 3000);
 						} else if (res.data.status === 2) {

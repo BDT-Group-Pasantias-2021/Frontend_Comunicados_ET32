@@ -158,7 +158,7 @@ export default function ComunicadoModal({ modalAction }) {
 							}}
 							onSubmit={(values) => {
 								handleUpdateComunicado(activeModal.id_comunicaciones, activeModal.fecha, values);
-								/* Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/login', values); */
+								/* Axios.post('http://192.168.43.121:3005/Frontend_Comunicados_ET32/login', values); */
 							}}
 						>
 							<Form className="modal-form-data-container">
@@ -252,7 +252,7 @@ export default function ComunicadoModal({ modalAction }) {
 							onSubmit={(values) => {
 								alert(JSON.stringify(values, null, 2));
 								/* handleUpdateComunicado(activeModal.id_comunicaciones, activeModal.fecha, values); */
-								/* Axios.post('http://localhost:3001/Frontend_Comunicados_ET32/login', values); */
+								/* Axios.post('http://192.168.43.121:3005/Frontend_Comunicados_ET32/login', values); */
 							}}
 						>
 							<Form className="modal-form-data-container">
