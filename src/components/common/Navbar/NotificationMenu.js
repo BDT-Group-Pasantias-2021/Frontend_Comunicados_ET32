@@ -22,18 +22,31 @@ export default function NotificationMenu({ toggleFunction }) {
 		}
 
 		window.addEventListener('click', function (e) {
-			if (!document.getElementById('notification-menu').contains(e.target)) {
-				if (!document.getElementById('notifications-button').contains(e.target)) {
-					toggleFunction(2);
+			const notificationMenu = document.getElementById('notification-menu');
+			const notificationButton = document.getElementById('notifications-button');
+			if(notificationMenu){
+				if (!notificationMenu.contains(e.target)) {
+					if(notificationButton){
+						if (!notificationButton.contains(e.target)) {
+							toggleFunction(2);
+						}
+					}
+				
 				}
-			}
+			}	
 		});
-
 		return () => {
-			window.addEventListener('click', function (e) {
-				if (!document.getElementById('notification-menu').contains(e.target)) {
-					if (!document.getElementById('notifications-button').contains(e.target)) {
-						toggleFunction(2);
+			window.removeEventListener('click', function (e) {
+				const notificationMenu = document.getElementById('notification-menu');
+				const notificationButton = document.getElementById('notifications-button');
+				if(notificationMenu){
+					if (!notificationMenu.contains(e.target)) {
+						if(notificationButton){
+							if (!notificationButton.contains(e.target)) {
+								toggleFunction(2);
+							}
+						}
+					
 					}
 				}
 			});

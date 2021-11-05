@@ -1,5 +1,5 @@
 {
 	"host": "localhost",
-	"port": 3001,
-	"basename": "/Frontend_Comunicados_ET32"
+	"port": 3005,
+	"basename": "Frontend_Comunicados_ET32"
 }
