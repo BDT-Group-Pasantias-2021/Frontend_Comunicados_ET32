@@ -14,6 +14,9 @@ import FechaComunicado from '../common/InicioView/FechaComunicado';
 // eslint-disable-next-line no-unused-vars
 import Axios from 'axios';
 
+// Data
+import config from '../../data/config.json';
+
 /* const ComunicadosJSON = [
 	{
 		fecha: '2021-09-18',
@@ -156,11 +159,13 @@ export default function Inicio({ showNavbar }) {
 
 	const getComunicados = (setFechaComunicados, setFechaComunicadosAux, setFirstFetch) => {
 		const values = { titulo: '' };
-		Axios.post('http://192.168.43.121:3005/Frontend_Comunicados_ET32/search_titulo_comunicados', values).then((res) => {
-			setFechaComunicados(res.data);
-			setFechaComunicadosAux(res.data);
-			setFirstFetch(false);
-		});
+		Axios.post(`http://${config.host}:${config.port}/${config.basename}/search_titulo_comunicados`, values).then(
+			(res) => {
+				setFechaComunicados(res.data);
+				setFechaComunicadosAux(res.data);
+				setFirstFetch(false);
+			}
+		);
 	};
 
 	const deleteComunicado = (id, selectedFecha) => {
@@ -212,6 +217,7 @@ export default function Inicio({ showNavbar }) {
 	// PETICION AXIOS AL BACKEND PARA VERIFICAR QUE LA TOKEN EXISTA EN LA DB
 	let history = useHistory();
 	useEffect(() => {
+		console.log(config.host);
 		if (firstFetch) {
 			getComunicados(setFechaComunicados, setFechaComunicadosAux, setFirstFetch);
 		}

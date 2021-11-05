@@ -11,6 +11,9 @@ import { Icon } from 'rsuite';
 // Styles
 import 'rsuite/dist/styles/rsuite-default.css';
 
+// Data
+import config from '../../../data/config.json';
+
 // Forms
 const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 	const history = useHistory();
@@ -31,7 +34,7 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 				}}
 				onSubmit={(values, { setSubmitting }) => {
 					setSubmitting(false);
-					Axios.post('http://192.168.43.121:3005/Frontend_Comunicados_ET32/login', values).then((res) => {
+					Axios.post(`http://${config.host}:${config.port}/${config.basename}/login`, values).then((res) => {
 						console.log();
 						if (res.data.status === 'success') {
 							res.data.email = values.email;
@@ -165,15 +168,17 @@ const RegisterForm = ({ changeForm, showPassword, seePassword }) => {
 				}}
 				onSubmit={(values, { setSubmitting }) => {
 					setSubmitting(false);
-					Axios.post('http://192.168.43.121:3005/Frontend_Comunicados_ET32/register', values).then((res) => {
-						console.log(res.data);
-						if (res.data.status === 'success') {
-							res.data.email = values.email;
-							localStorage.setItem('user-token', JSON.stringify(res.data.sessionID, res.data.email));
-							localStorage.setItem('user-email', JSON.stringify(res.data.email));
-							history.push('/home');
+					Axios.post(`http://${config.host}:${config.port}/${config.basename}/register`, values).then(
+						(res) => {
+							console.log(res.data);
+							if (res.data.status === 'success') {
+								res.data.email = values.email;
+								localStorage.setItem('user-token', JSON.stringify(res.data.sessionID, res.data.email));
+								localStorage.setItem('user-email', JSON.stringify(res.data.email));
+								history.push('/home');
+							}
 						}
-					});
+					);
 				}}
 			>
 				<Form
@@ -319,7 +324,7 @@ const RecoverPassword = ({ changeForm }) => {
 				}}
 				onSubmit={(values, { setSubmitting }) => {
 					setSubmitting(false);
-					Axios.post('http://192.168.43.121:3005/Frontend_Comunicados_ET32/recoverPassword', values).then(
+					Axios.post(`http://${config.host}:${config.port}/${config.basename}/recoverPassword`, values).then(
 						(res) => {
 							console.log(res);
 							const resetPassBtn = document.getElementById('reset-password-btn');
@@ -429,22 +434,24 @@ const ChangePassword = ({ searchVars }) => {
 					return errors;
 				}}
 				onSubmit={(values) => {
-					Axios.post('http://192.168.43.121:3005/Frontend_Comunicados_ET32/setNewPassword', values).then((res) => {
-						const statusResponseMessage = document.getElementById('status-response-message');
-						if (res.data.status === 1) {
-							statusResponseMessage.innerHTML = 'Contraseña cambiada con éxito. Redireccionando...';
-							statusResponseMessage.classList.add('status-response-message-success');
-							setTimeout(() => {
-								window.location.replace('http://192.168.43.121:3000/Frontend_Comunicados_ET32');
-								console.log('Redireccionando a Login');
-							}, 3000);
-						} else if (res.data.status === 2) {
-							statusResponseMessage.innerHTML = 'Token inválido';
-							statusResponseMessage.classList.add('status-response-message-error');
-						} else if (res.data.status === 3) {
-							statusResponseMessage.innerHTML = 'Error al cambiar la contraseña';
+					Axios.post(`http://${config.host}:${config.port}/${config.basename}/setNewPassword`, values).then(
+						(res) => {
+							const statusResponseMessage = document.getElementById('status-response-message');
+							if (res.data.status === 1) {
+								statusResponseMessage.innerHTML = 'Contraseña cambiada con éxito. Redireccionando...';
+								statusResponseMessage.classList.add('status-response-message-success');
+								setTimeout(() => {
+									window.location.replace('http://192.168.43.121:3000/Frontend_Comunicados_ET32');
+									console.log('Redireccionando a Login');
+								}, 3000);
+							} else if (res.data.status === 2) {
+								statusResponseMessage.innerHTML = 'Token inválido';
+								statusResponseMessage.classList.add('status-response-message-error');
+							} else if (res.data.status === 3) {
+								statusResponseMessage.innerHTML = 'Error al cambiar la contraseña';
+							}
 						}
-					});
+					);
 				}}
 			>
 				<Form
