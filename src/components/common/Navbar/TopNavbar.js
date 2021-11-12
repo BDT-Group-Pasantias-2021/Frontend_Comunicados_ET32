@@ -13,10 +13,9 @@ import SideNavbar from './SideNavbar.js';
 
 import ProfilePhoto from '../../../assets/svgs/unnamed.jpg';
 import LogOutIcon from '../../../assets/svgs/log-out-logo.svg';
-import PersonalAreaIcon from '../../../assets/svgs/personal-area.svg';
 import ConfigIcon from '../../../assets/svgs/config.svg';
 import PerfilIcon from '../../../assets/svgs/perfil-icon.svg';
-import CalificationIcon from '../../../assets/svgs/calification.svg';
+import DownloadAppIcon from '../../../assets/svgs/download-app.svg';
 // Styles
 import '../../../css/top_navbar.css';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
@@ -45,7 +44,14 @@ export default function TopNavbar() {
 			notificationMenu.style.maxHeight = null;
 		}
 	};
+<<<<<<< Updated upstream
 
+=======
+	const configWindow = () => {
+		history.push('/configuracion');
+		console.log('configuracion');
+	};
+>>>>>>> Stashed changes
 	const cerrarSesion = () => {
 		//extraer user-token del localStorage y guardarlo en variable de values
 		const sessionID = localStorage.getItem('user-token');
@@ -179,30 +185,26 @@ export default function TopNavbar() {
 						<DropdownMenu className="user-config-menu">
 							<DropdownItem header>
 								<p className="user-config-menu-name">Agustin Rezett</p>
+								<p className="user-config-menu-email">
+									{localStorage.getItem('user-email').split('"')}
+								</p>
 							</DropdownItem>
 							<DropdownItem divider />
 							<DropdownItem>
-								<div className="perfil-container">
-									<span>Perfil</span>
-									<img className="perfil-icon" src={PerfilIcon} alt="img"></img>
-								</div>
-							</DropdownItem>
-							<DropdownItem>
-								<div className="config-icon-container">
+								<div
+									className="config-icon-container"
+									onClick={() => {
+										configWindow();
+									}}
+								>
 									<span>Configuración</span>
 									<img className="config-icon" src={ConfigIcon} alt="img"></img>
 								</div>
 							</DropdownItem>
 							<DropdownItem>
-								<div className="calificacion-container">
-									<span>Calificación</span>
-									<img className="calificacion-icon" src={CalificationIcon} alt="img"></img>
-								</div>
-							</DropdownItem>
-							<DropdownItem>
-								<div className="personal-area-container">
-									<span>Area Personal</span>
-									<img className="personal-area-icon" src={PersonalAreaIcon} alt="img"></img>
+								<div className="download-app-container">
+									<span>Descargar App</span>
+									<img className="download-icon" src={DownloadAppIcon} alt="img"></img>
 								</div>
 							</DropdownItem>
 							<DropdownItem divider />

@@ -191,10 +191,22 @@
   padding: 15px !important;
   margin-top: 15px !important;
 }
+#top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 #top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-header .user-config-menu-name {
   font-size: 20px;
   color: #000;
   padding: 10px;
+  padding-bottom: 0px;
+}
+#top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-header .user-config-menu-email {
+  font-size: 14px;
+  top: -10px;
+  color: #999999;
 }
 #top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item {
   transition: all 120ms ease-in;
@@ -202,26 +214,6 @@
 }
 #top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item:hover {
   background-color: #dddddd !important;
-}
-#top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item .perfil-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-#top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item .perfil-container .perfil-icon {
-  width: 20px;
-  height: auto;
-}
-#top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item .calificacion-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-#top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item .calificacion-container .calificacion-icon {
-  width: 20px;
-  height: auto;
 }
 #top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item .config-icon-container {
   display: flex;
@@ -233,14 +225,14 @@
   width: 20px;
   height: auto;
 }
-#top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item .personal-area-container {
+#top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item .download-app-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
-#top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item .personal-area-container .personal-area-icon {
-  width: 22px;
+#top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item .download-app-container .download-icon {
+  width: 20px;
   height: auto;
 }
 #top-navbar .right-nav .profile-settings-container .dropdown .user-config-menu .dropdown-item .log-out-container {

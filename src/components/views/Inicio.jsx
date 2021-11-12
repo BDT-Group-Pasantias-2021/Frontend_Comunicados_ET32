@@ -157,7 +157,7 @@ export default function Inicio({ showNavbar }) {
 	const [activeModal, setActiveModal] = useState(null);
 	const [modalAction, setModalAction] = useState('read');
 
-	const getComunicados = (setFechaComunicados, setFechaComunicadosAux, setFirstFetch) => {
+	const getComunicados = (setFechaComunicados, setFechaComunicadosAux, setFirstFetch, ) => {
 		const values = { titulo: '' };
 		Axios.post(`http://${config.host}:${config.port}/${config.basename}/search_titulo_comunicados`, values).then(
 			(res) => {
