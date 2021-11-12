@@ -213,9 +213,11 @@ export default function Inicio({ showNavbar }) {
 			if (element.fecha === selectedFecha) {
 				const comunicados = element.comunicados.map((comunicado) => {
 					if (comunicado.id_comunicaciones === id) {
-						const values = { titulo: '' };
+						const email = localStorage.getItem('user-email');
+						const values = { idComunicado: id, email: email};
+						alert(values, null, 2);
 						Axios.post(
-							`http://${config.host}:${config.port}/${config.basename}/search_titulo_comunicados`,
+							`http://${config.host}:${config.port}/${config.basename}/firmarComunicado`,
 							values
 						).then((res) => {});
 						return { ...comunicado, leido: true };
