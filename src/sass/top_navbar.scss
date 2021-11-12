@@ -195,10 +195,17 @@ $containers-border-radius: 5px;
 					margin-top: 15px !important;
 
 					.dropdown-header {
+						@include displayFlex(column, center, center);
 						.user-config-menu-name {
 							font-size: 20px;
 							color: #000;
 							padding: 10px;
+							padding-bottom: 0px;
+						}
+						.user-config-menu-email {
+							font-size: 14px;
+							top: -10px;
+							color: rgb(153, 153, 153);
 						}
 					}
 					.dropdown-item {
@@ -207,20 +214,6 @@ $containers-border-radius: 5px;
 						&:hover {
 							background-color: #dddddd !important;
 						}
-						.perfil-container {
-							@include displayFlex(row, space-between, center);
-							.perfil-icon {
-								width: 20px;
-								height: auto;
-							}
-						}
-						.calificacion-container {
-							@include displayFlex(row, space-between, center);
-							.calificacion-icon {
-								width: 20px;
-								height: auto;
-							}
-						}
 						.config-icon-container {
 							@include displayFlex(row, space-between, center);
 							.config-icon {
@@ -228,10 +221,10 @@ $containers-border-radius: 5px;
 								height: auto;
 							}
 						}
-						.personal-area-container {
+						.download-app-container {
 							@include displayFlex(row, space-between, center);
-							.personal-area-icon {
-								width: 22px;
+							.download-icon {
+								width: 20px;
 								height: auto;
 							}
 						}
