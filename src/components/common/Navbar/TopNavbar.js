@@ -45,21 +45,19 @@ export default function TopNavbar() {
 			notificationMenu.style.maxHeight = null;
 		}
 	};
-	const cerrarSesion = () => {
-			//extraer user-token del localStorage y guardarlo en variable de values
-			const sessionID = localStorage.getItem('user-token');
-			const values = {sessionID};
-			Axios.post(`http://${config.host}:${config.port}/${config.basename}/logout`, values).then(
-				(res) => {
-						//remover user-email y user-token de local storage
-						localStorage.removeItem('user-email');
-						localStorage.removeItem('user-token');
-						history.push('/');
-				}
-			); 
-		}
 
-	
+	const cerrarSesion = () => {
+		//extraer user-token del localStorage y guardarlo en variable de values
+		const sessionID = localStorage.getItem('user-token');
+		const values = { sessionID };
+		Axios.post(`http://${config.host}:${config.port}/${config.basename}/logout`, values).then((res) => {
+			//remover user-email y user-token de local storage
+			localStorage.removeItem('user-email');
+			localStorage.removeItem('user-token');
+			history.push('/');
+		});
+	};
+
 	useEffect(() => {
 		const searchColor = document.getElementById('search-bar');
 		const changeColor = document.getElementById('Lupa_svg');
@@ -210,11 +208,13 @@ export default function TopNavbar() {
 							<DropdownItem divider />
 							<DropdownItem>
 								<div className="log-out-container">
-									<span onClick={
-										() => {
-											cerrarSesion();	
-										}
-									}>Cerrar Sesión</span>
+									<span
+										onClick={() => {
+											cerrarSesion();
+										}}
+									>
+										Cerrar Sesión
+									</span>
 
 									<img className="log-out-icon" src={LogOutIcon} alt="img"></img>
 								</div>

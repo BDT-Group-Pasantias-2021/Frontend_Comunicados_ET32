@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import Axios from 'axios';
 
 // Hooks
@@ -19,9 +20,10 @@ export default function ComunicadoModal({ modalAction }) {
 				<div className="modal-top-section">
 					<div className="modal-tags-close">
 						<div className="modal-etiquetas">
-							{activeModal.etiquetas.map((tag) => (
-								<CategoryTag key={tag.id_etiqueta} categoria={tag} tipo={'modal'} />
-							))}
+							{activeModal.etiquetas != null &&
+								activeModal.etiquetas.map((tag) => (
+									<CategoryTag key={tag.id_etiqueta} categoria={tag} tipo={'modal'} />
+								))}
 						</div>
 						<div className="standard-icon-container" onClick={() => setActiveModal(null)}>
 							<svg className="standard-icon" viewBox="0 0 512.001 512.001">
@@ -95,6 +97,7 @@ export default function ComunicadoModal({ modalAction }) {
 								</g>
 							</svg>
 							<p className="standard-icon-label">{activeModal.leido ? 'Firmado' : 'Pendiente'}</p>
+							<div id="something"></div>
 						</div>
 					</div>
 					<div className="modal-buttons">
@@ -314,13 +317,14 @@ export default function ComunicadoModal({ modalAction }) {
 	const handleSignComunicado = (id, fecha) => {
 		window.navigator.vibrate([50]);
 		const signBtn = document.getElementById('modal-sign-button');
+
 		signBtn.innerHTML =
 			'<svg class="seen-marker-icon" viewBox="0 0 512 512"><g><g><path d="M504.502,75.496c-9.997-9.998-26.205-9.998-36.204,0L161.594,382.203L43.702,264.311c-9.997-9.998-26.205-9.997-36.204,0 c-9.998,9.997-9.998,26.205,0,36.203l135.994,135.992c9.994,9.997,26.214,9.99,36.204,0L504.502,111.7 C514.5,101.703,514.499,85.494,504.502,75.496z"/></g></g></svg>';
 		signBtn.classList.add('modal-sign-button-active');
 		setTimeout(() => {
 			activeModal.leido = true;
-		}, 5);
-		signComunicado(id, fecha);
+			signComunicado(id, fecha);
+		}, 2000);
 	};
 
 	const handleUpdateComunicado = (id, fecha, comunicado) => {

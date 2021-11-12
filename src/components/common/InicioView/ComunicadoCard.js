@@ -20,7 +20,7 @@ export default function ComunicadoCard({ comunicado, fechas }) {
 		const realHeight = comunicadoCard.scrollHeight;
 
 		if (!comunicadoCard.style.maxHeight) {
-			comunicadoCard.style.maxHeight = realHeight + 20 + 10 + 'px';
+			comunicadoCard.style.maxHeight = realHeight + 30 + 'px';
 		} else {
 			comunicadoCard.style.maxHeight = null;
 		}

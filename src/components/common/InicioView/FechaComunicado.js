@@ -34,8 +34,12 @@ export default function FechaComunicado({ fecha, comunicados }) {
 		<div className="date-comunicados-container col-11 col-sm-12 col-md-10">
 			<h4 className="date-comunicados-header">{renderDate}</h4>
 			<div className="date-comunicados-cards">
-				{comunicados.map((comunicado, index) => (
-					<ComunicadoCard key={index} comunicado={comunicado} fechas={{ renderDate, fecha }} />
+				{comunicados.map((comunicado) => (
+					<ComunicadoCard
+						key={comunicado.id_comunicaciones}
+						comunicado={comunicado}
+						fechas={{ renderDate, fecha }}
+					/>
 				))}
 			</div>
 		</div>

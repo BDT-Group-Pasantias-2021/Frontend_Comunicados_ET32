@@ -43,7 +43,9 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 							history.push('/home');
 						} else {
 							const messageContainer = document.getElementById('message-container');
-							messageContainer.innerText = res.data;
+							if (messageContainer) {
+								messageContainer.innerText = res.data;
+							}
 							setTimeout(() => {
 								messageContainer.innerText = '';
 							}, 2500);

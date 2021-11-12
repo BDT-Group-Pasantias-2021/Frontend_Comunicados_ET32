@@ -161,11 +161,21 @@ export default function Inicio({ showNavbar }) {
 		const values = { titulo: '' };
 		Axios.post(`http://${config.host}:${config.port}/${config.basename}/search_titulo_comunicados`, values).then(
 			(res) => {
-				setFechaComunicados(res.data);
-				setFechaComunicadosAux(res.data);
+				setFechaComunicados(orderComunicadosByDate(res.data));
+				setFechaComunicadosAux(orderComunicadosByDate(res.data));
+
 				setFirstFetch(false);
 			}
 		);
+	};
+
+	const orderComunicadosByDate = (fechaComunicados) => {
+		const fechaComunicadosOrdenados = fechaComunicados.sort((a, b) => {
+			const dateA = new Date(a.fecha);
+			const dateB = new Date(b.fecha);
+			return dateB - dateA;
+		});
+		return fechaComunicadosOrdenados;
 	};
 
 	const deleteComunicado = (id, selectedFecha) => {
@@ -203,6 +213,11 @@ export default function Inicio({ showNavbar }) {
 			if (element.fecha === selectedFecha) {
 				const comunicados = element.comunicados.map((comunicado) => {
 					if (comunicado.id_comunicaciones === id) {
+						const values = { titulo: '' };
+						Axios.post(
+							`http://${config.host}:${config.port}/${config.basename}/search_titulo_comunicados`,
+							values
+						).then((res) => {});
 						return { ...comunicado, leido: true };
 					}
 					return comunicado;
@@ -211,13 +226,15 @@ export default function Inicio({ showNavbar }) {
 			}
 			return element;
 		});
+
 		setFechaComunicados(newFechaComunicados);
 	};
+
+	//function to order fechaComunicados in date ascending order
 
 	// PETICION AXIOS AL BACKEND PARA VERIFICAR QUE LA TOKEN EXISTA EN LA DB
 	let history = useHistory();
 	useEffect(() => {
-		console.log(config.host);
 		if (firstFetch) {
 			getComunicados(setFechaComunicados, setFechaComunicadosAux, setFirstFetch);
 		}
