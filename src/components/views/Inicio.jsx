@@ -158,8 +158,9 @@ export default function Inicio({ showNavbar }) {
 	const [modalAction, setModalAction] = useState('read');
 
 	const getComunicados = (setFechaComunicados, setFechaComunicadosAux, setFirstFetch) => {
-		const values = { titulo: '' };
-		Axios.post(`http://${config.host}:${config.port}/${config.basename}/search_titulo_comunicados`, values).then(
+		const email = localStorage.getItem('user-email');
+		const values = { email: email };
+		Axios.post(`http://${config.host}:${config.port}/${config.basename}/search_receptor_comunicados`, values).then(
 			(res) => {
 				setFechaComunicados(orderComunicadosByDate(res.data));
 				setFechaComunicadosAux(orderComunicadosByDate(res.data));
@@ -214,8 +215,7 @@ export default function Inicio({ showNavbar }) {
 				const comunicados = element.comunicados.map((comunicado) => {
 					if (comunicado.id_comunicaciones === id) {
 						const email = localStorage.getItem('user-email');
-						const values = { idComunicado: id, email: email};
-						alert(values, null, 2);
+						const values = { idComunicado: id, email: email };
 						Axios.post(
 							`http://${config.host}:${config.port}/${config.basename}/firmarComunicado`,
 							values
@@ -246,8 +246,16 @@ export default function Inicio({ showNavbar }) {
 			const newFechaComunicados = fechaComunicados.reduce((acc, element) => {
 				const comunicados = element.comunicados.filter((comunicado) => {
 					return (
-						comunicado.titulo.toLowerCase().includes(searchValue.toLowerCase()) ||
-						comunicado.descripcion.toLowerCase().includes(searchValue.toLowerCase())
+						comunicado.titulo
+							.normalize('NFD')
+							.replace(/[\u0300-\u036f]/g, '')
+							.toLowerCase()
+							.includes(searchValue.toLowerCase()) ||
+						comunicado.descripcion
+							.normalize('NFD')
+							.replace(/[\u0300-\u036f]/g, '')
+							.toLowerCase()
+							.includes(searchValue.toLowerCase())
 					);
 				});
 				if (comunicados.length > 0) {
@@ -296,6 +304,7 @@ export default function Inicio({ showNavbar }) {
 				});
 			}
 		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [firstFetch, fechaComunicados, history, showNavbar]);
 
 	return (

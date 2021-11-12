@@ -324,7 +324,7 @@ export default function ComunicadoModal({ modalAction }) {
 		setTimeout(() => {
 			activeModal.leido = true;
 			signComunicado(id, fecha);
-		}, 2000);
+		}, 700);
 	};
 
 	const handleUpdateComunicado = (id, fecha, comunicado) => {
