@@ -1,5 +1,6 @@
+/* eslint-disable no-sequences */
 /* eslint-disable no-unused-vars */
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import Axios from 'axios';
 
@@ -10,9 +11,13 @@ import CategoryTag from './CategoryTag';
 // Components
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 
+// Data
+import config from '../../../data/config.json';
+
 export default function ComunicadoModal({ modalAction }) {
 	const { activeModal, setActiveModal, setModalAction, signComunicado, updateComunicado } =
 		useContext(ComunicadoCardContext);
+	const [cursos, setCursos] = useState(null);
 
 	const ReadModalContent = () => {
 		return (
@@ -215,6 +220,8 @@ export default function ComunicadoModal({ modalAction }) {
 	};
 
 	const InsertModalContent = () => {
+		const emisor = localStorage.getItem('user-email').replaceAll('"', '');
+
 		return (
 			<div className="modal-container">
 				<div className="modal-top-section">
@@ -237,15 +244,16 @@ export default function ComunicadoModal({ modalAction }) {
 						</div>
 					</div>
 					<div className="modal-from-who">
-						Comunicado por: <b>[static]</b>
+						Comunicado por: <b>{emisor}</b>
 					</div>
 					<div className="modal-content">
 						<Formik
 							initialValues={{
-								emisor: '[Static]',
+								emisor: emisor,
 								titulo: '',
 								descripcion: '',
 								categorias: [],
+								cursoReceptor: '',
 							}}
 							validate={(values) => {
 								const errors = {};
@@ -255,10 +263,46 @@ export default function ComunicadoModal({ modalAction }) {
 							onSubmit={(values) => {
 								alert(JSON.stringify(values, null, 2));
 								/* handleUpdateComunicado(activeModal.id_comunicaciones, activeModal.fecha, values); */
-								/* Axios.post('http://192.168.43.121:3005/Frontend_Comunicados_ET32/login', values); */
+								//* Petición de inserción de comunicado
+								Axios.post(
+									`http://${config.host}:${config.port}/${config.basename}/insertComunicado`,
+									values
+								).then((res) => {
+									console.log(res);
+									if (res.data.status === 1) {
+										alert('Comunicado insertado correctamente');
+										setActiveModal(null);
+									} else if (res.data.status === 2) {
+										console.log('El emisor no existe');
+									} else if (res.data.status === 3) {
+										console.log('El título debe tener entre 5 y 50 caracteres');
+									} else if (res.data.status === 4) {
+										console.log('La descripción debe tener al menos 5 caracteres');
+									} else {
+										console.log('El curso no existe');
+									}
+								});
 							}}
 						>
 							<Form className="modal-form-data-container">
+								<div className="form-input-container modal-receptor-container">
+									<label className="form-label">Curso receptor: </label>
+
+									<Field as="select" className="modal-input-receptor" name="cursoReceptor" required>
+										{cursos !== null &&
+											((
+												<option defaultValue disabled>
+													Selecciona un curso
+												</option>
+											),
+											cursos.map((curso) => (
+												<option key={curso.id_curso} value={curso.id_curso}>
+													{curso.anio}º {curso.division}. {curso.turno} - {curso.especialidad}
+												</option>
+											)))}
+									</Field>
+									<ErrorMessage className="input-error" name="titulo" component="div" />
+								</div>
 								<div className="form-input-container">
 									<Field
 										component="textarea"
@@ -347,7 +391,15 @@ export default function ComunicadoModal({ modalAction }) {
 		mainForm.click();
 	};
 
+	const getCursos = (setCursos) => {
+		Axios.post(`http://${config.host}:${config.port}/${config.basename}/getCursos`).then((response) => {
+			setCursos(response.data.result);
+		});
+	};
+
 	useEffect(() => {
+		getCursos(setCursos);
+
 		if (activeModal.leido !== undefined) {
 			if (!activeModal.leido) {
 				const modal = document.getElementById(`modal-comunicado`);
@@ -357,7 +409,7 @@ export default function ComunicadoModal({ modalAction }) {
 				modal.classList.remove('unread-comunicado');
 			}
 		}
-	});
+	}, [activeModal.leido]);
 
 	return (
 		<>

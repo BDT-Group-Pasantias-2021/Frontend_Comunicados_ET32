@@ -45,10 +45,10 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 							const messageContainer = document.getElementById('message-container');
 							if (messageContainer) {
 								messageContainer.innerText = res.data;
+								setTimeout(() => {
+									messageContainer.innerText = '';
+								}, 2500);
 							}
-							setTimeout(() => {
-								messageContainer.innerText = '';
-							}, 2500);
 						}
 					});
 				}}

@@ -3,10 +3,9 @@ import { ButtonGroup, Dropdown, DropdownItem, DropdownMenu, DropdownToggle } fro
 
 // Hooks
 
-
 //Components
 
-export default function SortAndFilter({selectFiltro,getComunicados,filtrarComunicados}) {
+export default function SortAndFilter({ selectFiltro, getComunicados, filtrarComunicados }) {
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 	const openDropdown = () => setDropdownOpen((prevState) => !prevState);
 	return (
@@ -24,8 +23,12 @@ export default function SortAndFilter({selectFiltro,getComunicados,filtrarComuni
 			</div>
 			<div className="standard-icon-container standard-icon-container-margin">
 				<select
-				onChange={() => {selectFiltro()}}
-				name="select-comunicado" id="select-comunicados">
+					onChange={() => {
+						selectFiltro();
+					}}
+					name="select-comunicado"
+					id="select-comunicados"
+				>
 					<option value="filtrar"> Filtrar por: </option>
 					<option value="todo"> Mostrar todo </option>
 					<option value="fecha"> fecha </option>
@@ -33,8 +36,11 @@ export default function SortAndFilter({selectFiltro,getComunicados,filtrarComuni
 					<option value="receptor"> receptor </option>
 					<option value="titulo"> titulo </option>
 				</select>
-				<input type="text" id="input-filtro"hidden></input>
-				<button id="btn-filtro" hidden onClick={filtrarComunicados()} > Buscar </button>					
+				<input type="text" id="input-filtro" hidden></input>
+				<button id="btn-filtro" hidden onClick={() => filtrarComunicados}>
+					{' '}
+					Buscar{' '}
+				</button>
 				{/* <Dropdown isOpen={dropdownOpen} toggle={openDropdown}id="select-comunicados">
 						<DropdownToggle className="user-config profile-image-container">
 						<svg
@@ -54,8 +60,7 @@ export default function SortAndFilter({selectFiltro,getComunicados,filtrarComuni
 							</DropdownItem>
 						</DropdownMenu>
 					</Dropdown> */}
-				</div>
 			</div>
-	
+		</div>
 	);
 }

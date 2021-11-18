@@ -121,6 +121,17 @@
 						}
 					}
 
+					.modal-receptor-container {
+						@include displayFlex(row, flex-start, center);
+
+						.modal-input-receptor {
+							margin-left: 3px;
+							margin-bottom: 10px;
+							border: none;
+							width: fit-content;
+						}
+					}
+
 					.modal-title-edit {
 						height: 50px;
 						resize: none;

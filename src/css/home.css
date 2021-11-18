@@ -144,6 +144,18 @@
 .father-container-view .modal-comunicado .modal-container .modal-top-section .modal-content .modal-form-data-container .enter-btn {
   display: none;
 }
+.father-container-view .modal-comunicado .modal-container .modal-top-section .modal-content .modal-receptor-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.father-container-view .modal-comunicado .modal-container .modal-top-section .modal-content .modal-receptor-container .modal-input-receptor {
+  margin-left: 3px;
+  margin-bottom: 10px;
+  border: none;
+  width: fit-content;
+}
 .father-container-view .modal-comunicado .modal-container .modal-top-section .modal-content .modal-title-edit {
   height: 50px;
   resize: none;
