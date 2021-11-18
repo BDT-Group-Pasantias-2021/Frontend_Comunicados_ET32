@@ -26,26 +26,55 @@ export default function Inicio({ showNavbar }) {
 	const [activeModal, setActiveModal] = useState(null);
 	const [modalAction, setModalAction] = useState('read');
 
-	const selectFiltro = () => {
+	const selectFiltro = () => { 
 		let valorSelect = document.getElementById('select-comunicados');
 		let miFiltro = "select_all_comunicados";
+		let miInput = document.getElementById('input-filtro');
+		let miBtn = document.getElementById('btn-filtro');
+
 		if (valorSelect.value !== null || valorSelect.value !== '') {
 			if (valorSelect.value === 'fecha') {
 				miFiltro = 'search_fecha_comunicados';
+				miInput.type = 'date';
+				miBtn.removeAttribute("hidden");
+				miInput.removeAttribute("hidden");
 			} else if (valorSelect.value === 'idCategoria') {
 				miFiltro = 'search_id_tiposComunicados';
+				miInput.type = 'number';
+				miBtn.removeAttribute("hidden");
+				
+				miInput.removeAttribute("hidden");
+
 			} else if (valorSelect.value === 'receptor') {
 				miFiltro =  'search_receptor_comunicados';
+				miInput.type = 'text';
+				miInput.removeAttribute("hidden");
+				miBtn.removeAttribute("hidden");
+
 			}  else if (valorSelect.value === 'titulo') {
 				miFiltro =  'search_titulo_comunicados';
-			}else {
-				//Muestra todos los archivos
-				miFiltro =  'search_all_comunicados';
-			}
-			getComunicados(setFechaComunicados, setFechaComunicadosAux, setFirstFetch,miFiltro);
+				miInput.type = 'text';
+				miInput.removeAttribute("hidden");
+				miBtn.removeAttribute("hidden");
 
+			}else if (valorSelect.value === 'todo') {
+				miFiltro =  'search_all_comunicados';
+				miInput.setAttribute("hidden", true);
+				miBtn.removeAttribute("hidden");
+			}else{
+				miInput.setAttribute("hidden", true);
+				miBtn.setAttribute("hidden", true);
+			}
+			return miFiltro;
+			
 		}
 	};
+	const filtrarComunicados = () => {
+		let miFiltro = selectFiltro();
+		getComunicados(setFechaComunicados, setFechaComunicadosAux, setFirstFetch,miFiltro);
+
+	}
+
 	const defValues = (selectFiltro)=>{
 		let values = {};
 		if (selectFiltro === 'search_fecha_comunicados') {
@@ -233,7 +262,8 @@ export default function Inicio({ showNavbar }) {
 				<div className="container" style={{ paddingTop: '35px' }}>
 					<div className="row">
 						<SortAndFilter selectFiltro = {()=> selectFiltro() }
-						getComunicados = {()=>getComunicados()}/>
+						getComunicados = {()=>getComunicados()}
+						filtrarComunicados = {() => filtrarComunicados()}/>
 						{fechaComunicadosAux.length > 0
 							? // eslint-disable-next-line array-callback-return
 							  fechaComunicadosAux.map((element) => {
