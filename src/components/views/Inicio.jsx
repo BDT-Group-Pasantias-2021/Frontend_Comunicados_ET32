@@ -22,15 +22,53 @@ export default function Inicio({ showNavbar }) {
 	const [fechaComunicados, setFechaComunicados] = useState([]);
 	const [fechaComunicadosAux, setFechaComunicadosAux] = useState([]);
 	const [firstFetch, setFirstFetch] = useState(true);
-
 	//* Activación de modal
 	const [activeModal, setActiveModal] = useState(null);
 	const [modalAction, setModalAction] = useState('read');
 
-	const getComunicados = (setFechaComunicados, setFechaComunicadosAux, setFirstFetch) => {
-		const email = localStorage.getItem('user-email');
-		const values = { email: email };
-		Axios.post(`http://${config.host}:${config.port}/${config.basename}/search_receptor_comunicados`, values).then(
+	const selectFiltro = () => {
+		let valorSelect = document.getElementById('select-comunicados');
+		let miFiltro = "select_all_comunicados";
+		if (valorSelect.value !== null || valorSelect.value !== '') {
+			if (valorSelect.value === 'fecha') {
+				miFiltro = 'search_fecha_comunicados';
+			} else if (valorSelect.value === 'idCategoria') {
+				miFiltro = 'search_id_tiposComunicados';
+			} else if (valorSelect.value === 'receptor') {
+				miFiltro =  'search_receptor_comunicados';
+			}  else if (valorSelect.value === 'titulo') {
+				miFiltro =  'search_titulo_comunicados';
+			}else {
+				//Muestra todos los archivos
+				miFiltro =  'search_all_comunicados';
+			}
+			getComunicados(setFechaComunicados, setFechaComunicadosAux, setFirstFetch,miFiltro);
+
+		}
+	};
+	const defValues = (selectFiltro)=>{
+		let values = {};
+		if (selectFiltro === 'search_fecha_comunicados') {
+			values = {fecha: "2021-09-18"};
+		}else if (selectFiltro === 'search_id_tiposComunicados') {
+			values = {id: 2};
+		}
+		else if (selectFiltro === 'search_receptor_comunicados') {
+			values = {email: "'juanaubone1234@gmail.com'"};
+		}
+		else if (selectFiltro === 'search_titulo_comunicados') {
+			values = {titulo: "acto"};
+		}
+		else{
+			return values;
+		}
+		return values;
+	}
+	const getComunicados = (setFechaComunicados, setFechaComunicadosAux, setFirstFetch,selectFiltro) => {
+		
+		let values = defValues(selectFiltro);
+		console.log(defValues(selectFiltro));
+		Axios.post(`http://${config.host}:${config.port}/${config.basename}/${selectFiltro}`, values).then(
 			(res) => {
 				setFechaComunicados(orderComunicadosByDate(res.data));
 				setFechaComunicadosAux(orderComunicadosByDate(res.data));
@@ -107,10 +145,11 @@ export default function Inicio({ showNavbar }) {
 	// PETICION AXIOS AL BACKEND PARA VERIFICAR QUE LA TOKEN EXISTA EN LA DB
 	let history = useHistory();
 	useEffect(() => {
-		if (firstFetch) {
-			getComunicados(setFechaComunicados, setFechaComunicadosAux, setFirstFetch);
+		if(firstFetch){
+			console.log('firstFetch');
+			getComunicados(setFechaComunicados, setFechaComunicadosAux, setFirstFetch,"search_all_comunicados");
 		}
-
+		
 		// search in fechaComunicados and returns an array of comunicados that match the search value
 		const searchComunicadoBySearchValue = (searchValue) => {
 			const newFechaComunicados = fechaComunicados.reduce((acc, element) => {
@@ -193,7 +232,8 @@ export default function Inicio({ showNavbar }) {
 				{activeModal && <ComunicadoModal modalAction={modalAction} />}
 				<div className="container" style={{ paddingTop: '35px' }}>
 					<div className="row">
-						<SortAndFilter />
+						<SortAndFilter selectFiltro = {()=> selectFiltro() }
+						getComunicados = {()=>getComunicados()}/>
 						{fechaComunicadosAux.length > 0
 							? // eslint-disable-next-line array-callback-return
 							  fechaComunicadosAux.map((element) => {
