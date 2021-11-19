@@ -15,7 +15,7 @@ export default function FechaComunicado({ fecha, comunicados }) {
 	const getFormatedDate = () => {
 		// sumar un dia a la fecha
 		const tempDate = new Date(fecha);
-		const date = `${tempDate.getFullYear()}/${tempDate.getMonth() + 1}/${tempDate.getDate() + 1}`;
+		const date = `${tempDate.getFullYear()}/${tempDate.getMonth() + 1}/${tempDate.getDate()}`;
 		const fechaFormat = new Date(date);
 
 		const fechaEspFormat = fechaFormat.toLocaleDateString(undefined, {

@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useEffect, useState } from 'react';
 
 // Styles
@@ -40,10 +41,6 @@ export default function Inicio({ showNavbar, homePageLocation }) {
 
 					return { ...element, comunicados: orderedComunicados };
 				});
-
-				console.log(fechasOrdenadasPorDia);
-				console.log(orderComunicadosByDate(res.data));
-
 				setFechaComunicados(fechasOrdenadasPorDia);
 				setFechaComunicadosAux(fechasOrdenadasPorDia);
 			}
@@ -58,6 +55,60 @@ export default function Inicio({ showNavbar, homePageLocation }) {
 		});
 
 		return fechaComunicadosOrdenados;
+	};
+
+	const filterComunicadosByDate = (fecha) => {
+		function addZero(i) {
+			if (i < 10) {
+				i = '0' + i;
+			}
+			return i;
+		}
+
+		console.log(fecha);
+		const fechaComunicadosFiltrados = fechaComunicados.filter((element) => {
+			let date = new Date(element.fecha);
+			let dateFilter = fecha;
+			date = date.getFullYear() + '-' + addZero(date.getMonth() + 1) + '-' + addZero(date.getDate());
+
+			if (date === dateFilter) {
+				return element;
+			}
+		});
+
+		setFechaComunicadosAux(fechaComunicadosFiltrados);
+	};
+
+	const filterComunicadosByTag = (tag) => {
+		const comunicadoWithTags = [];
+
+		const fechaComunicadosFiltrados = fechaComunicados.filter((element) => {
+			const comunicadosFiltrados = element.comunicados.filter((comunicado) => {
+				if (comunicado.etiquetas) {
+					comunicado.etiquetas.forEach((etiqueta) => {
+						if (etiqueta.id_etiqueta === parseInt(tag)) {
+							comunicadoWithTags.push({ fecha: element.fecha, comunicados: [comunicado] });
+						}
+					});
+				}
+			});
+		});
+
+		// Crear un nuevo array con los comunicados que repitan la fecha
+		const fechaComunicadosFiltradosAux = [];
+		comunicadoWithTags.forEach((element) => {
+			let existe = false;
+			fechaComunicadosFiltradosAux.map((elementAux) => {
+				if (elementAux.fecha === element.fecha) {
+					existe = true;
+					elementAux.comunicados.push(element.comunicados[0]);
+				}
+			});
+			if (!existe) {
+				fechaComunicadosFiltradosAux.push(element);
+			}
+		});
+		setFechaComunicadosAux(fechaComunicadosFiltradosAux);
 	};
 
 	const deleteComunicado = (id, selectedFecha) => {
@@ -217,7 +268,10 @@ export default function Inicio({ showNavbar, homePageLocation }) {
 				{activeModal && <ComunicadoModal modalAction={modalAction} />}
 				<div className="container" style={{ paddingTop: '35px' }}>
 					<div className="row">
-						<SortAndFilter />
+						<SortAndFilter
+							filterComunicadosByDate={filterComunicadosByDate}
+							filterComunicadosByTag={filterComunicadosByTag}
+						/>
 						{fechaComunicados && fechaComunicadosAux.length > 0
 							? // eslint-disable-next-line array-callback-return
 							  fechaComunicadosAux.map((element) => {

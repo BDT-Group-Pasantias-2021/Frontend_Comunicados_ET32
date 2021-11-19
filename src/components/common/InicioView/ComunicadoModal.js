@@ -272,6 +272,7 @@ export default function ComunicadoModal({ modalAction }) {
 									if (res.data.status === 1) {
 										alert('Comunicado insertado correctamente');
 										setActiveModal(null);
+										window.location.reload();
 									} else if (res.data.status === 2) {
 										console.log('El emisor no existe');
 									} else if (res.data.status === 3) {
