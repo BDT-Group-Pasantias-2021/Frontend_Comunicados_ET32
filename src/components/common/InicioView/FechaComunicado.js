@@ -6,15 +6,13 @@ import ComunicadoCard from './ComunicadoCard';
 export default function FechaComunicado({ fecha, comunicados }) {
 	const currentDate = (resta = 0) => {
 		const tempCurDate = new Date();
-		const curDate = `${tempCurDate.getFullYear()}-${tempCurDate.getMonth() < 10 && 0}${
-			tempCurDate.getMonth() + 1
-		}-${tempCurDate.getDate() - resta}`;
-		return curDate;
+		//const curDate = `${tempCurDate.getFullYear()}-${tempCurDate.getMonth() + 1}-${tempCurDate.getDate() - resta}`;
+		return tempCurDate;
 	};
 
-	const getFormatedDate = () => {
+	const getFormatedDate = (vanillaFecha) => {
 		// sumar un dia a la fecha
-		const tempDate = new Date(fecha);
+		const tempDate = new Date(vanillaFecha);
 		const date = `${tempDate.getFullYear()}/${tempDate.getMonth() + 1}/${tempDate.getDate()}`;
 		const fechaFormat = new Date(date);
 
@@ -28,7 +26,12 @@ export default function FechaComunicado({ fecha, comunicados }) {
 		return finalFechaEsp;
 	};
 
-	const renderDate = fecha === currentDate() ? 'Hoy' : fecha === currentDate(1) ? 'Ayer' : getFormatedDate();
+	const renderDate =
+		getFormatedDate(fecha) === getFormatedDate(currentDate())
+			? 'Hoy'
+			: fecha === getFormatedDate(currentDate(1))
+			? 'Ayer'
+			: getFormatedDate(fecha);
 
 	return (
 		<div className="date-comunicados-container col-11 col-sm-12 col-md-10">

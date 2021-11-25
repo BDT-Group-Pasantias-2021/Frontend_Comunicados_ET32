@@ -221,12 +221,34 @@ export default function ComunicadoModal({ modalAction }) {
 
 	const InsertModalContent = () => {
 		const emisor = localStorage.getItem('user-email').replaceAll('"', '');
+		const categoriasList = [
+			{
+				id_etiqueta: 1,
+				etiqueta: 'General',
+				color: 'rgb(18, 18, 18)',
+			},
+			{
+				id_etiqueta: 2,
+				etiqueta: 'Urgente',
+				color: 'rgb(255, 66, 66)',
+			},
+			{
+				id_etiqueta: 3,
+				etiqueta: 'Académico',
+				color: 'rgb(68, 171, 255)',
+			},
+		];
 
 		return (
 			<div className="modal-container">
 				<div className="modal-top-section">
 					<div className="modal-tags-close">
-						<div className="modal-etiquetas">[static]</div>
+						<div className="modal-etiquetas">
+							{categoriasList != null &&
+								categoriasList.map((tag) => (
+									<CategoryTag key={tag.id_etiqueta} categoria={tag} tipo={'modalInsert'} />
+								))}
+						</div>
 						<div className="standard-icon-container" onClick={() => setActiveModal(null)}>
 							<svg className="standard-icon" viewBox="0 0 512.001 512.001">
 								<g>

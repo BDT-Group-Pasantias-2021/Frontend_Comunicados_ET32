@@ -73,7 +73,7 @@
 							height: 25px;
 							margin-right: 7px;
 							border-radius: 5px;
-							transition: all 100ms ease-in-out;
+							transition: all 50ms ease-in-out;
 							cursor: default;
 
 							.tag-category {
@@ -81,6 +81,14 @@
 								font-size: 13px;
 								font-weight: 700;
 							}
+						}
+
+						.comunicado-category-insert {
+							cursor: pointer;
+						}
+
+						.comunicado-category-insert-disabled {
+							background-color: grey !important;
 						}
 					}
 				}
@@ -103,6 +111,7 @@
 					border: 0;
 					border-radius: 0;
 					outline: 0;
+					overflow: hidden;
 
 					@media screen and (max-width: 575px) {
 						max-height: 490px;

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 //Components
 
 export default function SortAndFilter({ filterComunicadosByDate, filterComunicadosByTag }) {
-	const [showFilterMenu, setShowFilterMenu] = useState(true);
+	const [showFilterMenu, setShowFilterMenu] = useState(false);
 	const [filterType, setFilterType] = useState('text');
 
 	useEffect(() => {

@@ -36,15 +36,30 @@ export default function CategoryTag({ categoria, tipo }) {
 		});
 	};
 
+	const activeCategory = () => {
+		const categoryTagsList = document.querySelectorAll(`.comunicado-category-id${categoria.id_etiqueta}`);
+		categoryTagsList.forEach((element) => {
+			element.classList.toggle('comunicado-category-insert-disabled');
+		});
+		console.log('QSasd');
+	};
+
 	return (
 		<div
-			className={`comunicado-category comunicado-category-id${categoria.id_etiqueta}`}
+			className={`comunicado-category comunicado-category-insert comunicado-category-id${categoria.id_etiqueta} ${
+				tipo === 'modalInsert' && 'comunicado-category-insert-disabled'
+			}`}
+			onClick={() => activeCategory()}
 			onMouseEnter={() => hoverBackgroundStyle()}
 			onMouseLeave={() => normalBackgroundStyle()}
 			style={{ backgroundColor: categoria.color }}
 			title={categoria.nombre}
 		>
-			{tipo === 'card' ? null : <div className="tag-category">{categoria.etiqueta}</div>}
+			{tipo === 'card' ? null : tipo === 'modalInsert' ? (
+				<div className="tag-category tag-insert">{categoria.etiqueta}</div>
+			) : (
+				<div className="tag-category">{categoria.etiqueta}</div>
+			)}
 		</div>
 	);
 }
