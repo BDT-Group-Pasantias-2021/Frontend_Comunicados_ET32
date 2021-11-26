@@ -219,34 +219,37 @@ export default function ComunicadoModal({ modalAction }) {
 		);
 	};
 
+	const getTagsFromDB = (setCategorias) => {
+		Axios.post(
+			`http://${config.host}:${config.port}/${config.basename}/getCategoriasComunicados`,
+		).then((res) => {
+			console.log(1)
+			setCategorias(res.data.result);
+		});
+	};
+
 	const InsertModalContent = () => {
 		const emisor = localStorage.getItem('user-email').replaceAll('"', '');
-		const categoriasList = [
-			{
-				id_etiqueta: 1,
-				etiqueta: 'General',
-				color: 'rgb(18, 18, 18)',
-			},
-			{
-				id_etiqueta: 2,
-				etiqueta: 'Urgente',
-				color: 'rgb(255, 66, 66)',
-			},
-			{
-				id_etiqueta: 3,
-				etiqueta: 'Académico',
-				color: 'rgb(68, 171, 255)',
-			},
-		];
 
+		const [categoriasList, setCategorias] = useState(null);
 		const [selectedTags, setSelectedTags] = useState([]);
+		const [firstFetch, setFirstFetch] = useState(true);
+
+		useEffect(() => {
+			if (firstFetch) {
+				getTagsFromDB(setCategorias)
+				setFirstFetch(false);
+			}
+			return () => {
+			}
+		}, [categoriasList, firstFetch])
 
 		return (
 			<div className="modal-container">
 				<div className="modal-top-section">
 					<div className="modal-tags-close">
 						<div className="modal-etiquetas">
-							{categoriasList != null &&
+							{categoriasList &&
 								categoriasList.map((tag) => (
 									<CategoryTag key={tag.id_etiqueta} categoria={tag} tipo={'modalInsert'} selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
 								))}
@@ -276,7 +279,6 @@ export default function ComunicadoModal({ modalAction }) {
 								emisor: emisor,
 								titulo: '',
 								descripcion: '',
-								categorias: [],
 								cursoReceptor: '',
 							}}
 							validate={(values) => {
@@ -285,19 +287,26 @@ export default function ComunicadoModal({ modalAction }) {
 								return errors;
 							}}
 							onSubmit={(values) => {
-								values.categorias = selectedTags;
-								alert(JSON.stringify(values, null, 2));
-								/* handleUpdateComunicado(activeModal.id_comunicaciones, activeModal.fecha, values); */
 								//* Petición de inserción de comunicado
-								/* Axios.post(
+								Axios.post(
 									`http://${config.host}:${config.port}/${config.basename}/insertComunicado`,
 									values
 								).then((res) => {
-									console.log(res);
 									if (res.data.status === 1) {
-										alert('Comunicado insertado correctamente');
-										setActiveModal(null);
-										window.location.reload();
+										// eslint-disable-next-line array-callback-return
+										selectedTags.map((tag) => {
+											Axios.post(
+												`http://${config.host}:${config.port}/${config.basename}/addCategoriaComunicado`,
+												{
+													idComunicado: res.data.id_comunicado,
+													idCategoria: tag,
+												}
+											).then((res) => {
+												alert('Comunicado insertado correctamente');
+												setActiveModal(null);
+												window.location.reload();
+											});
+										})
 									} else if (res.data.status === 2) {
 										console.log('El emisor no existe');
 									} else if (res.data.status === 3) {
@@ -307,7 +316,7 @@ export default function ComunicadoModal({ modalAction }) {
 									} else {
 										console.log('El curso no existe');
 									}
-								}); */
+								});
 							}}
 						>
 							<Form className="modal-form-data-container">

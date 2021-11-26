@@ -29,13 +29,13 @@ export default function Inicio({ showNavbar, homePageLocation }) {
 	const [activeModal, setActiveModal] = useState(null);
 	const [modalAction, setModalAction] = useState('read');
 
-	const getComunicados = (setFechaComunicados, setFechaComunicadosAux, setFirstFetch) => {
+	const getComunicados = (setFechaComunicados, setFechaComunicadosAux, setFirstFetch, orderBy) => {
 		setFirstFetch(false);
 		const email = localStorage.getItem('user-email');
 		const values = { email: email };
 		Axios.post(`http://${config.host}:${config.port}/${config.basename}/search_receptor_comunicados`, values).then(
 			(res) => {
-				const fechasOrdenadasPorDia = orderComunicadosByDate(res.data).map((element) => {
+				const fechasOrdenadasPorDia = orderBy(res.data).map((element) => {
 					const orderedComunicados = element.comunicados.sort((a, b) =>
 						a.id_comunicaciones < b.id_comunicaciones ? 1 : -1
 					);
@@ -56,6 +56,21 @@ export default function Inicio({ showNavbar, homePageLocation }) {
 		});
 
 		return fechaComunicadosOrdenados;
+	};
+
+	const orderComunicadosByDateDesc = (fechaComunicados) => {
+		const fechaComunicadosOrdenados = fechaComunicados.sort((a, b) => {
+			const dateA = new Date(a.fecha);
+			const dateB = new Date(b.fecha);
+			return dateA - dateB;
+		});
+
+		return fechaComunicadosOrdenados;
+	};
+
+	const cleanFilters = () => {
+		setFechaComunicadosAux(fechaComunicados);
+		document.getElementById('input-filter').value = '';
 	};
 
 	const filterComunicadosByDate = (fecha) => {
@@ -112,13 +127,30 @@ export default function Inicio({ showNavbar, homePageLocation }) {
 		setFechaComunicadosAux(fechaComunicadosFiltradosAux);
 	};
 
+	const filterComunicadosByEmisor = (searchValue) => {
+		const newFechaComunicados = fechaComunicados.reduce((acc, element) => {
+			const comunicados = element.comunicados.filter((comunicado) => {
+				return comunicado.emisor
+					.normalize('NFD')
+					.replace(/[\u0300-\u036f]/g, '')
+					.toLowerCase()
+					.includes(searchValue.toLowerCase());
+			});
+			if (comunicados.length > 0) {
+				acc.push({ fecha: element.fecha, comunicados });
+			}
+			return acc;
+		}, []);
+		setFechaComunicadosAux(newFechaComunicados);
+	};
+
 	const deleteComunicado = (id, selectedFecha) => {
 		const confirmState = window.confirm('¿Estás seguro de eliminar este comunicado?');
-		const values = { idComunicado: id };
+		const email = localStorage.getItem('user-email');
+		const values = { idComunicado: id, emisor: email };
 		if (confirmState) {
 			Axios.post(`http://${config.host}:${config.port}/${config.basename}/deleteComunicado`, values).then(
 				(res) => {
-					console.log(res.data.status);
 					if (res.data.status === 1) {
 						const newFechaComunicados = fechaComunicados.map((element) => {
 							if (element.fecha === selectedFecha) {
@@ -183,7 +215,7 @@ export default function Inicio({ showNavbar, homePageLocation }) {
 	let history = useHistory();
 	useEffect(() => {
 		if (firstFetch) {
-			getComunicados(setFechaComunicados, setFechaComunicadosAux, setFirstFetch);
+			getComunicados(setFechaComunicados, setFechaComunicadosAux, setFirstFetch, orderComunicadosByDate);
 		}
 
 		// search in fechaComunicados and returns an array of comunicados that match the search value
@@ -208,7 +240,6 @@ export default function Inicio({ showNavbar, homePageLocation }) {
 				}
 				return acc;
 			}, []);
-			console.log(newFechaComunicados);
 			setFechaComunicadosAux(newFechaComunicados);
 		};
 
@@ -270,8 +301,26 @@ export default function Inicio({ showNavbar, homePageLocation }) {
 				<div className="container" style={{ paddingTop: '35px' }}>
 					<div className="row">
 						<SortAndFilter
+							orderComunicadosAsc={() =>
+								getComunicados(
+									setFechaComunicados,
+									setFechaComunicadosAux,
+									setFirstFetch,
+									orderComunicadosByDate
+								)
+							}
+							orderComunicadosDesc={() =>
+								getComunicados(
+									setFechaComunicados,
+									setFechaComunicadosAux,
+									setFirstFetch,
+									orderComunicadosByDateDesc
+								)
+							}
+							cleanFilters={cleanFilters}
 							filterComunicadosByDate={filterComunicadosByDate}
 							filterComunicadosByTag={filterComunicadosByTag}
+							filterComunicadosByEmisor={filterComunicadosByEmisor}
 						/>
 						{fechaComunicados && fechaComunicadosAux.length > 0
 							? // eslint-disable-next-line array-callback-return
