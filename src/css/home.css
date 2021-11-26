@@ -6,6 +6,55 @@
   padding: 0;
   margin-bottom: 1rem;
 }
+.filter-bar-container .filter-menu-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 0px;
+  overflow: hidden;
+  transition: all 1.3s cubic-bezier(0.34, 0, 0.67, 1.01);
+}
+.filter-bar-container .filter-menu-container .filter-option-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 2px;
+  line-height: 10px;
+  width: fit-content;
+  height: 30px;
+  padding: 5px 30px;
+  border-radius: 5px;
+  transition: all 150ms ease-in-out;
+  font-size: 12px;
+}
+.filter-bar-container .filter-menu-container .filter-option-btn:hover {
+  background-color: #bdbdbd34;
+}
+.filter-bar-container .filter-menu-container .filter-option-input {
+  margin: 0 10px;
+}
+.filter-bar-container .filter-menu-container .filter-option-input input {
+  font-size: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  height: 25px;
+  background-color: #ffff;
+  padding: 10px;
+  width: 470px;
+}
+.filter-bar-container .filter-menu-container .filter-option-input input:focus {
+  outline: 1px solid #9b9b9b;
+}
+.filter-bar-container .filter-menu-container-active {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+}
 
 .filter-btn-toggler {
   display: flex;
@@ -15,38 +64,6 @@
 .filter-btn-toggler .filter-btn-content {
   display: flex;
   flex-direction: row;
-}
-.filter-btn-toggler .filter-menu-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  width: 120px;
-  display: none;
-  visibility: hidden;
-  opacity: 0;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0px 2px 7px -3px #00000042;
-  position: absolute;
-  margin-top: 2rem;
-  z-index: 1000;
-}
-.filter-btn-toggler .filter-menu-container .filter-option-btn {
-  width: 100%;
-  height: 35px;
-  padding: 8px;
-  padding-left: 10px;
-  transition: all 150ms ease-in-out;
-  border-bottom: 1px solid #e6e6e6;
-}
-.filter-btn-toggler .filter-menu-container .filter-option-btn:hover {
-  background-color: #f5f5f5;
-}
-.filter-btn-toggler .filter-menu-container-active {
-  display: flex;
-  visibility: visible;
-  opacity: 1;
 }
 
 /* SCSS DIRECTORY

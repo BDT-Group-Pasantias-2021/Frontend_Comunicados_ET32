@@ -58,7 +58,7 @@
   position: static;
   width: 250px;
   height: 27.5px;
-  top: calc(50% - 30px / 2 + 0px);
+  top: calc(50% - 15px + 0px);
   color: #fff;
   background: rgba(255, 255, 255, 0.275);
   border-radius: 5px;
