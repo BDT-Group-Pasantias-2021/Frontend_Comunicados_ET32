@@ -21,7 +21,7 @@ function darkenColor(col, amt) {
 	return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
 }
 
-export default function CategoryTag({ categoria, tipo }) {
+export default function CategoryTag({ categoria, tipo, selectedTags, setSelectedTags }) {
 	const normalBackgroundStyle = () => {
 		const categoryTagsList = document.querySelectorAll(`.comunicado-category-id${categoria.id_etiqueta}`);
 		categoryTagsList.forEach((element) => {
@@ -41,15 +41,22 @@ export default function CategoryTag({ categoria, tipo }) {
 		categoryTagsList.forEach((element) => {
 			element.classList.toggle('comunicado-category-insert-disabled');
 		});
-		console.log('QSasd');
+		//? Verify if the category is already selected
+		if (selectedTags.includes(categoria.id_etiqueta)) {
+			//* Remove the category from the selected tags
+			setSelectedTags(selectedTags.filter((tag) => tag !== categoria.id_etiqueta));
+		} else {
+			//* Add the category to the selected tags
+			setSelectedTags([...selectedTags, categoria.id_etiqueta]);
+		}
 	};
 
 	return (
 		<div
-			className={`comunicado-category comunicado-category-insert comunicado-category-id${categoria.id_etiqueta} ${
-				tipo === 'modalInsert' && 'comunicado-category-insert-disabled'
-			}`}
-			onClick={() => activeCategory()}
+			className={`comunicado-category comunicado-category-insert comunicado-category-id${categoria.id_etiqueta} ${tipo === 'modalInsert' && 'comunicado-category-insert-disabled'
+				}`}
+
+			onClick={() => tipo === 'modalInsert' && activeCategory(categoria.id_etiqueta)}
 			onMouseEnter={() => hoverBackgroundStyle()}
 			onMouseLeave={() => normalBackgroundStyle()}
 			style={{ backgroundColor: categoria.color }}

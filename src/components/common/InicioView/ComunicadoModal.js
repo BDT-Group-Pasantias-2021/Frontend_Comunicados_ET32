@@ -239,6 +239,8 @@ export default function ComunicadoModal({ modalAction }) {
 			},
 		];
 
+		const [selectedTags, setSelectedTags] = useState([]);
+
 		return (
 			<div className="modal-container">
 				<div className="modal-top-section">
@@ -246,7 +248,7 @@ export default function ComunicadoModal({ modalAction }) {
 						<div className="modal-etiquetas">
 							{categoriasList != null &&
 								categoriasList.map((tag) => (
-									<CategoryTag key={tag.id_etiqueta} categoria={tag} tipo={'modalInsert'} />
+									<CategoryTag key={tag.id_etiqueta} categoria={tag} tipo={'modalInsert'} selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
 								))}
 						</div>
 						<div className="standard-icon-container" onClick={() => setActiveModal(null)}>
@@ -283,10 +285,11 @@ export default function ComunicadoModal({ modalAction }) {
 								return errors;
 							}}
 							onSubmit={(values) => {
+								values.categorias = selectedTags;
 								alert(JSON.stringify(values, null, 2));
 								/* handleUpdateComunicado(activeModal.id_comunicaciones, activeModal.fecha, values); */
 								//* Petición de inserción de comunicado
-								Axios.post(
+								/* Axios.post(
 									`http://${config.host}:${config.port}/${config.basename}/insertComunicado`,
 									values
 								).then((res) => {
@@ -304,7 +307,7 @@ export default function ComunicadoModal({ modalAction }) {
 									} else {
 										console.log('El curso no existe');
 									}
-								});
+								}); */
 							}}
 						>
 							<Form className="modal-form-data-container">
@@ -318,11 +321,11 @@ export default function ComunicadoModal({ modalAction }) {
 													Selecciona un curso
 												</option>
 											),
-											cursos.map((curso) => (
-												<option key={curso.id_curso} value={curso.id_curso}>
-													{curso.anio}º {curso.division}. {curso.turno} - {curso.especialidad}
-												</option>
-											)))}
+												cursos.map((curso) => (
+													<option key={curso.id_curso} value={curso.id_curso}>
+														{curso.anio}º {curso.division}. {curso.turno} - {curso.especialidad}
+													</option>
+												)))}
 									</Field>
 									<ErrorMessage className="input-error" name="titulo" component="div" />
 								</div>
@@ -336,7 +339,7 @@ export default function ComunicadoModal({ modalAction }) {
 									/>
 									<ErrorMessage className="input-error" name="titulo" component="div" />
 								</div>
-								<div className="modal-text-edit">
+								<div className="modal-text">
 									<Field
 										component="textarea"
 										className="modal-text-edit"
