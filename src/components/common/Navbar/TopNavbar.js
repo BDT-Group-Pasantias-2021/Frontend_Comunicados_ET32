@@ -25,16 +25,13 @@ import config from '../../../data/config.json';
 
 export default function TopNavbar() {
 	const { activeSidebar, setActiveSidebar } = useContext(NavbarContext);
-	const {firstFetch, setFirstFetch} = useState(true); 
+	const { firstFetch, setFirstFetch } = useState(true);
+	const [accountInfo, setAccountInfo] = useState([])
 	const history = useHistory();
-	const email = localStorage.getItem("user-email");
-	const values = { email: email };
 
 	//Hooks Dropdown
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 	const openDropdown = () => setDropdownOpen((prevState) => !prevState);
-	
-
 
 	const toggleNotificationMenu = (action = 0) => {
 		const notificationMenu = document.getElementById('notification-menu');
@@ -60,6 +57,7 @@ export default function TopNavbar() {
 		const values = { sessionID };
 		Axios.post(`http://${config.host}:${config.port}/${config.basename}/logout`, values).then((res) => {
 			//remover user-email y user-token de local storage
+			localStorage.removeItem('user-account-info');
 			localStorage.removeItem('user-email');
 			localStorage.removeItem('user-token');
 			history.push('/');
@@ -67,13 +65,13 @@ export default function TopNavbar() {
 	};
 
 	useEffect(() => {
-		if(firstFetch){
-			Axios.post(`http://${config.host}:${config.port}/${config.basename}/getProfileImage`, values).then((res) => {
-			console.log(res)	
-			localStorage.setItem('user-profile-image', res.data);
-			})
-			setFirstFetch(false);
-		}
+		const email = localStorage.getItem("user-email");
+		const values = { email: email };
+		Axios.post(`http://${config.host}:${config.port}/${config.basename}/getAccountInfo`, values).then((res) => {
+			localStorage.setItem('user-account-info', JSON.stringify(res.data));
+			setAccountInfo(res.data);
+		})
+
 		const searchColor = document.getElementById('search-bar');
 		const changeColor = document.getElementById('Lupa_svg');
 		searchColor.addEventListener('focus', () => {
@@ -186,18 +184,22 @@ export default function TopNavbar() {
 					</div>
 					<NotificationMenu toggleFunction={toggleNotificationMenu} />
 				</div>
-				<div className="profile-settings-container">
+				<div className="profile-settings-container" id="profile-settings-container">
 					<Dropdown isOpen={dropdownOpen} toggle={openDropdown}>
 						<DropdownToggle className="user-config profile-image-container">
 
-							{localStorage.getItem('user-profile-image') ?
-								<img className="profile-image-btn" src={localStorage.getItem('user-profile-image')} alt="Profile" /> :
+							{accountInfo ?
+								<img className="profile-image-btn" src={accountInfo.foto_perfil} alt="Profile" /> :
 								<img className="profile-image-btn" src={ProfilePhoto} alt="Profile" />}
 						</DropdownToggle>
 
 						<DropdownMenu className="user-config-menu">
 							<DropdownItem header>
-								<p className="user-config-menu-name">Agustin Rezett</p>
+								<p className="user-config-menu-name">
+									{
+										accountInfo ?
+											`${accountInfo.nombre} ${accountInfo.apellido}` : "Undefined"}
+								</p>
 								<p className="user-config-menu-email">
 									{localStorage.getItem('user-email').split('"')}
 								</p>
@@ -222,12 +224,10 @@ export default function TopNavbar() {
 							</DropdownItem>
 							<DropdownItem divider />
 							<DropdownItem>
-								<div className="log-out-container">
-									<span
-										onClick={() => {
-											cerrarSesion();
-										}}
-									>
+								<div className="log-out-container" onClick={() => {
+									cerrarSesion();
+								}}>
+									<span>
 										Cerrar Sesión
 									</span>
 
