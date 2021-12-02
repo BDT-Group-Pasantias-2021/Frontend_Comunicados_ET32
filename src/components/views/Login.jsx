@@ -17,7 +17,7 @@ export default function Login({ hideNavbar }) {
 
 		const token = localStorage.getItem('user-token');
 		if (token) {
-			alert('Borrá el token de sesión');
+			/* alert('Borrá el token de sesión'); */
 			history.push('/home');
 		} else {
 			setLoadContent(true);

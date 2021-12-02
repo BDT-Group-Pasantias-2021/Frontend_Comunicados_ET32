@@ -25,10 +25,18 @@ export default function ComunicadoModal({ modalAction }) {
 				<div className="modal-top-section">
 					<div className="modal-tags-close">
 						<div className="modal-etiquetas">
+<<<<<<< Updated upstream
 							{activeModal.etiquetas != null &&
 								activeModal.etiquetas.map((tag) => (
 									<CategoryTag key={tag.id_etiqueta} categoria={tag} tipo={'modal'} />
 								))}
+=======
+							{
+							activeModal.etiquetas!=null&& 
+							activeModal.etiquetas.map((tag) => (
+								<CategoryTag key={tag.id_etiqueta} categoria={tag} tipo={'modal'} />
+							))}
+>>>>>>> Stashed changes
 						</div>
 						<div className="standard-icon-container" onClick={() => setActiveModal(null)}>
 							<svg className="standard-icon" viewBox="0 0 512.001 512.001">
@@ -127,7 +135,9 @@ export default function ComunicadoModal({ modalAction }) {
 				<div className="modal-top-section">
 					<div className="modal-tags-close">
 						<div className="modal-etiquetas">
-							{activeModal.categorias.map((tag) => (
+							{
+							activeModal.categorias!=null&&
+							activeModal.categorias.map((tag) => (
 								<CategoryTag key={tag.id_categoria} categoria={tag} tipo={'modal'} />
 							))}
 						</div>
