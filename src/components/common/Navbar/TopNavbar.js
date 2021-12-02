@@ -25,6 +25,7 @@ import config from '../../../data/config.json';
 
 export default function TopNavbar() {
 	const { activeSidebar, setActiveSidebar } = useContext(NavbarContext);
+	const {firstFetch, setFirstFetch} = useState(true); 
 	const history = useHistory();
 	const email = localStorage.getItem("user-email");
 	const values = { email: email };
@@ -32,9 +33,7 @@ export default function TopNavbar() {
 	//Hooks Dropdown
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 	const openDropdown = () => setDropdownOpen((prevState) => !prevState);
-	Axios.post(`http://${config.host}:${config.port}/${config.basename}/getProfileImage`, values).then((res) => {
-		localStorage.setItem('user-profile-image', res.data.image);
-	})
+	
 
 
 	const toggleNotificationMenu = (action = 0) => {
@@ -68,6 +67,13 @@ export default function TopNavbar() {
 	};
 
 	useEffect(() => {
+		if(firstFetch){
+			Axios.post(`http://${config.host}:${config.port}/${config.basename}/getProfileImage`, values).then((res) => {
+			console.log(res)	
+			localStorage.setItem('user-profile-image', res.data);
+			})
+			setFirstFetch(false);
+		}
 		const searchColor = document.getElementById('search-bar');
 		const changeColor = document.getElementById('Lupa_svg');
 		searchColor.addEventListener('focus', () => {
@@ -76,7 +82,8 @@ export default function TopNavbar() {
 		searchColor.addEventListener('focusout', () => {
 			changeColor.style.fill = '#fff';
 		});
-	}, []);
+
+	}, [firstFetch, setFirstFetch]);
 
 	return (
 		<nav id="top-navbar">
