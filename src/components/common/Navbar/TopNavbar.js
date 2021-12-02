@@ -26,9 +26,16 @@ import config from '../../../data/config.json';
 export default function TopNavbar() {
 	const { activeSidebar, setActiveSidebar } = useContext(NavbarContext);
 	const history = useHistory();
+	const email = localStorage.getItem("user-email");
+	const values = { email: email };
+
 	//Hooks Dropdown
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 	const openDropdown = () => setDropdownOpen((prevState) => !prevState);
+	Axios.post(`http://${config.host}:${config.port}/${config.basename}/getProfileImage`, values).then((res) => {
+		localStorage.setItem('user-profile-image', res.data.image);
+	})
+
 
 	const toggleNotificationMenu = (action = 0) => {
 		const notificationMenu = document.getElementById('notification-menu');
@@ -175,7 +182,10 @@ export default function TopNavbar() {
 				<div className="profile-settings-container">
 					<Dropdown isOpen={dropdownOpen} toggle={openDropdown}>
 						<DropdownToggle className="user-config profile-image-container">
-							<img className="profile-image-btn" src={ProfilePhoto} alt="profile_image" />
+
+							{localStorage.getItem('user-profile-image') ?
+								<img className="profile-image-btn" src={localStorage.getItem('user-profile-image')} alt="Profile" /> :
+								<img className="profile-image-btn" src={ProfilePhoto} alt="Profile" />}
 						</DropdownToggle>
 
 						<DropdownMenu className="user-config-menu">
