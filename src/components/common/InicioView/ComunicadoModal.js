@@ -25,18 +25,10 @@ export default function ComunicadoModal({ modalAction }) {
 				<div className="modal-top-section">
 					<div className="modal-tags-close">
 						<div className="modal-etiquetas">
-<<<<<<< Updated upstream
 							{activeModal.etiquetas != null &&
 								activeModal.etiquetas.map((tag) => (
 									<CategoryTag key={tag.id_etiqueta} categoria={tag} tipo={'modal'} />
 								))}
-=======
-							{
-							activeModal.etiquetas!=null&& 
-							activeModal.etiquetas.map((tag) => (
-								<CategoryTag key={tag.id_etiqueta} categoria={tag} tipo={'modal'} />
-							))}
->>>>>>> Stashed changes
 						</div>
 						<div className="standard-icon-container" onClick={() => setActiveModal(null)}>
 							<svg className="standard-icon" viewBox="0 0 512.001 512.001">
@@ -233,7 +225,7 @@ export default function ComunicadoModal({ modalAction }) {
 		Axios.post(
 			`http://${config.host}:${config.port}/${config.basename}/getCategoriasComunicados`,
 		).then((res) => {
-			console.log(1)
+			
 			setCategorias(res.data.result);
 		});
 	};
@@ -298,11 +290,14 @@ export default function ComunicadoModal({ modalAction }) {
 							}}
 							onSubmit={(values) => {
 								//* Petición de inserción de comunicado
-								Axios.post(
-									`http://${config.host}:${config.port}/${config.basename}/insertComunicado`,
-									values
+								if(values.cursoReceptor){
+									Axios.post(
+									
+										`http://${config.host}:${config.port}/${config.basename}/insertComunicado`,
+										values
 								).then((res) => {
-									if (res.data.status === 1) {
+									console.log(res);
+									if (res.data.status === "1") {
 										// eslint-disable-next-line array-callback-return
 										selectedTags.map((tag) => {
 											Axios.post(
@@ -317,18 +312,19 @@ export default function ComunicadoModal({ modalAction }) {
 												window.location.reload();
 											});
 										})
-									} else if (res.data.status === 2) {
-										console.log('El emisor no existe');
-									} else if (res.data.status === 3) {
-										console.log('El título debe tener entre 5 y 50 caracteres');
-									} else if (res.data.status === 4) {
-										console.log('La descripción debe tener al menos 5 caracteres');
-									} else {
-										console.log('El curso no existe');
+									} else if (res.data.status === "2") {
+										alert('El emisor no existe');
+									} else if (res.data.status === "3") {
+										alert('El título debe tener entre 5 y 500 caracteres');
+									} else if (res.data.status === "4") {
+										alert('La descripción debe tener al menos 5 caracteres');
+									} else if (res.data.status === "99") {
+										alert("Usted no tiene permisos para ingresar comunicados.")
 									}
 								});
-							}}
-						>
+							}else{alert("Antes de guardar, seleccione un curso.")}
+						}
+						}>
 							<Form className="modal-form-data-container">
 								<div className="form-input-container modal-receptor-container">
 									<label className="form-label">Curso receptor: </label>

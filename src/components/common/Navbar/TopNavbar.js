@@ -188,7 +188,7 @@ export default function TopNavbar() {
 					<Dropdown isOpen={dropdownOpen} toggle={openDropdown}>
 						<DropdownToggle className="user-config profile-image-container">
 
-							{accountInfo ?
+							{accountInfo.foto_perfil ?
 								<img className="profile-image-btn" src={accountInfo.foto_perfil} alt="Profile" /> :
 								<img className="profile-image-btn" src={ProfilePhoto} alt="Profile" />}
 						</DropdownToggle>

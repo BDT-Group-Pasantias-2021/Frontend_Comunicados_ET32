@@ -443,7 +443,7 @@ const ChangePassword = ({ searchVars }) => {
 								statusResponseMessage.innerHTML = 'Contraseña cambiada con éxito. Redireccionando...';
 								statusResponseMessage.classList.add('status-response-message-success');
 								setTimeout(() => {
-									window.location.replace('http://192.168.43.121:3000/Frontend_Comunicados_ET32');
+									window.location.replace(`http://${config.host}:${config.frontendPort}/${config.basename}`);
 									console.log('Redireccionando a Login');
 								}, 3000);
 							} else if (res.data.status === 2) {
