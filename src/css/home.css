@@ -35,6 +35,9 @@
 .filter-bar-container .filter-menu-container .filter-option-btn:hover {
   background-color: #bdbdbd34;
 }
+.filter-bar-container .filter-menu-container .active-filter {
+  background-color: #bdbdbd34;
+}
 .filter-bar-container .filter-menu-container .filter-option-input {
   margin: 0 10px;
 }

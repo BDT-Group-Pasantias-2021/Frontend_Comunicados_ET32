@@ -70,7 +70,7 @@ export default function Inicio({ showNavbar, homePageLocation }) {
 
 	const cleanFilters = () => {
 		setFechaComunicadosAux(fechaComunicados);
-		document.getElementById('input-filter').value = '';
+		document.getElementById('input-filter') && (document.getElementById('input-filter').value = '');
 	};
 
 	const filterComunicadosByDate = (fecha) => {

@@ -35,7 +35,7 @@ const LoginForm = ({ changeForm, showPassword, seePassword }) => {
 				onSubmit={(values, { setSubmitting }) => {
 					setSubmitting(false);
 					Axios.post(`http://${config.host}:${config.port}/${config.basename}/login`, values).then((res) => {
-						console.log();
+						console.log(res);
 						if (res.data.status === 'success') {
 							res.data.email = values.email;
 							localStorage.setItem('user-token', JSON.stringify(res.data.sessionID, res.data.email));
